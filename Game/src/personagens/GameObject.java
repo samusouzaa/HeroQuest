@@ -12,16 +12,20 @@ public abstract class GameObject {
 	//Lista de itens
 	private ArrayList<Item> itens;
 	
-	public GameObject(int a, int b, int c) {
-		hp = a;
-		ip = b;
-		dadosAtq = c;
-		this.itens = new ArrayList<Item>;
+	public GameObject(int hp, int ip, int atq) {
+		this.hp = a;
+		this.ip = b;
+		this.dadosAtq = atq;
+		this.itens = new ArrayList<Item>();
 	}
 	
-	protected Atacar() {
-		
-	}
+	protected abstract void Atacar();
+	
+	protected abstract void Andar();
+	
+	protected abstract void UsarItem();
+	
+	
 
 	
 }
