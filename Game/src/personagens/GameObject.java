@@ -1,7 +1,10 @@
 package personagens;
 import java.util.ArrayList;
+import Usaveis.*;
+
 
 public abstract class GameObject {
+	private final int hpcheio;
 	private int hp;
 	private int ip;
 	private int dadosAtq;
@@ -11,19 +14,30 @@ public abstract class GameObject {
 	//private Posic pos;
 	
 	//arma
-	private Arma arma;
+	private Arma armaD;
+	private Arma armaE;
 	//Lista de itens
 	private ArrayList<Item> itens;
 	//Lista de magias
 	private ArrayList<Magia> magias;
 	
 	public GameObject(int hp, int ip, int atq, int dfs) {
+		this.hpcheio = hp;
 		this.hp = hp;
 		this.ip = ip;
 		this.dadosAtq = atq;
 		this.dadosDfs = dfs;
 		this.itens = new ArrayList<Item>();
 		this.magias = new ArrayList<Magia>();
+	}
+	
+	protected void equipar(boolean mao, Arma arma) {// true esquerda false direita
+		if(mao) {
+			armaE = arma;
+		}
+		else {
+			armaD = arma;
+		}
 	}
 	
 	//Se escolhe qual direção cardinal se atacará
@@ -48,6 +62,14 @@ public abstract class GameObject {
 	
 	private void receberDano(int dano) {
 		hp -= dano;
+	}
+	
+	public void receberCura(int cura) {
+		if(hp + cura > hpcheio)
+			hp = hpcheio;
+		else
+			hp += cura;
+				
 	}
 	
 	protected void lancaMagia(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria todas com números e ele escolheria a que ele quer lançar
