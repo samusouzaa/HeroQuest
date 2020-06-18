@@ -11,14 +11,14 @@ public class EsqueletoMago extends Inimigo{
 	private static final int HP = 4;
 	private static final int IP = 6;
 	
-	public EsqueletoMago() {
-		super(HP, IP, ATAQUE, DEFESA);
+	public EsqueletoMago(int x, int y) {
+		super(x, y, HP, IP, ATAQUE, DEFESA);
 	}
 	
 	public void mudarPosicao() {
 		int proxima_posicao = new Random().nextInt(8) + 1;
 		this.posicao_atual = proxima_posicao; 
-		/*terminar implementação*/
+		/*terminar implementacao*/
 	}
 	
 }
