@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import Usaveis.*;
 
 
-public abstract class GameObject {
+public abstract class GameObject extends Objeto {
 	private final int hpcheio;
 	private int hp;
 	private int ip;
@@ -21,7 +21,8 @@ public abstract class GameObject {
 	//Lista de magias
 	private ArrayList<Magia> magias;
 	
-	public GameObject(int hp, int ip, int atq, int dfs) {
+	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
+		super(x,y);
 		this.hpcheio = hp;
 		this.hp = hp;
 		this.ip = ip;
