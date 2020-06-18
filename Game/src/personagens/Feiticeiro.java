@@ -6,8 +6,8 @@ public class Feiticeiro extends Heroi {
 	private static final int HP = 4;
 	private static final int IP = 6;
 	
-	public Feiticeiro() {
-		super(HP, IP, ATAQUE, DEFESA);
+	public Feiticeiro(int x, int y) {
+		super(x, y, HP, IP, ATAQUE, DEFESA);
 	}
 	
 
