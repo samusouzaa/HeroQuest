@@ -1,6 +1,6 @@
 package Usaveis;
 
-public class Arma {
+public class Arma extends Item{
 	private int alcance;
 	private int bonusDados;
 	private boolean ehdestruida;
