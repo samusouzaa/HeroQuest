@@ -1,6 +1,7 @@
 package personagens;
 import java.util.ArrayList;
 import Usaveis.*;
+import Externos.*;
 
 
 public abstract class GameObject extends Objeto {
@@ -41,6 +42,10 @@ public abstract class GameObject extends Objeto {
 		}
 	}
 	
+	public int getDefesa() {
+		return dadosDfs;
+	}
+	
 	//Se escolhe qual direção cardinal se atacará
 	
 	protected void Atacar(String direcao) {
@@ -49,15 +54,25 @@ public abstract class GameObject extends Objeto {
 		if(inimigo == null)
 			return;
 		
-		int dadoAliado = CaveiraDado(); //Função será criada posteriormente e devolve o número de caveiras
+		int numeroDados = dadosAtq;// + armaD.getDano + armaE.getDano; 
+		int dadoAliado = 0;
+		int aux;
 		
-		int dadoInimigo = inimigo.EscudoDado(); //Função será criada posteriormente e devolve o número de escudos
+		for(int i = 0; i < numeroDados; i++) {
+			aux = Dados.resultadoDado(TipoDado.LUTA);
+			if (0 <aux && aux < 4 )
+				dadoAliado += 1; 
+		}
+		
+		int dadoInimigo = inimigo.Defender(); //Função será criada posteriormente e devolve o número de escudos
 		
 		int resultado = dadoAliado - dadoInimigo;
 		
 		if (resultado > 0)
 			inimigo.receberDano(resultado);
 	}
+	
+	protected abstract int Defender();
 	
 	protected abstract void Andar();
 	
@@ -74,7 +89,7 @@ public abstract class GameObject extends Objeto {
 	}
 	
 	protected void lancaMagia(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria todas com números e ele escolheria a que ele quer lançar
-		int dado = ComumDado();
+		int dado = Dados.resultadoDado(TipoDado.COMUM);
 		if(dado < ip) {
 			System.out.println("Magia fracassou");
 			return;

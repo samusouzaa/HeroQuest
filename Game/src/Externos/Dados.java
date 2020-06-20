@@ -8,13 +8,13 @@ import java.util.Random;
  * 		- Os n�mero 4 e 5 representam o escudo do her�i
  * 		- O n�mero 6 representa o escudo do monstro
  * */
-public class Dados{
+public abstract class Dados{
 	
-	public int resultadoDado(char tipo_dado) {
+	public static int resultadoDado(TipoDado tipo_dado) {
 		
 		int resultado = new Random().nextInt(6) + 1;
 		
-		if(tipo_dado == 'A') {
+		if(tipo_dado == TipoDado.COMUM) {
 			System.out.printf("Voce tirou o n�mero %d no dado\n", resultado);
 		}
 		
