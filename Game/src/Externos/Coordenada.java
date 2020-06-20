@@ -1,4 +1,4 @@
-package personagens;
+package Externos;
 
 public class Coordenada {
 	private int x;
