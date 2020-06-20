@@ -1,7 +1,10 @@
 package personagens;
 
+import Externos.Coordenada;
+
 public abstract class Objeto {
 private Coordenada coordenada;
+private boolean visivel;
 	
 	Objeto(int x, int y) {
 		coordenada = new Coordenada(x,y);
