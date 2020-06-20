@@ -1,7 +1,8 @@
-package personagens;
+package elementosbasicos.personagens;
 
 import Externos.Dados;
 import Externos.TipoDado;
+import elementosbasicos.GameObject;
 
 public class Heroi extends GameObject {
 	

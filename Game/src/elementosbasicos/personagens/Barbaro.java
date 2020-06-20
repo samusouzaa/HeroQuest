@@ -1,4 +1,4 @@
-package personagens;
+package elementosbasicos.personagens;
 
 public class Barbaro extends Heroi {
 	private static final int ATAQUE = 3;

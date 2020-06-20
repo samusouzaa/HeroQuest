@@ -1,4 +1,4 @@
-package personagens;
+package elementosbasicos.personagens;
 
 public class Feiticeiro extends Heroi {
 	private static final int ATAQUE = 1;

@@ -1,7 +1,8 @@
-package personagens;
+package elementosbasicos.personagens;
 
 import Externos.Dados;
 import Externos.TipoDado;
+import elementosbasicos.GameObject;
 
 public class Inimigo extends GameObject {
 	public Inimigo(int x, int y, int hp, int ip, int atq, int defesa) {

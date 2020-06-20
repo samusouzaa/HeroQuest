@@ -1,6 +1,6 @@
 package Usaveis;
 
-import personagens.GameObject;
+import elementosbasicos.GameObject;
 
 public class SimpleHeal extends Magia {
 	public void Usar(GameObject gameobject) {

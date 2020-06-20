@@ -1,7 +1,8 @@
 package Usaveis;
 
-import personagens.GameObject;
 import java.util.Scanner;
+
+import elementosbasicos.GameObject;
 
 public class Teleport extends Magia{
 	public void Usar(GameObject gameobject) {

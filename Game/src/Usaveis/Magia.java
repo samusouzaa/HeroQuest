@@ -1,5 +1,5 @@
 package Usaveis;
-import personagens.GameObject;
+import elementosbasicos.GameObject;
 
 public abstract class Magia extends Item{
 	

@@ -1,4 +1,4 @@
-package personagens;
+package elementosbasicos.personagens;
 
 import java.util.Random;
 

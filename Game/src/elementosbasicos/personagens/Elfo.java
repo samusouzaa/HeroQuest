@@ -1,4 +1,4 @@
-package personagens;
+package elementosbasicos.personagens;
 
 public class Elfo extends Heroi {
 	private static final int ATAQUE = 2;

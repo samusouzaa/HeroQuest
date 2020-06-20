@@ -1,4 +1,4 @@
-package personagens;
+package elementosbasicos.personagens;
 
 public class Anao extends Heroi {
 	private static final int ATAQUE = 2;
