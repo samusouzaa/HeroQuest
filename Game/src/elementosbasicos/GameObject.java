@@ -1,4 +1,4 @@
-package personagens;
+package elementosbasicos;
 import java.util.ArrayList;
 import Usaveis.*;
 import Externos.*;
@@ -40,6 +40,13 @@ public abstract class GameObject extends Objeto {
 		else {
 			armaD = arma;
 		}
+	}
+	
+	protected boolean isAlive(){
+		if (hp <= 0)
+			return false;
+		return true;
+		
 	}
 	
 	public int getDefesa() {

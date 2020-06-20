@@ -1,4 +1,4 @@
-package personagens;
+package elementosbasicos;
 
 import Externos.Coordenada;
 
