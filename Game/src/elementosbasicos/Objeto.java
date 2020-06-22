@@ -14,6 +14,10 @@ private boolean visivel;
 		return coordenada;
 	}
 	
+	protected void atualizaCoordinate(int x, int y) {
+		this.coordenada.changeCoordinates(x,y);
+	}
+	
 	public int getX() {
 		return coordenada.getX();
 	}
