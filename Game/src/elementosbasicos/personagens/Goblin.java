@@ -9,6 +9,6 @@ public class Goblin extends Inimigo {
 	public Goblin(int x, int y) {
 		super(x, y, HP, IP, ATAQUE, DEFESA);
 		
-	}
+	} 
 	
 }

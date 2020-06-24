@@ -8,6 +8,6 @@ public class Esqueleto extends Inimigo {
 	
 	public Esqueleto(int x, int y) {
 		super(x, y, HP, IP, ATAQUE, DEFESA);
-	}
+	} 
 
 }
