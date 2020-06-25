@@ -83,7 +83,7 @@ public abstract class GameObject extends Objeto {
 	
 	protected abstract void Andar();
 	
-	private void receberDano(int dano) {
+	public void receberDano(int dano) {
 		hp -= dano;
 	}
 	
