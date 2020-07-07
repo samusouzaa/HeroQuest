@@ -10,6 +10,6 @@ public class Arma extends Item {
 		super(chave);
 		this.tipo = tipo;
 
-	}
+	} 
 	
 }
