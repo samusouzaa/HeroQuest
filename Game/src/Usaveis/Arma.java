@@ -10,6 +10,18 @@ public class Arma extends Item {
 		super(chave);
 		this.tipo = tipo;
 
+	}
+
+	public int getDano() {
+		return tipo.danosataque;
 	} 
-	
+
+	public int getAlcance() {
+		return tipo.alcance; //usar futuramente em InimigoAlcancavel()
+	}
+
+	public boolean getDestrutivel() {
+		return tipo.destrutivel;
+	}
+
 }
