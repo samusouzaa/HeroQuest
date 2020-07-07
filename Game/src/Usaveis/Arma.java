@@ -1,14 +1,14 @@
 package Usaveis;
 
-public class Arma extends Item{
-	private int alcance;
-	private int bonusDados;
-	private boolean ehdestruida;
-	
-	public Arma(int alcance, int bonus, boolean ehdestruida, int x, int y, String chave) {
-		super(x,y, chave);
-		this.alcance = alcance;
-		this.bonusDados = bonus;
-		this.ehdestruida = ehdestruida;
+public class Arma extends Item {
+	private TipoArma tipo;
+
+	public Arma(TipoArma tipo, String chave) { /*
+												 * mudei os parametros anteriores para receber o TipoArma tipo de cada
+												 * arma, que já sabe as especificidades de cada uma
+												 */
+		super(chave);
+		this.tipo = tipo;
+
 	}
 }
