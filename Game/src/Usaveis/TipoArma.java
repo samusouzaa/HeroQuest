@@ -1,7 +1,7 @@
 package Usaveis;
 
 public enum TipoArma {
-	PUNHAL(1, 2, true), MARTELO(2, 3, true), MACHADO(3, 5, false), LANCA(4, 1, false);
+	PUNHAL(1, 2, true), ESPADACURTA(2, 3, true), ESPADALONGA(3, 5, false), LANCA(4, 1, false);
 
 	private final int alcance;
 	private final int bonus;
