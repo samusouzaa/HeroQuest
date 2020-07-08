@@ -5,14 +5,6 @@ import java.util.Scanner;
 import elementosbasicos.GameObject;
 
 public class Teleport extends Magia{
-	
-	private static final String nome = "Teleport";
-	
-	public Teleport() {
-		super(nome);
-		// TODO Auto-generated constructor stub
-	}
-
 	public void Usar(GameObject gameobject) {
 		System.out.println("Digite as coordenadas da posição para qual se teletransportará");
 		Scanner keyboard = new Scanner(System.in);

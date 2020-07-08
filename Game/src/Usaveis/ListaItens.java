@@ -15,4 +15,8 @@ public class ListaItens {
 		Item item = lista_itens.get(chave);
 		return item;
 	}
+	
+	public void removerItem(String chave) {
+		lista_itens.remove(chave);
+	}
 }
