@@ -2,7 +2,7 @@ package elementosbasicos;
 
 import Externos.Coordenada;
 
-public abstract class Objeto {
+public abstract class Objeto  {
 private Coordenada coordenada;
 private boolean visivel;
 	
@@ -22,6 +22,7 @@ private boolean visivel;
 		return coordenada.getX();
 	}
 	
+	
 	public int getY() {
 		return coordenada.getY();
 	}
@@ -33,4 +34,16 @@ private boolean visivel;
 	public boolean isSameCoordiantes(Objeto object) {
 		return coordenada.equals(object);
 	}
+	
+	public void receberDano(int dano) {
+		return;
+	}
+	
+	@Override
+	public String toString() {
+		return " ";
+	}
+
+	
+	
 }

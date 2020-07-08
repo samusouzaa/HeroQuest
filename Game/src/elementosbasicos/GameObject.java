@@ -83,6 +83,7 @@ public abstract class GameObject extends Objeto {
 	
 	protected abstract void Andar();
 	
+	@Override
 	public void receberDano(int dano) {
 		hp -= dano;
 	}

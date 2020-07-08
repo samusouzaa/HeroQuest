@@ -1,5 +1,6 @@
 package Usaveis;
 import elementosbasicos.GameObject;
+import elementosbasicos.Mapa;
 
 public abstract class Magia extends Item{
 	
@@ -7,6 +8,6 @@ public abstract class Magia extends Item{
 		super(nome_magia);
 	}
 	
-	public abstract void Usar(GameObject gameobject);
+	public abstract void Usar(GameObject gameobject, Mapa mapa);
 	
 }
