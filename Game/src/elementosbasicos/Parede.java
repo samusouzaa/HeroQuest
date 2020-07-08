@@ -8,7 +8,7 @@ public class Parede extends Objeto {
 	
 	@Override
 	public String toString() {
-		return "X";
+		return "XX";
 	}
 
 }

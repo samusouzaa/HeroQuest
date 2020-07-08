@@ -9,8 +9,8 @@ public class Mapa {
 	}
 	private Objeto[][] mapa;
 	
-	private static final int LARGURA = 37;
-	private static final int ALTURA = 31;
+	private static final int LARGURA = 36;
+	private static final int ALTURA = 27;
 
 	protected Mapa() {
 		mapa = new Objeto[ALTURA][LARGURA];
@@ -71,8 +71,6 @@ public class Mapa {
 			if((i > 1 && i < 12) || (i > 14 && i < 24)) {
 				Parede parede = new Parede(i, 2);
 				this.addObjeto(parede);
-				parede = new Parede(i, 7);
-				this.addObjeto(parede);
 				parede = new Parede(i, 12);
 				this.addObjeto(parede);
 				parede = new Parede(i, 28);
@@ -80,6 +78,16 @@ public class Mapa {
 				parede = new Parede(i, 33);
 				this.addObjeto(parede);
 			}
+		}
+		
+		for(int i = 3; i < 11; i++) {
+			Parede parede = new Parede(i, 7);
+			this.addObjeto(parede);
+		}
+		
+		for(int i = 15; i < 24; i++) {
+			Parede parede = new Parede(i, 6);
+			this.addObjeto(parede);
 		}
 		
 		for (int i = 3; i < ALTURA-3; i++) {
@@ -126,6 +134,13 @@ public class Mapa {
 			}
 		}
 		
+		for (int i = 10; i < 18; i++) {
+			Parede parede = new Parede(i,14 );
+			this.addObjeto(parede);
+			parede = new Parede(i,21 );
+			this.addObjeto(parede);
+		}
+		
 		for (int i = 2; i< 7; i++) {
 			Parede parede = new Parede(19, i);
 			this.addObjeto(parede);
@@ -135,8 +150,31 @@ public class Mapa {
 			this.addObjeto(parede);
 		}
 		
+		for(int i = 19; i<24; i++) {
+			Parede parede = new Parede(i, 19);
+			this.addObjeto(parede);
+			parede = new Parede(i, 16);
+			this.addObjeto(parede);
+		}
+		
+		for(int i = 24; i < 33; i++ ) {
+			Parede parede = new Parede(20, i);
+			this.addObjeto(parede);
+		}
+		
 		for (int i = 6; i< 13; i++) {
 			Parede parede = new Parede(18, i);
+			this.addObjeto(parede);
+		}
+		
+		for (int i = 15; i< 20; i++) {
+			Parede parede = new Parede(i, 23);
+			this.addObjeto(parede);
+		}
+		for (int i = 14; i< 21; i++) {
+			Parede parede = new Parede(10, i);
+			this.addObjeto(parede);
+			parede = new Parede(17, i);
 			this.addObjeto(parede);
 		}
 		
@@ -147,7 +185,7 @@ public class Mapa {
 		for (int i = 0; i < ALTURA; i++) {
 			for (int j = 0; j < LARGURA; j++) {
 				if(mapa[i][j] == null) 
-					System.out.printf(" ");
+					System.out.printf("  ");
 					
 				else
 					System.out.printf(mapa[i][j].toString());
