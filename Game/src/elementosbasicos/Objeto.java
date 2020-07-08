@@ -10,11 +10,11 @@ private boolean visivel;
 		coordenada = new Coordenada(x,y);
 	}
 	
-	public Coordenada getCoordinate() {
+	protected Coordenada getCoordinate() {
 		return coordenada;
 	}
 	
-	public void atualizaCoordinate(int x, int y) {
+	protected void atualizaCoordinate(int x, int y) {
 		this.coordenada.changeCoordinates(x,y);
 	}
 	
