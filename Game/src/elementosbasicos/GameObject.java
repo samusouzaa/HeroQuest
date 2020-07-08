@@ -10,6 +10,7 @@ public abstract class GameObject extends Objeto {
 	private int ip;
 	private int dadosAtq;
 	private int dadosDfs;
+	private Armadura armadura;
 	
 	//Posição no mapa que será configurado posteriormente
 	//private Posic pos;
@@ -18,9 +19,11 @@ public abstract class GameObject extends Objeto {
 	private Arma armaD;
 	private Arma armaE;
 	//Lista de itens
-	private ArrayList<Item> itens;
+	private ListaItens itens;
 	//Lista de magias
-	private ArrayList<Magia> magias;
+	private ListaItens magias;
+	
+	
 	
 	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
 		super(x,y);
@@ -29,8 +32,9 @@ public abstract class GameObject extends Objeto {
 		this.ip = ip;
 		this.dadosAtq = atq;
 		this.dadosDfs = dfs;
-		this.itens = new ArrayList<Item>();
-		this.magias = new ArrayList<Magia>();
+		this.itens = new ListaItens();
+		this.magias = new ListaItens();
+		this.armadura.setValor_armadura(0);
 	}
 	
 	protected void equipar(boolean mao, Arma arma) {// true esquerda false direita
@@ -93,6 +97,12 @@ public abstract class GameObject extends Objeto {
 		else
 			hp += cura;
 				
+	}
+	
+	protected int usarArmadura(int ataque) {
+		int ataque_final;
+		ataque_final = ataque - armadura.getValor_armadura();
+		return ataque_final;
 	}
 	
 	protected void lancaMagia(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria todas com números e ele escolheria a que ele quer lançar
