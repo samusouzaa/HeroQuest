@@ -1,7 +1,11 @@
 package elementosbasicos;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import Usaveis.*;
+import excecoes.ArmaInvalidaException;
+import excecoes.GameException;
 import Externos.*;
 
 public abstract class GameObject extends Objeto {
@@ -9,38 +13,37 @@ public abstract class GameObject extends Objeto {
 	private int hp;
 	private int ip;
 	private int dadosAtq;
-	private int dadosDfs;
-<<<<<<< HEAD
+	private int dadosDfs;<<<<<<<HEAD
 	private Armadura armadura;
-	
-	//Posição no mapa que será configurado posteriormente
-	//private Posic pos;
-	
-	//arma
-=======
 
 	// Posição no mapa que será configurado posteriormente
 	// private Posic pos;
 
 	// arma
->>>>>>> branch 'master' of https://github.com/Pedro-Andrade-POSDR/MC322HeroQuest.git
+	=======
+
+	// Posição no mapa que será configurado posteriormente
+	// private Posic pos;
+
+	// arma
+	>>>>>>>branch'master'
+	of https:// github.com/Pedro-Andrade-POSDR/MC322HeroQuest.git
 	private Arma armaD;
-	private Arma armaE;
-<<<<<<< HEAD
-	//Lista de itens
+	private Arma armaE;<<<<<<<HEAD
+	// Lista de itens
 	private ListaItens itens;
-	//Lista de magias
+	// Lista de magias
 	private ListaItens magias;
-	
-	
-	
-=======
+
+	=======
 	// Lista de itens
 	private ArrayList<Item> itens;
 	// Lista de magias
 	private ArrayList<Magia> magias;
 
->>>>>>> branch 'master' of https://github.com/Pedro-Andrade-POSDR/MC322HeroQuest.git
+	>>>>>>>branch'master'
+	of https:// github.com/Pedro-Andrade-POSDR/MC322HeroQuest.git
+
 	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
 		super(x, y);
 		this.hpcheio = hp;
@@ -72,6 +75,46 @@ public abstract class GameObject extends Objeto {
 
 	}
 
+	private boolean Armado() {
+		if (armaD != null || armaE != null) {
+			return true;
+		}
+		return false;
+	}
+
+	private int escolhaArmas() {
+		if (armaE != null) {
+			System.out.println("1 - " + armaE);
+		} else {
+			System.out.print("1 - " + " ---- ");
+		}
+		if (armaD != null) {
+			System.out.println("2 - " + armaD);
+		} else {
+			System.out.println("2 -" + " ---- ");
+		}
+
+		Scanner in = new Scanner(System.in);
+		String s = in.nextLine();
+		switch (s) {
+		case ("1"):
+			if (armaE == null) {
+				throw new ArmaInvalidaException();
+			} else {
+				destruirArma(armaE);
+				return armaE.getDano();
+			}
+		case ("2"):
+			if (armaD == null) {
+				throw new ArmaInvalidaException();
+			} else {
+				destruirArma(armaD);
+				return armaD.getDano();
+			}
+
+		}
+	}
+
 	protected boolean isAlive() {
 		if (hp <= 0)
 			return false;
@@ -92,22 +135,38 @@ public abstract class GameObject extends Objeto {
 		if (inimigo == null)
 			return;
 
-		int numeroDados = dadosAtq;// + armaD.getDano + armaE.getDano;
-		int dadoAliado = 0;
-		int aux;
+		int numeroDados = dadosAtq; // + armaD.getDano() + armaE.getDano(); // ataque normal
 
-		for (int i = 0; i < numeroDados; i++) {
-			aux = Dados.resultadoDado(TipoDado.LUTA);
-			if (0 < aux && aux < 4)
-				dadoAliado += 1;
+		if (Armado()) {
+			System.out.println("Usar armas disponíveis?"); // excecao pra caso a arma for null
+			System.out.println("y = sim");
+			System.out.println("n = não");
+			Scanner in = new Scanner(System.in);
+			String s = in.nextLine();
+			if (s == "y") {
+				numeroDados += this.escolhaArmas();
+			} else {
+				System.out.println("Não há armas disponíveis");
+
+			}
 		}
+		Scanner s = new Scanner(System.in);
 
-		int dadoInimigo = inimigo.Defender(); // Função será criada posteriormente e devolve o número de escudos
-
-		int resultado = dadoAliado - dadoInimigo;
-
-		if (resultado > 0)
-			inimigo.receberDano(resultado);
+//		int dadoAliado = 0;
+//		int aux;
+//
+//		for (int i = 0; i < numeroDados; i++) {
+//			aux = Dados.resultadoDado(TipoDado.LUTA);
+//			if (0 < aux && aux < 4)
+//				dadoAliado += 1;
+//		}
+//
+//		int dadoInimigo = inimigo.Defender(); // Função será criada posteriormente e devolve o número de escudos
+//
+//		int resultado = dadoAliado - dadoInimigo;
+//
+//		if (resultado > 0)
+//			inimigo.receberDano(resultado);
 	}
 
 	protected abstract int Defender();
@@ -124,15 +183,14 @@ public abstract class GameObject extends Objeto {
 		else
 			hp += cura;
 
-	}
-<<<<<<< HEAD
-	
+	}<<<<<<<HEAD
+
 	protected int usarArmadura(int ataque) {
 		int ataque_final;
 		ataque_final = ataque - armadura.getValor_armadura();
 		return ataque_final;
 	}
-	
+
 	protected void lancaMagia(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria todas com números e ele escolheria a que ele quer lançar
 =======
 
