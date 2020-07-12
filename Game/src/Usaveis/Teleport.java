@@ -1,7 +1,7 @@
 package Usaveis;
 
 import java.util.Scanner;
-
+import elementosbasicos.Mapa;
 import elementosbasicos.GameObject;
 
 public class Teleport extends Magia{
@@ -13,8 +13,9 @@ public class Teleport extends Magia{
 		super(nome);
 		// TODO Auto-generated constructor stub
 	}
-
-	public void Usar(GameObject gameobject) {
+	
+	@Override
+	public void Usar(GameObject gameobject, Mapa mapa) {
 		System.out.println("Digite as coordenadas da posição para qual se teletransportará");
 		Scanner keyboard = new Scanner(System.in);
 		while(true) {

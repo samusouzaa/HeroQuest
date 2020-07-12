@@ -175,7 +175,7 @@ public abstract class GameObject extends Objeto {
 		return ataque_final;
 	}
 
-	protected void lancaMagia(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria
+	protected void lancaMagia(int posic, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria
 											// todas com números e ele escolheria a que ele quer lançar
 
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
@@ -186,7 +186,7 @@ public abstract class GameObject extends Objeto {
 
 		Magia magia = magias.get(posic - 1);
 
-		magia.Usar(this);
+		magia.Usar(this, mapa);
 	}
 
 	protected void usarItem(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria todas
