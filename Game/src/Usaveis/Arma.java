@@ -23,5 +23,10 @@ public class Arma extends Item {
 	public boolean getDestrutivel() {
 		return tipo.destrutivel;
 	}
+	
+	public String toString(){
+		return tipo.nome;
+		
+	}
 
 }

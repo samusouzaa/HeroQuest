@@ -6,9 +6,10 @@ import elementosbasicos.GameObject;
 
 public class Teleport extends Magia{
 	
-	private static final String nome = "SimpleHeal";
+
+	private static final String nome = "Teleport";
 	
-	Teleport() {
+	public Teleport() {
 		super(nome);
 		// TODO Auto-generated constructor stub
 	}
