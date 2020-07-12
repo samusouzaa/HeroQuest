@@ -10,37 +10,20 @@ public abstract class GameObject extends Objeto {
 	private int ip;
 	private int dadosAtq;
 	private int dadosDfs;
-<<<<<<< HEAD
 	private Armadura armadura;
 	
 	//Posição no mapa que será configurado posteriormente
 	//private Posic pos;
 	
-	//arma
-=======
-
-	// Posição no mapa que será configurado posteriormente
-	// private Posic pos;
-
-	// arma
->>>>>>> branch 'master' of https://github.com/Pedro-Andrade-POSDR/MC322HeroQuest.git
 	private Arma armaD;
 	private Arma armaE;
-<<<<<<< HEAD
-	//Lista de itens
-	private ListaItens itens;
-	//Lista de magias
-	private ListaItens magias;
-	
-	
-	
-=======
+
 	// Lista de itens
 	private ArrayList<Item> itens;
 	// Lista de magias
 	private ArrayList<Magia> magias;
 
->>>>>>> branch 'master' of https://github.com/Pedro-Andrade-POSDR/MC322HeroQuest.git
+
 	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
 		super(x, y);
 		this.hpcheio = hp;
@@ -48,8 +31,8 @@ public abstract class GameObject extends Objeto {
 		this.ip = ip;
 		this.dadosAtq = atq;
 		this.dadosDfs = dfs;
-		this.itens = new ListaItens();
-		this.magias = new ListaItens();
+		this.itens = new ArrayList<Item>();
+		this.magias = new ArrayList<Magia>();
 		this.armadura.setValor_armadura(0);
 	}
 
@@ -125,7 +108,7 @@ public abstract class GameObject extends Objeto {
 			hp += cura;
 
 	}
-<<<<<<< HEAD
+
 	
 	protected int usarArmadura(int ataque) {
 		int ataque_final;
@@ -133,12 +116,9 @@ public abstract class GameObject extends Objeto {
 		return ataque_final;
 	}
 	
-	protected void lancaMagia(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria todas com números e ele escolheria a que ele quer lançar
-=======
-
 	protected void lancaMagia(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria
 											// todas com números e ele escolheria a que ele quer lançar
->>>>>>> branch 'master' of https://github.com/Pedro-Andrade-POSDR/MC322HeroQuest.git
+
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
 		if (dado < ip) {
 			System.out.println("Magia fracassou");
@@ -147,7 +127,7 @@ public abstract class GameObject extends Objeto {
 
 		Magia magia = magias.get(posic - 1);
 
-		magia.Usar();
+		magia.Usar(this);
 	}
 
 	protected void usarItem(int posic) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria todas

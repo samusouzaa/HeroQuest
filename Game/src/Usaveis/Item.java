@@ -2,10 +2,12 @@ package Usaveis;
 
 import elementosbasicos.Objeto;
 
-public abstract class Item extends Objeto{
+public abstract class Item{
+	
+	private String chave;
 
-	Item(int x, int y, String chave) {
-		super(x, y);
+	Item(String chave) {
+		this.chave = chave;
 	}
 	
 }
