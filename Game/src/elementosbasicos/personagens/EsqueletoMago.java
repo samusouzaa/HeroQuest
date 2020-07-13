@@ -65,4 +65,9 @@ public class EsqueletoMago extends Inimigo{
 		}
 	}
 	
+	@Override
+	public String toString() {
+		return "em";
+	}
+	
 }

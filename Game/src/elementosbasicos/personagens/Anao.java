@@ -10,5 +10,10 @@ public class Anao extends Heroi {
 		super(x, y,HP, IP, ATAQUE, DEFESA);
 		//this.equipar(true, arma);
 	}
+	
+	@Override
+	public String toString() {
+		return "AN";
+	}
 
 }

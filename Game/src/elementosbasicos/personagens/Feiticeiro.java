@@ -10,6 +10,11 @@ public class Feiticeiro extends Heroi {
 		super(x, y, HP, IP, ATAQUE, DEFESA);
 	}
 	
+	@Override
+	public String toString() {
+		return "FE";
+	}
+	
 
 
 }

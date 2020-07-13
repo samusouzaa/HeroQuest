@@ -11,4 +11,9 @@ public class Goblin extends Inimigo {
 		
 	} 
 	
+	@Override
+	public String toString() {
+		return "go";
+	}
+	
 }

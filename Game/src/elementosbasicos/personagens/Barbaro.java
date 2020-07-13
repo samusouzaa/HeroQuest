@@ -11,5 +11,10 @@ public class Barbaro extends Heroi {
 		//this.equipar(true, arma);
 		//this.equipar(false, arma);
 	}
+	
+	@Override
+	public String toString() {
+		return "BA";
+	}
 
 }
