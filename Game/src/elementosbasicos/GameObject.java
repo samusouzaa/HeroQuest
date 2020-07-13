@@ -36,7 +36,31 @@ public abstract class GameObject extends Objeto {
 		this.dadosDfs = dfs;
 		this.itens = new ArrayList<Item>();
 		this.magias = new ArrayList<Magia>();
-		this.armadura.setValor_armadura(0);
+		//this.armadura.setValor_armadura(0);
+	}
+	
+	protected void Mover(Direcao direcao, Mapa mapa) {
+		int x = this.getX();
+		int y = this.getY();
+		switch(direcao) {
+			case UP:
+				x -= 1;
+				break;
+			case DOWN:
+				x += 1;
+				break;
+			case LEFT:
+				y -= 1;
+				break;
+			case RIGHT:
+				y += 1;
+				break;
+		}
+		if(mapa.verificarPosicao(x,y)) {
+			mapa.removeObjeto(this);
+			this.atualizaCoordinate(x, y);
+			mapa.addObjeto(this);
+		}
 	}
 
 	protected void equipar(boolean mao, Arma arma) {// true esquerda false direita
@@ -154,7 +178,7 @@ public abstract class GameObject extends Objeto {
 
 	protected abstract int Defender();
 
-	protected abstract void Andar();
+	public abstract void Andar(Mapa mapa);
 
 	public void receberDano(int dano) {
 		hp -= dano;

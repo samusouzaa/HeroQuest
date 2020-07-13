@@ -3,19 +3,21 @@ import elementosbasicos.personagens.*;
 import java.util.ArrayList;
 
 public class Mapa {
-	public static void main(String[] args) {
-		Mapa mapa = new Mapa();
-		mapa.printMap();
-	}
+
 	private Objeto[][] mapa;
 	
 	private static final int LARGURA = 36;
 	private static final int ALTURA = 27;
 
-	protected Mapa() {
+	public Mapa() {
 		mapa = new Objeto[ALTURA][LARGURA];
 		CriarMapaPadrao();
-		
+	}
+	
+	public boolean verificarPosicao(int x, int y) {
+		if (mapa[x][y] == null)
+			return true;
+		return false;
 	}
 	
 	public int getLargura() {
@@ -30,11 +32,11 @@ public class Mapa {
 		return mapa[x][y];
 	}
 	
-	protected void addObjeto(Objeto objeto) {
+	public void addObjeto(Objeto objeto) {
 		mapa[objeto.getX()][objeto.getY()] = objeto;
 	}
 	
-	protected void removeObjeto(Objeto objeto) {
+	public void removeObjeto(Objeto objeto) {
 		mapa[objeto.getX()][objeto.getY()] = null;
 	}
 	
@@ -181,7 +183,7 @@ public class Mapa {
 		
 	}
 	
-	protected void printMap() {
+	public void printMap() {
 		for (int i = 0; i < ALTURA; i++) {
 			for (int j = 0; j < LARGURA; j++) {
 				if(mapa[i][j] == null) 
