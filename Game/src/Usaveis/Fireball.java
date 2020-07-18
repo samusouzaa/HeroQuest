@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import Externos.Coordenada;
 import elementosbasicos.GameObject;
+import elementosbasicos.Mapa;
 
 public class Fireball extends Magia {
 	
@@ -15,7 +16,7 @@ public class Fireball extends Magia {
 	
 	
 	@Override
-	public void Usar(GameObject gameobject) {
+	public void Usar(GameObject gameobject, Mapa mapa) {
 		// TODO Auto-generated method stub
 		ArrayList<GameObject> inimigosProximos = getInimigos(gameobject.getCoordinate());
 		

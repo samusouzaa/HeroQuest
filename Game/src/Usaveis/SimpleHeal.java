@@ -2,6 +2,7 @@ package Usaveis;
 import Externos.Dados;
 import Externos.TipoDado;
 import elementosbasicos.GameObject;
+import elementosbasicos.Mapa;
 
 public class SimpleHeal extends Magia {
 	
@@ -10,8 +11,9 @@ public class SimpleHeal extends Magia {
 	public SimpleHeal() {
 		super(nome);
 	}
-
-	public void Usar(GameObject gameobject) {
+	
+	@Override
+	public void Usar(GameObject gameobject, Mapa mapa) {
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
 		gameobject.receberCura(dado);
 		
