@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Usaveis.*;
+import elementosbasicos.personagens.Inimigo;
 import excecoes.ArmaInvalidaException;
 import excecoes.GameException;
 import Externos.*;
@@ -37,6 +38,10 @@ public abstract class GameObject extends Objeto {
 		this.itens = new ArrayList<Item>();
 		this.magias = new ArrayList<Magia>();
 		//this.armadura.setValor_armadura(0);
+	}
+	///////RETIRAR
+	public int getHp() {
+		return this.hp;
 	}
 	
 	protected void Mover(Direcao direcao, Mapa mapa) {
@@ -135,12 +140,7 @@ public abstract class GameObject extends Objeto {
 
 	// Se escolhe qual direção cardinal se atacará
 
-	protected void Atacar(String direcao) {
-		GameObject inimigo = InimigoAlcancavel(direcao); // Função será criada posteriormente e devolve o inimigo no
-															// alcance, ou devolve null
-
-		if (inimigo == null)
-			return;
+	protected void Atacar(GameObject inimigo) {
 
 		int numeroDados = dadosAtq; // + armaD.getDano() + armaE.getDano(); // ataque normal
 
@@ -159,21 +159,21 @@ public abstract class GameObject extends Objeto {
 		}
 		Scanner s = new Scanner(System.in);
 
-//		int dadoAliado = 0;
-//		int aux;
-//
-//		for (int i = 0; i < numeroDados; i++) {
-//			aux = Dados.resultadoDado(TipoDado.LUTA);
-//			if (0 < aux && aux < 4)
-//				dadoAliado += 1;
-//		}
-//
-//		int dadoInimigo = inimigo.Defender(); // Função será criada posteriormente e devolve o número de escudos
-//
-//		int resultado = dadoAliado - dadoInimigo;
-//
-//		if (resultado > 0)
-//			inimigo.receberDano(resultado);
+		int dadoAliado = 0;
+		int aux;
+
+		for (int i = 0; i < numeroDados; i++) {
+			aux = Dados.resultadoDado(TipoDado.LUTA);
+			if (0 < aux && aux < 4)
+				dadoAliado += 1;
+		}
+
+		int dadoInimigo = inimigo.Defender(); // Função será criada posteriormente e devolve o número de escudos
+
+		int resultado = dadoAliado - dadoInimigo;
+
+		if (resultado > 0)
+			inimigo.receberDano(resultado);
 	}
 
 	protected abstract int Defender();
