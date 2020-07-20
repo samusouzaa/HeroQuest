@@ -35,10 +35,13 @@ public class HeroQuest {
 	
 	public void Jogar() {
 		while(true) {
-			//Vez dos herois
-			for(GameObject heroi : herois)
+			//Herois andam 
+			for(GameObject heroi : herois) {
 				heroi.Andar(mapa);
+			}
+			
 		}
+		
 	}
 	
 	

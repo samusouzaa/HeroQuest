@@ -89,7 +89,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 		return false;
 	}
 
-	private int escolhaArmas() {
+	private int escolhaArmas() throws ArmaInvalidaException {
 		if (armaE != null) {
 			System.out.println("1 - " + armaE);
 		} else {
@@ -120,6 +120,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 			}
 
 		}
+		return 0;
 	}
 
 	protected boolean isAlive() {
@@ -159,21 +160,21 @@ public abstract class GameObject extends Objeto implements Personagem {
 		}
 		Scanner s = new Scanner(System.in);
 
-//		int dadoAliado = 0;
-//		int aux;
-//
-//		for (int i = 0; i < numeroDados; i++) {
-//			aux = Dados.resultadoDado(TipoDado.LUTA);
-//			if (0 < aux && aux < 4)
-//				dadoAliado += 1;
-//		}
-//
-//		int dadoInimigo = inimigo.Defender(); // Função será criada posteriormente e devolve o número de escudos
-//
-//		int resultado = dadoAliado - dadoInimigo;
-//
-//		if (resultado > 0)
-//			inimigo.receberDano(resultado);
+		int dadoAliado = 0;
+		int aux;
+
+		for (int i = 0; i < numeroDados; i++) {
+			aux = Dados.resultadoDado(TipoDado.LUTA);
+			if (0 < aux && aux < 4)
+				dadoAliado += 1;
+		}
+
+		int dadoInimigo = inimigo.Defender(); // Função será criada posteriormente e devolve o número de escudos
+
+		int resultado = dadoAliado - dadoInimigo;
+
+		if (resultado > 0)
+			inimigo.receberDano(resultado);
 	}
 
 	protected abstract int Defender();
