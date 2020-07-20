@@ -8,7 +8,7 @@ import excecoes.ArmaInvalidaException;
 import excecoes.GameException;
 import Externos.*;
 
-public abstract class GameObject extends Objeto {
+public abstract class GameObject extends Objeto implements Personagem {
 	private final int hpcheio;
 	private int hp;
 	private int ip;
