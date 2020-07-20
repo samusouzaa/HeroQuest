@@ -15,5 +15,11 @@ public class Anao extends Heroi {
 	public String toString() {
 		return "AN";
 	}
+	
+	@Override
+	public void Vez() {
+		System.out.println("Vez do anao");
+		System.out.println("Vida:" + HP);
+	}
 
 }

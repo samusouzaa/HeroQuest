@@ -136,7 +136,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 
 	// Se escolhe qual direção cardinal se atacará
 
-	protected void Atacar(String direcao) {
+	public void Atacar(String direcao) {
 		GameObject inimigo = InimigoAlcancavel(direcao); // Função será criada posteriormente e devolve o inimigo no
 															// alcance, ou devolve null
 

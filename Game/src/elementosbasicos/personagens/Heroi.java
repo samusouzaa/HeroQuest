@@ -9,7 +9,7 @@ import elementosbasicos.Mapa;
 
 import java.util.Scanner;
 
-public class Heroi extends GameObject {
+public abstract class Heroi extends GameObject {
 	
 	public Heroi(int x, int y, int hp, int ip, int atq, int dfs) {
 		super(x, y,hp, ip, atq, dfs);
@@ -73,5 +73,7 @@ public class Heroi extends GameObject {
 		}
 		return dadoAliado;
 	}
+
+	
 	
 }

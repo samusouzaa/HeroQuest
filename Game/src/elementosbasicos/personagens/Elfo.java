@@ -16,4 +16,10 @@ public class Elfo extends Heroi {
 	public String toString() {
 		return "EL";
 	}
+	
+	@Override
+	public void Vez() {
+		System.out.println("Vez do elfo");
+		System.out.println("Vida:" + HP);
+	}
 }
