@@ -7,6 +7,7 @@ import Externos.TipoDado;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Heroi extends GameObject {
@@ -15,8 +16,12 @@ public abstract class Heroi extends GameObject {
 		super(x, y,hp, ip, atq, dfs);
 	}
 	
+	private ArrayList<GameObject> inimigos_proximos = new ArrayList<GameObject>();
+	
 	public void Andar(Mapa mapa) {
 		//Jogar dados
+		//se um ataque for realizado,ele n�o andar� mais
+		boolean atacou = false;
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
 		Direcao direcao;
@@ -56,6 +61,7 @@ public abstract class Heroi extends GameObject {
 				conferido = false;
 			
 			verificado = mapa.verificarPosicao(getX(), getY());
+
 		}
 		
 		mapa.addObjeto(this);
@@ -74,6 +80,79 @@ public abstract class Heroi extends GameObject {
 		return dadoAliado;
 	}
 
+	
+	
+	public GameObject inimigosTurno(Mapa mapa){
+		
+		int x = this.getX();
+		int y = this.getY();
+		int posicao_inimigo = 1;
+		boolean existe_inimigo = false;
+		
+		GameObject inimigo_atacado;
+		
+		//verifica inimigos acima
+		if (mapa.getObjetoMapa(x, y+1) instanceof Inimigo) {
+			System.out.println("Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y+1).toString());
+			inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x, y+1));
+			posicao_inimigo++;
+			existe_inimigo = true;
+			}
+		
+		//verifica inimigos na direita
+		if (mapa.getObjetoMapa(x+1, y) instanceof Inimigo) {
+			System.out.println("Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x+1, y).toString());
+			inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x+1, y));
+			posicao_inimigo++;
+			existe_inimigo = true;
+		}
+			
+		//verifica inimigos embaixo
+		if (mapa.getObjetoMapa(x, y-1) instanceof Inimigo) {
+			System.out.println("Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y-1).toString());
+			inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x, y-1));
+			posicao_inimigo++;
+			existe_inimigo = true;
+		}
+		
+		//verifica inimigos na esquerda
+		if (mapa.getObjetoMapa(x-1, y) instanceof Inimigo) {
+			System.out.println("Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x-1, y).toString());
+			inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x-1, y));
+			posicao_inimigo++;
+			existe_inimigo = true;
+		}
+		
+		//Se existir algum inimigo proximo, perguntamos se o ataque ocorrer�
+		if (existe_inimigo == true) {
+			//Se n�o quiser realizar ataque
+			System.out.println("Pressione qualquer outra tecla se n�o quiser realizar o ataque");
+		
+			Scanner keyboard = new Scanner(System.in);
+			int inimigo_escolhido = keyboard.nextInt();
+		
+			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo-1) {
+				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido-1);
+				return inimigo_atacado;
+				}
+		
+			else
+				return null;
+		}
+		
+		else
+			return null;
+	}
+	
+	public boolean realizaAtaque(Mapa mapa) {
+		GameObject inimigo = inimigosTurno(mapa);
+		if (inimigo != null) {
+			this.Atacar(inimigo);
+			return true;
+			}
+		else
+			return false;
+	}
 	
 	
 }
