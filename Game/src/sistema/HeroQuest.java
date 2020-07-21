@@ -34,10 +34,24 @@ public class HeroQuest {
 	}
 	
 	public void Jogar() {
+		Scanner keyboard = new Scanner(System.in);
+		String command;
+		
 		while(true) {
-			//Herois andam 
+			mapa.printMap();
+			//Vez dos herois
 			for(GameObject heroi : herois) {
-				heroi.Andar(mapa);
+				heroi.Vez();
+				
+				System.out.println("Você quer andar [Y/N]");
+				command = keyboard.nextLine();
+				if(command.compareTo("Y") == 0)
+					heroi.Andar(mapa);
+				
+				System.out.println("Você quer atacar [Y/N]");
+				command = keyboard.nextLine();
+				if(command.compareTo("Y") == 0)
+					heroi.Andar(mapa);
 			}
 			
 		}
