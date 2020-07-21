@@ -12,42 +12,25 @@ public class HeroQuest {
 	private ArrayList<GameObject> inimigos;
 	
 	public HeroQuest() {
-		Anao anao = new Anao(13, 1);
-		
-		//teste de ataque
-		/*Elfo elfo = new Elfo(1, 2);
+		Anao anao = new Anao(1, 1);
+		Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
-		Feiticeiro feiticeiro = new Feiticeiro(1,4);*/
-		
-		Goblin goblin = new Goblin(12,4);
-		Esqueleto esqueleto = new Esqueleto(13,5);
-		EsqueletoMago esqueleto_mago = new EsqueletoMago(14,4);
+		Feiticeiro feiticeiro = new Feiticeiro(1,4);
 		
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
 		
-		//teste de ataque
-		/*herois.add(feiticeiro);
+		herois.add(feiticeiro);
 		herois.add(elfo);
-		herois.add(barbaro);*/
+		herois.add(barbaro);
 		herois.add(anao);
-		inimigos.add(goblin);
-		inimigos.add(esqueleto);
-		inimigos.add(esqueleto_mago);
-		
 		
 		mapa = new Mapa();
 		
-		//teste de ataque
-		/*
 		mapa.addObjeto(feiticeiro);
 		mapa.addObjeto(barbaro);
-		mapa.addObjeto(elfo);*/
-		
+		mapa.addObjeto(elfo);
 		mapa.addObjeto(anao);
-		mapa.addObjeto(goblin);
-		mapa.addObjeto(esqueleto);
-		mapa.addObjeto(esqueleto_mago);
 	}
 	
 	public void Jogar() {
@@ -55,7 +38,6 @@ public class HeroQuest {
 		String command;
 		
 		while(true) {
-
 			mapa.printMap();
 			//Vez dos herois
 			for(GameObject heroi : herois) {
@@ -69,7 +51,7 @@ public class HeroQuest {
 				System.out.println("Você quer atacar [Y/N]");
 				command = keyboard.nextLine();
 				if(command.compareTo("Y") == 0)
-					heroi.Atacar(null);
+					heroi.Andar(mapa);
 			}
 			
 		}
