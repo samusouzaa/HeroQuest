@@ -25,20 +25,19 @@ public class MagicMissile extends Magia {
 		int ny = y;
 
 		while (inimigo == null) {
-			switch (direcao) {
-			case DOWN:
+			
+			if (direcao == Direcao.DOWN)
 				nx += 1;
 
-			case RIGHT:
+			else if (direcao == Direcao.RIGHT)
 				ny += 1;
 
-			case LEFT:
+			else if (direcao == Direcao.LEFT)
 				ny -= 1;
 
-			default:
+			else
 				nx -= 1;
-
-			}
+			
 			if(nx > mapa.getAltura() || ny > mapa.getLargura())
 				break;
 			
@@ -59,18 +58,19 @@ public class MagicMissile extends Magia {
 			Scanner keyboard = new Scanner(System.in);
 
 			String command = keyboard.nextLine();
-			Direcao direcao;
+			Direcao direcao = null;
 
-			switch (command) {
-			case "s":
+			if(command.compareTo("s") == 0)
 				direcao = Direcao.DOWN;
-			case "d":
+			
+			if(command.compareTo("d") == 0)
 				direcao = Direcao.RIGHT;
-			case "a":
+			
+			if(command.compareTo("a") == 0)
 				direcao = Direcao.LEFT;
-			default:
+			
+			if(command.compareTo("w") == 0)
 				direcao = Direcao.UP;
-			}
 
 			Objeto alvo = getPrimeiroInimigo(x, y, direcao, mapa);
 			if(alvo != null) {
