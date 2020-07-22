@@ -1,12 +1,12 @@
 package Usaveis;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import Externos.Direcao;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 import elementosbasicos.Objeto;
 import elementosbasicos.personagens.Inimigo;
+
 
 public class Fireball extends Magia {
 	

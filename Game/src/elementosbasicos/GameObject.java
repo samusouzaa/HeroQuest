@@ -9,7 +9,7 @@ import excecoes.ArmaInvalidaException;
 import excecoes.GameException;
 import Externos.*;
 
-public abstract class GameObject extends Objeto {
+public abstract class GameObject extends Objeto implements Personagem {
 	private final int hpcheio;
 	private int hp;
 	private int ip;
@@ -94,7 +94,9 @@ public abstract class GameObject extends Objeto {
 		return false;
 	}
 
+
 	protected Arma escolhaArmas() throws ArmaInvalidaException {
+		
 		if (armaE != null) {
 			System.out.println("1 - " + armaE);
 		} else {
@@ -125,6 +127,7 @@ public abstract class GameObject extends Objeto {
 			}
 
 		}
+
 		return null;
 	}
 

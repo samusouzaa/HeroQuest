@@ -16,5 +16,11 @@ public class Barbaro extends Heroi {
 	public String toString() {
 		return "BA";
 	}
+	
+	@Override
+	public void Vez() {
+		System.out.println("Vez do barbaro");
+		System.out.println("Vida:" + HP);
+	}
 
 }

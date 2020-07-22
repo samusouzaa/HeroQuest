@@ -10,7 +10,7 @@ public class Inimigo extends GameObject {
 		super(x, y, hp, ip, atq, defesa);
 	}
 	
-	protected void Andar(Mapa mapa) {
+	public void Andar(Mapa mapa) {
 		//Ainda vamos desenvolver
 	}
 	
@@ -24,5 +24,11 @@ public class Inimigo extends GameObject {
 				dadoAliado += 1;
 		}
 		return dadoAliado;
+	}
+
+	@Override
+	public void Vez() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -8,6 +8,7 @@ private boolean visivel;
 	
 	public Objeto(int x, int y) {
 		coordenada = new Coordenada(x,y);
+		visivel = false;
 	}
 	
 	protected Coordenada getCoordinate() {
@@ -33,6 +34,10 @@ private boolean visivel;
 	
 	public boolean isSameCoordiantes(Objeto object) {
 		return coordenada.equals(object);
+	}
+	
+	public void Visto() {
+		visivel = true;
 	}
 	
 	public void receberDano(int dano) {

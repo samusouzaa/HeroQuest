@@ -3,11 +3,6 @@ package sistema;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Usaveis.Arma;
-import Usaveis.Fireball;
-import Usaveis.MagicMissile;
-import Usaveis.Teleport;
-import Usaveis.TipoArma;
 import elementosbasicos.*;
 import elementosbasicos.personagens.*;
 
@@ -15,62 +10,79 @@ public class HeroQuest {
 	private Mapa mapa;
 	private ArrayList<GameObject> herois;
 	private ArrayList<GameObject> inimigos;
-	
+
 	public HeroQuest() {
-		Anao anao = new Anao(13, 1);
-		Arma arma = new Arma(TipoArma.ESPADALONGA, "A");
-		anao.equipar(true, arma);
-		Fireball magiam = new Fireball();
-		anao.adicionaMagia(magiam);
-		//teste de ataque
-		/*Elfo elfo = new Elfo(1, 2);
+		Anao anao = new Anao(1, 1);
+		Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
-		Feiticeiro feiticeiro = new Feiticeiro(1,4);*/
+		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
 		
-		Goblin goblin = new Goblin(12,4);
-		Esqueleto esqueleto = new Esqueleto(13,5);
-		EsqueletoMago esqueleto_mago = new EsqueletoMago(14,4);
+		Goblin goblin = new Goblin(1, 9);
 		
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
-		
-		//teste de ataque
-		/*herois.add(feiticeiro);
-		herois.add(elfo);
-		herois.add(barbaro);*/
-		herois.add(anao);
+
 		inimigos.add(goblin);
-		inimigos.add(esqueleto);
-		inimigos.add(esqueleto_mago);
 		
-		
+		herois.add(feiticeiro);
+		herois.add(elfo);
+		herois.add(barbaro);
+		herois.add(anao);
+
 		mapa = new Mapa();
-		
-		//teste de ataque
-		/*
+
 		mapa.addObjeto(feiticeiro);
 		mapa.addObjeto(barbaro);
-		mapa.addObjeto(elfo);*/
-		
+		mapa.addObjeto(elfo);
 		mapa.addObjeto(anao);
 		mapa.addObjeto(goblin);
-		mapa.addObjeto(esqueleto);
-		mapa.addObjeto(esqueleto_mago);
 	}
-	
+
 	public void Jogar() {
+		Scanner keyboard = new Scanner(System.in);
+		String command;
+		boolean andar, acao;
+		
 		while(true) {
-			//Herois andam 
+			mapa.printMap();
+			
+			//Vez dos herois
 			for(GameObject heroi : herois) {
-				heroi.Andar(mapa);
-				heroi.lancaMagia(1, mapa);
+				heroi.Vez();
+				
+				andar = false;
+				acao = false;
+				while (!andar || !acao) {
+				
+					System.out.println("Selecione sua ação [w/a/m/n]");
+					command = keyboard.nextLine();
+					if(command.compareTo("w") == 0 && !andar) {
+						heroi.Andar(mapa);
+						andar = true;
+					}
+					
+					else if (command.compareTo("a") == 0 && !acao) {
+						((Heroi) heroi).realizaAtaque(mapa);
+						acao = true;
+					}
+					
+					else if (command.compareTo("m") == 0 && !acao) {
+						//Usar magia
+						acao = true;
+					}
+					
+					else if (command.compareTo("n") == 0) {
+						break;
+					}
+					
+					else
+						System.out.println("Voce ja usou esta acao");
 				}
-			System.out.println("Vida goblin: " +inimigos.get(0).getHp());
-			System.out.println("Vida esqueleto: " +inimigos.get(1).getHp());
-			System.out.println("Vida esqueleto mago: " +inimigos.get(2).getHp());
+				
+			}
 			
 		}
+		
 	}
-	
-	
+
 }

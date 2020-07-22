@@ -1,5 +1,6 @@
 package elementosbasicos.personagens;
 
+import Externos.Coordenada;
 import Externos.Dados;
 import Externos.Direcao;
 import Externos.TipoDado;
@@ -12,7 +13,7 @@ import excecoes.ArmaInvalidaException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Heroi extends GameObject {
+public abstract class Heroi extends GameObject {
 	
 	public Heroi(int x, int y, int hp, int ip, int atq, int dfs) {
 		super(x, y,hp, ip, atq, dfs);
@@ -22,37 +23,52 @@ public class Heroi extends GameObject {
 	
 	public void Andar(Mapa mapa) {
 		//Jogar dados
-		//se um ataque for realizado,ele não andará mais
+		//se um ataque for realizado,ele nï¿½o andarï¿½ mais
 		boolean atacou = false;
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
 		Direcao direcao;
-
+		boolean conferido = false;
+		boolean verificado = false;
+		int xi = getX();
+		int yi = getY();
+		mapa.removeObjeto(this);
 		
-		for (int i = 0; i < passos; i++) {
-			System.out.println("Digite a prÃ³xima direÃ§Ã£o");
+		while(!conferido || !verificado) {
+			this.atualizaCoordinate(xi, yi);
+			Mapa copia = mapa.getCopia();
+			for (int i = 0; i < passos; i++) {
+				copia.addObjeto(this);
+				
+				System.out.println("Digite a prÃ³xima direÃ§Ã£o");
+				String command = keyboard.nextLine();
+				
+				if(command.compareTo("w") == 0)
+					direcao = Direcao.UP;
+				else if(command.compareTo("a") == 0)
+					direcao = Direcao.LEFT;
+				else if(command.compareTo("d") == 0)
+					direcao = Direcao.RIGHT;
+				else
+					direcao = Direcao.DOWN;
+				
+				this.Mover(direcao, copia);
+				
+				copia.printMap();
+			}
+			System.out.println("Esta Ã© a posiÃ§Ã£o desejada [Y/N]");
 			String command = keyboard.nextLine();
-			
-			if(command.compareTo("w") == 0)
-				direcao = Direcao.UP;
-			else if(command.compareTo("a") == 0)
-				direcao = Direcao.LEFT;
-			else if(command.compareTo("d") == 0)
-				direcao = Direcao.RIGHT;
+			if(command.compareTo("Y") == 0)
+				conferido = true;
 			else
-				direcao = Direcao.DOWN;
+				conferido = false;
 			
-			this.Mover(direcao, mapa);
-			
-			mapa.printMap();
-			
-			atacou = realizaAtaque(mapa);
-			
-			if (atacou == true) {
-				mapa.printMap();
-				break;
-				}
+			verificado = mapa.verificarPosicao(getX(), getY());
+
 		}
+		
+		mapa.addObjeto(this);
+		mapa.printMap();
 	}
 	
 	protected int Defender() {
@@ -66,6 +82,8 @@ public class Heroi extends GameObject {
 		}
 		return dadoAliado;
 	}
+
+	
 	
 	public GameObject inimigosTurno(Mapa mapa, Arma arma){
 		
@@ -131,10 +149,10 @@ public class Heroi extends GameObject {
 				break;
 		}
 		
-		//Se existir algum inimigo proximo, perguntamos se o ataque ocorrerá
+		//Se existir algum inimigo proximo, perguntamos se o ataque ocorrerï¿½
 		if (existe_inimigo == true) {
-			//Se não quiser realizar ataque
-			System.out.println("Pressione qualquer outra tecla se não quiser realizar o ataque");
+			//Se nï¿½o quiser realizar ataque
+			System.out.println("Pressione qualquer outra tecla se nï¿½o quiser realizar o ataque");
 		
 			Scanner keyboard = new Scanner(System.in);
 			int inimigo_escolhido = keyboard.nextInt();

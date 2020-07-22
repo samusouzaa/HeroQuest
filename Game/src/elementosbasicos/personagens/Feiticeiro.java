@@ -15,6 +15,11 @@ public class Feiticeiro extends Heroi {
 		return "FE";
 	}
 	
+	@Override
+	public void Vez() {
+		System.out.println("Vez do feiticeiro");
+		System.out.println("Vida:" + HP);
+	}
 
 
 }
