@@ -5,6 +5,7 @@ import Externos.Direcao;
 import Externos.TipoDado;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
+import excecoes.ArmaInvalidaException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -129,7 +130,12 @@ public class Heroi extends GameObject {
 	public boolean realizaAtaque(Mapa mapa) {
 		GameObject inimigo = inimigosTurno(mapa);
 		if (inimigo != null) {
-			this.Atacar(inimigo);
+			try {
+				this.Atacar(inimigo);
+			} catch (ArmaInvalidaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
 			}
 		else

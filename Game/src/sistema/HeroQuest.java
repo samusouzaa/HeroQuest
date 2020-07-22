@@ -3,6 +3,10 @@ package sistema;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Usaveis.Arma;
+import Usaveis.MagicMissile;
+import Usaveis.Teleport;
+import Usaveis.TipoArma;
 import elementosbasicos.*;
 import elementosbasicos.personagens.*;
 
@@ -13,7 +17,10 @@ public class HeroQuest {
 	
 	public HeroQuest() {
 		Anao anao = new Anao(13, 1);
-		
+		Arma arma = new Arma(TipoArma.ESPADALONGA, "A");
+		anao.equipar(true, arma);
+		Teleport magiam = new Teleport();
+		anao.adicionaMagia(magiam);
 		//teste de ataque
 		/*Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
@@ -46,8 +53,8 @@ public class HeroQuest {
 		
 		mapa.addObjeto(anao);
 		mapa.addObjeto(goblin);
-		mapa.addObjeto(esqueleto);
-		mapa.addObjeto(esqueleto_mago);
+		//mapa.addObjeto(esqueleto);
+		//mapa.addObjeto(esqueleto_mago);
 	}
 	
 	public void Jogar() {
@@ -55,6 +62,7 @@ public class HeroQuest {
 			//Herois andam 
 			for(GameObject heroi : herois) {
 				heroi.Andar(mapa);
+				heroi.lancaMagia(1, mapa);
 				}
 			System.out.println("Vida goblin: " +inimigos.get(0).getHp());
 			System.out.println("Vida esqueleto: " +inimigos.get(1).getHp());

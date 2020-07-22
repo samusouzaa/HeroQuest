@@ -15,7 +15,7 @@ public class Inimigo extends GameObject {
 	}
 	
 	protected int Defender() {
-		int numeroDados = this.getDefesa(); // + armadura.getDefesa; 
+		int numeroDados = this.getDefesa(); // + armadura.getDefesa; obs.: inimigos não possuem aramadura
 		int aux;
 		int dadoAliado = 0;
 		for (int i = 0; i < numeroDados; i++) {

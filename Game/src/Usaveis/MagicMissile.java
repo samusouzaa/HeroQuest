@@ -12,7 +12,7 @@ public class MagicMissile extends Magia {
 
 	private static final String nome = "MagicMissile";
 
-	MagicMissile() {
+	public MagicMissile() {
 		super(nome);
 		// TODO Auto-generated constructor stub
 	}
@@ -48,7 +48,7 @@ public class MagicMissile extends Magia {
 		return inimigo;	
 	}
 
-	@Override
+	
 	public void Usar(GameObject gameobject, Mapa mapa) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < 3; i++) {

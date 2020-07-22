@@ -14,7 +14,7 @@ public class Teleport extends Magia{
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
+	
 	public void Usar(GameObject gameobject, Mapa mapa) {
 		System.out.println("Digite as coordenadas da posição para qual se teletransportará");
 		Scanner keyboard = new Scanner(System.in);
@@ -22,8 +22,8 @@ public class Teleport extends Magia{
 			int x = keyboard.nextInt();
 			int y = keyboard.nextInt(); 
 			
-			if (Teletransportavel) {
-				//Mudar coordenadas
+			if (Teletransportavel()) {
+				gameobject.mudarPosicao(x, y);
 				break;
 			}
 			else {
@@ -34,7 +34,7 @@ public class Teleport extends Magia{
 	}
 	
 	private boolean Teletransportavel() {
-		
+		return true;
 	}
 
 }
