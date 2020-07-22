@@ -87,14 +87,14 @@ public abstract class GameObject extends Objeto {
 
 	}
 
-	private boolean Armado() {
+	protected boolean Armado() {
 		if (armaD != null || armaE != null) {
 			return true;
 		}
 		return false;
 	}
 
-	private int escolhaArmas() throws ArmaInvalidaException {
+	protected Arma escolhaArmas() throws ArmaInvalidaException {
 		if (armaE != null) {
 			System.out.println("1 - " + armaE);
 		} else {
@@ -114,18 +114,18 @@ public abstract class GameObject extends Objeto {
 				throw new ArmaInvalidaException();
 			} else {
 				destruirArma(armaE);
-				return armaE.getDano();
+				return armaE;
 			}
 		case ("2"):
 			if (armaD == null) {
 				throw new ArmaInvalidaException();
 			} else {
 				destruirArma(armaD);
-				return armaD.getDano();
+				return armaD;
 			}
 
 		}
-		return 0;
+		return null;
 	}
 
 	protected boolean isAlive() {
@@ -141,23 +141,12 @@ public abstract class GameObject extends Objeto {
 
 	// Se escolhe qual direção cardinal se atacará
 
-	protected void Atacar(GameObject inimigo) throws ArmaInvalidaException {
+	protected void Atacar(GameObject inimigo, Arma arma) throws ArmaInvalidaException {
 
 		int numeroDados = dadosAtq;
-
-		if (Armado()) {
-			System.out.println("Usar armas disponíveis?"); // excecao pra caso a arma for null
-			System.out.println("y = sim");
-			System.out.println("n = não");
-			Scanner in = new Scanner(System.in);
-			String s = in.nextLine();
-			if (s.compareTo(s) == 0) {
-				numeroDados += this.escolhaArmas();
-			} else {
-				System.out.println("Não há armas disponíveis");
-
-			}
-		}
+		
+		if (arma != null)
+			numeroDados += arma.getDano();
 
 		int dadoAliado = 0;
 		int aux;

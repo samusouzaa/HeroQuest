@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Usaveis.Arma;
+import Usaveis.Fireball;
 import Usaveis.MagicMissile;
 import Usaveis.Teleport;
 import Usaveis.TipoArma;
@@ -19,7 +20,7 @@ public class HeroQuest {
 		Anao anao = new Anao(13, 1);
 		Arma arma = new Arma(TipoArma.ESPADALONGA, "A");
 		anao.equipar(true, arma);
-		Teleport magiam = new Teleport();
+		Fireball magiam = new Fireball();
 		anao.adicionaMagia(magiam);
 		//teste de ataque
 		/*Elfo elfo = new Elfo(1, 2);
@@ -53,8 +54,8 @@ public class HeroQuest {
 		
 		mapa.addObjeto(anao);
 		mapa.addObjeto(goblin);
-		//mapa.addObjeto(esqueleto);
-		//mapa.addObjeto(esqueleto_mago);
+		mapa.addObjeto(esqueleto);
+		mapa.addObjeto(esqueleto_mago);
 	}
 	
 	public void Jogar() {
