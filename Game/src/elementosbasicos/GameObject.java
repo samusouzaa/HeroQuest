@@ -16,10 +16,10 @@ public abstract class GameObject extends Objeto implements Personagem {
 	private int dadosAtq;
 	private int dadosDfs;
 	private Armadura armadura;
-
-	// Posição no mapa que será configurado posteriormente
-	// private Posic pos;
-
+	
+	//Posição no mapa que será configurado posteriormente
+	//private Posic pos;
+	
 	private Arma armaD;
 	private Arma armaE;
 
@@ -37,32 +37,31 @@ public abstract class GameObject extends Objeto implements Personagem {
 		this.dadosDfs = dfs;
 		this.itens = new ArrayList<Item>();
 		this.magias = new ArrayList<Magia>();
-		// this.armadura.setValor_armadura(0);
+		//this.armadura.setValor_armadura(0);
 	}
-
-	/////// RETIRAR
+	///////RETIRAR
 	public int getHp() {
 		return this.hp;
 	}
-
+	
 	protected void Mover(Direcao direcao, Mapa mapa) {
 		int x = this.getX();
 		int y = this.getY();
-		switch (direcao) {
-		case UP:
-			x -= 1;
-			break;
-		case DOWN:
-			x += 1;
-			break;
-		case LEFT:
-			y -= 1;
-			break;
-		case RIGHT:
-			y += 1;
-			break;
+		switch(direcao) {
+			case UP:
+				x -= 1;
+				break;
+			case DOWN:
+				x += 1;
+				break;
+			case LEFT:
+				y -= 1;
+				break;
+			case RIGHT:
+				y += 1;
+				break;
 		}
-		if (mapa.verificarPosicao(x, y)) {
+		if(mapa.verificarPosicao(x,y)) {
 			mapa.removeObjeto(this);
 			this.atualizaCoordinate(x, y);
 			mapa.addObjeto(this);
@@ -85,6 +84,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 				armaE = null;
 			}
 		}
+
 	}
 
 	protected boolean Armado() {
@@ -144,42 +144,12 @@ public abstract class GameObject extends Objeto implements Personagem {
 
 	// Se escolhe qual direção cardinal se atacará
 
-<<<<<<< HEAD
-	public void Atacar(String direcao) {
-		GameObject inimigo = InimigoAlcancavel(direcao); // Função será criada posteriormente e devolve o inimigo no
-															// alcance, ou devolve null
-
-		if (inimigo == null)
-			return;
-
-		int numeroDados = dadosAtq; // + armaD.getDano() + armaE.getDano(); // ataque normal
-
-		if (Armado()) {
-			System.out.println("Usar armas disponíveis?"); // excecao pra caso a arma for null
-			System.out.println("y = sim");
-			System.out.println("n = não");
-			Scanner in = new Scanner(System.in);
-			String s = in.nextLine();
-			if (s == "y") {
-				try {
-					numeroDados += this.escolhaArmas();
-				} catch (ArmaInvalidaException exception) {
-					System.out.println(exception.getMessage());
-				}
-			} else {
-				System.out.println("Não há armas disponíveis");
-
-			}
-		}
-		Scanner s = new Scanner(System.in);
-=======
 	protected void Atacar(GameObject inimigo, Arma arma) throws ArmaInvalidaException {
 
 		int numeroDados = dadosAtq;
 		
 		if (arma != null)
 			numeroDados += arma.getDano();
->>>>>>> refs/heads/samu
 
 		int dadoAliado = 0;
 		int aux;
@@ -213,28 +183,13 @@ public abstract class GameObject extends Objeto implements Personagem {
 			hp += cura;
 
 	}
-<<<<<<< HEAD
-
-	protected int usarArmadura(int ataque) {
-		int ataque_final;
-		ataque_final = ataque - armadura.getValor_armadura();
-		return ataque_final;
-=======
 	
 	public void adicionaMagia(Magia magia) {
 		magias.add(magia);
->>>>>>> refs/heads/samu
 	}
-<<<<<<< HEAD
-
-	protected void lancaMagia(int posic, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia
-														// apareceria
-		// todas com números e ele escolheria a que ele quer lançar
-=======
 	
 	public void lancaMagia(int posic, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria
 											// todas com números e ele escolheria a que ele quer lançar
->>>>>>> refs/heads/samu
 
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
 		if (dado < ip) {
