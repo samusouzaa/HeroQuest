@@ -16,10 +16,14 @@ public class HeroQuest {
 		Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
 		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
-
+		
+		Goblin goblin = new Goblin(1, 9);
+		
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
 
+		inimigos.add(goblin);
+		
 		herois.add(feiticeiro);
 		herois.add(elfo);
 		herois.add(barbaro);
@@ -31,6 +35,7 @@ public class HeroQuest {
 		mapa.addObjeto(barbaro);
 		mapa.addObjeto(elfo);
 		mapa.addObjeto(anao);
+		mapa.addObjeto(goblin);
 	}
 
 	public void Jogar() {
@@ -49,7 +54,7 @@ public class HeroQuest {
 				acao = false;
 				while (!andar || !acao) {
 				
-					System.out.println("Selecione sua aÃ§Ã£o [w/a/m/n]");
+					System.out.println("Selecione sua ação [w/a/m/n]");
 					command = keyboard.nextLine();
 					if(command.compareTo("w") == 0 && !andar) {
 						heroi.Andar(mapa);
@@ -57,7 +62,7 @@ public class HeroQuest {
 					}
 					
 					else if (command.compareTo("a") == 0 && !acao) {
-						heroi.Atacar(null);
+						((Heroi) heroi).realizaAtaque(mapa);
 						acao = true;
 					}
 					

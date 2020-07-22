@@ -11,8 +11,7 @@ public class SimpleHeal extends Magia {
 	public SimpleHeal() {
 		super(nome);
 	}
-	
-	@Override
+
 	public void Usar(GameObject gameobject, Mapa mapa) {
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
 		gameobject.receberCura(dado);

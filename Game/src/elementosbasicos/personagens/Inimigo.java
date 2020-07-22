@@ -10,12 +10,12 @@ public class Inimigo extends GameObject {
 		super(x, y, hp, ip, atq, defesa);
 	}
 	
-	protected void Andar(Mapa mapa) {
+	public void Andar(Mapa mapa) {
 		//Ainda vamos desenvolver
 	}
 	
 	protected int Defender() {
-		int numeroDados = this.getDefesa(); // + armadura.getDefesa; 
+		int numeroDados = this.getDefesa(); // + armadura.getDefesa; obs.: inimigos não possuem aramadura
 		int aux;
 		int dadoAliado = 0;
 		for (int i = 0; i < numeroDados; i++) {
@@ -24,5 +24,11 @@ public class Inimigo extends GameObject {
 				dadoAliado += 1;
 		}
 		return dadoAliado;
+	}
+
+	@Override
+	public void Vez() {
+		// TODO Auto-generated method stub
+		
 	}
 }
