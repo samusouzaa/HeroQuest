@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import elementosbasicos.*;
 import elementosbasicos.personagens.*;
+import excecoes.DigitoInvalidoException;
 
 public class HeroQuest {
 	private Mapa mapa;
@@ -74,15 +75,24 @@ public class HeroQuest {
 				acao = false;
 				while (!andar || !acao) {
 				
-					System.out.println("Selecione sua ação [w/a/m/n]");
-					command = keyboard.nextLine();
+					System.out.println("Selecione sua aÃ§Ã£o [w/a/m/n]");
+					command = keyboard.nextLine().toLowerCase();
 					if(command.compareTo("w") == 0 && !andar) {
+						try {
 						heroi.Andar(mapa);
+						} catch (DigitoInvalidoException exception) {
+							System.out.println(exception.getMessage());
+						}
 						andar = true;
 					}
 					
 					else if (command.compareTo("a") == 0 && !acao) {
+						try {
 						((Heroi) heroi).realizaAtaque(mapa);
+						} 
+						catch (DigitoInvalidoException exception) {
+							System.out.println(exception.getMessage());
+						}
 						acao = true;
 					}
 					
@@ -96,9 +106,9 @@ public class HeroQuest {
 					}
 					
 					else
-						System.out.println("Voce ja usou esta acao");
+						System.out.println("Voce ja usou esta acao"); //na entendeu
 					
-					System.out.println("vida goblin: " + ((GameObject) mapa.getObjetoMapa(1, 9)).getHp());
+					System.out.println("Vida goblin: " + ((GameObject) mapa.getObjetoMapa(1, 9)).getHp());
 				}
 				
 			}

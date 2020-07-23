@@ -3,6 +3,7 @@ package Usaveis;
 import elementosbasicos.*;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
+import excecoes.DigitoInvalidoException;
 
 import java.util.Scanner;
 
@@ -48,7 +49,7 @@ public class MagicMissile extends Magia {
 	}
 
 	
-	public void Usar(GameObject gameobject, Mapa mapa) {
+	public void Usar(GameObject gameobject, Mapa mapa) throws DigitoInvalidoException {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < 3; i++) {
 			int x = gameobject.getX();
@@ -57,20 +58,23 @@ public class MagicMissile extends Magia {
 			System.out.println("Digite a direção na qual você atirará");
 			Scanner keyboard = new Scanner(System.in);
 
-			String command = keyboard.nextLine();
+			String command = keyboard.nextLine().toLowerCase();
 			Direcao direcao = null;
 
 			if(command.compareTo("s") == 0)
 				direcao = Direcao.DOWN;
 			
-			if(command.compareTo("d") == 0)
+			else if(command.compareTo("d") == 0)
 				direcao = Direcao.RIGHT;
 			
-			if(command.compareTo("a") == 0)
+			else if(command.compareTo("a") == 0)
 				direcao = Direcao.LEFT;
 			
-			if(command.compareTo("w") == 0)
-				direcao = Direcao.UP;
+			else if(command.compareTo("w") == 0)
+				direcao = Direcao.UP;			
+			else 
+				throw new DigitoInvalidoException();
+			
 
 			Objeto alvo = getPrimeiroInimigo(x, y, direcao, mapa);
 			if(alvo != null) {
