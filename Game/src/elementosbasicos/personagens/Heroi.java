@@ -24,8 +24,6 @@ public abstract class Heroi extends GameObject {
 	
 	public void Andar(Mapa mapa) {
 		//Jogar dados
-		//se um ataque for realizado,ele n�o andar� mais
-		boolean atacou = false;
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
 		Direcao direcao;

@@ -15,7 +15,7 @@ private boolean visivel;
 		return coordenada;
 	}
 	
-	protected void atualizaCoordinate(int x, int y) {
+	public void atualizaCoordinate(int x, int y) {
 		this.coordenada.changeCoordinates(x,y);
 	}
 	

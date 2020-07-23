@@ -210,28 +210,33 @@ public class Mapa {
 	}
 	
 	public void Ver(int x, int y) {
-		for (int i = x; i < ALTURA; i++) {
-			if(mapa[i][y] instanceof Parede)
+		for (int i = x+1; i < ALTURA; i++) {
+			if(mapa[i][y] != null) {
+				mapa[i][y].Visto();
 				break;
-			mapa[i][y].Visto();
+			}
 		}
 		
-		for (int i = x; i < 0; i++) {
-			if(mapa[i][y] instanceof Parede)
+		for (int i = x-1; i > 0; i--) {
+			if(mapa[i][y]!=null) {
+				mapa[i][y].Visto();
 				break;
-			mapa[i][y].Visto();
+			}
 		}
 		
-		for (int i = y; i < 0; i++) {
-			if(mapa[x][i] instanceof Parede)
+		for (int i = y-1; i > 0; i--) {
+			if(mapa[x][i] != null) {
+				mapa[x][i].Visto();
 				break;
-			mapa[x][i].Visto();
+			}
 		}
 		
-		for (int i = y; i < LARGURA; i++) {
-			if(mapa[x][i] instanceof Parede)
-				break;
-			mapa[x][i].Visto();
+		for (int i = y+1; i < LARGURA; i++) {
+			if(mapa[x][i] != null) {
+				mapa[x][i].Visto();
+				break;}
+			
+			
 		}
 		
 	}
