@@ -54,6 +54,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 		return this.armaE;
 	}
 
+
 	protected void Mover(Direcao direcao, Mapa mapa) {
 		int x = this.getX();
 		int y = this.getY();
@@ -140,7 +141,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 		return null;
 	}
 
-	protected boolean isAlive() {
+	public boolean isAlive() {
 		if (hp <= 0)
 			return false;
 		return true;
@@ -227,6 +228,11 @@ public abstract class GameObject extends Objeto implements Personagem {
 
 	public void mudarPosicao(int x, int y) {
 		this.atualizaCoordinate(x, y);
+	}
+	
+	@Override
+	public boolean copiavel() {
+		return false;
 	}
 
 }

@@ -15,7 +15,7 @@ private boolean visivel;
 		return coordenada;
 	}
 	
-	protected void atualizaCoordinate(int x, int y) {
+	public void atualizaCoordinate(int x, int y) {
 		this.coordenada.changeCoordinates(x,y);
 	}
 	
@@ -42,6 +42,14 @@ private boolean visivel;
 	
 	public void receberDano(int dano) {
 		return;
+	}
+	
+	public boolean copiavel() {
+		return true;
+	}
+	
+	public boolean getVisibilidade() {
+		return visivel;
 	}
 	
 	@Override
