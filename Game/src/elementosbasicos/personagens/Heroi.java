@@ -18,26 +18,18 @@ import java.util.Scanner;
 public abstract class Heroi extends GameObject {
 
 	public Heroi(int x, int y, int hp, int ip, int atq, int dfs) {
-<<<<<<< HEAD
 		super(x, y,hp, ip, atq, dfs);
 		this.Visto();
-=======
-		super(x, y, hp, ip, atq, dfs);
->>>>>>> 06bc3906ee6fee7a64a4197d4ac33f80573e8ad1
 	}
 
 	private ArrayList<GameObject> inimigos_proximos = new ArrayList<GameObject>();
-<<<<<<< HEAD
-	
-	public void Andar(Mapa mapa) {
-		//Jogar dados
-=======
+
 
 	public void Andar(Mapa mapa) throws DigitoInvalidoException {
 		// Jogar dados
 		// se um ataque for realizado,ele nao andara mais
 		boolean atacou = false;
->>>>>>> 06bc3906ee6fee7a64a4197d4ac33f80573e8ad1
+
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
 		Direcao direcao;

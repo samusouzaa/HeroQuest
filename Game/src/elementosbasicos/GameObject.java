@@ -45,13 +45,9 @@ public abstract class GameObject extends Objeto implements Personagem {
 	public int getHp() {
 		return this.hp;
 	}
-<<<<<<< HEAD
-	
-	public void Mover(Direcao direcao, Mapa mapa) {
-=======
+
 
 	protected void Mover(Direcao direcao, Mapa mapa) {
->>>>>>> 06bc3906ee6fee7a64a4197d4ac33f80573e8ad1
 		int x = this.getX();
 		int y = this.getY();
 		switch (direcao) {
