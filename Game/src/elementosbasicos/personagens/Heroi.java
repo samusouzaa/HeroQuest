@@ -9,6 +9,8 @@ import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 import elementosbasicos.Parede;
 import excecoes.ArmaInvalidaException;
+import excecoes.DigitoInvalidoException;
+import excecoes.GameException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,7 +23,7 @@ public abstract class Heroi extends GameObject {
 	
 	private ArrayList<GameObject> inimigos_proximos = new ArrayList<GameObject>();
 	
-	public void Andar(Mapa mapa) {
+	public void Andar(Mapa mapa) throws DigitoInvalidoException {
 		//Jogar dados
 		//se um ataque for realizado,ele n�o andar� mais
 		boolean atacou = false;
@@ -42,26 +44,32 @@ public abstract class Heroi extends GameObject {
 				
 				System.out.println("Digite a próxima direção");
 				String command = keyboard.nextLine();
-				
+		
 				if(command.compareTo("w") == 0)
 					direcao = Direcao.UP;
 				else if(command.compareTo("a") == 0)
 					direcao = Direcao.LEFT;
 				else if(command.compareTo("d") == 0)
 					direcao = Direcao.RIGHT;
-				else
+				else if(command.compareTo("s") == 0)
 					direcao = Direcao.DOWN;
-				
+				else
+					throw new DigitoInvalidoException();
+			
 				this.Mover(direcao, copia);
 				
 				copia.printMap();
 			}
 			System.out.println("Esta é a posição desejada [Y/N]");
+	
 			String command = keyboard.nextLine();
 			if(command.compareTo("Y") == 0)
 				conferido = true;
-			else
+			else if (command.compareTo("N") == 0)
 				conferido = false;
+			else
+				throw new DigitoInvalidoException();
+
 			
 			verificado = mapa.verificarPosicao(getX(), getY());
 

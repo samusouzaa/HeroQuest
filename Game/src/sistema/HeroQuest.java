@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import elementosbasicos.*;
 import elementosbasicos.personagens.*;
+import excecoes.DigitoInvalidoException;
 
 public class HeroQuest {
 	private Mapa mapa;
@@ -74,10 +75,14 @@ public class HeroQuest {
 				acao = false;
 				while (!andar || !acao) {
 				
-					System.out.println("Selecione sua ação [w/a/m/n]");
+					System.out.println("Selecione sua aï¿½ï¿½o [w/a/m/n]");
 					command = keyboard.nextLine();
 					if(command.compareTo("w") == 0 && !andar) {
+						try {
 						heroi.Andar(mapa);
+						} catch (DigitoInvalidoException exception) {
+							System.out.println(exception.getMessage());
+						}
 						andar = true;
 					}
 					

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Usaveis.*;
 import elementosbasicos.personagens.Inimigo;
 import excecoes.ArmaInvalidaException;
+import excecoes.DigitoInvalidoException;
 import excecoes.GameException;
 import Externos.*;
 
@@ -170,7 +171,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 
 	protected abstract int Defender();
 
-	public abstract void Andar(Mapa mapa);
+	public abstract void Andar(Mapa mapa) throws DigitoInvalidoException;
 
 	public void receberDano(int dano) {
 		hp -= dano;
