@@ -38,6 +38,12 @@ public class HeroQuest {
 		//TESTE
 		inimigos.add(goblin);
 		
+		//TESTE ATAQUE
+		Arma arma1 = new Arma(TipoArma.ESPADACURTA, "A");
+		Arma arma2 = new Arma(TipoArma.ESPADALONGA, "B");
+		feiticeiro.equipar(true, arma1);
+		feiticeiro.equipar(false, arma2);
+		
 		herois.add(feiticeiro);
 		herois.add(elfo);
 		herois.add(barbaro);
@@ -91,6 +97,8 @@ public class HeroQuest {
 					
 					else
 						System.out.println("Voce ja usou esta acao");
+					
+					System.out.println("vida goblin: " + ((GameObject) mapa.getObjetoMapa(1, 9)).getHp());
 				}
 				
 			}
