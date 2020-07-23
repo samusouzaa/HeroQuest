@@ -25,7 +25,7 @@ public abstract class Heroi extends GameObject {
 
 	public void Andar(Mapa mapa) throws DigitoInvalidoException {
 		// Jogar dados
-		// se um ataque for realizado,ele n�o andar� mais
+		// se um ataque for realizado,ele nao andara mais
 		boolean atacou = false;
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
@@ -157,9 +157,9 @@ public abstract class Heroi extends GameObject {
 				break;
 		}
 
-		// Se existir algum inimigo proximo, perguntamos se o ataque ocorrer�
+		// Se existir algum inimigo proximo, perguntamos se o ataque ocorrer
 		if (existe_inimigo == true) {
-			// Se n�o quiser realizar ataque
+			// Se nao quiser realizar ataque
 			System.out.println("Pressione qualquer outra tecla se n�o quiser realizar o ataque");
 
 			Scanner keyboard = new Scanner(System.in);
@@ -192,8 +192,7 @@ public abstract class Heroi extends GameObject {
 				try {
 					arma_ataque = escolhaArmas();
 				} catch (ArmaInvalidaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.print(e.getMessage());
 				}
 			} else if (s.compareTo("n") == 0) {
 				System.out.println("Não há armas disponíveis");
@@ -208,8 +207,7 @@ public abstract class Heroi extends GameObject {
 			try {
 				this.Atacar(inimigo, arma_ataque);
 			} catch (ArmaInvalidaException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.print(e.getMessage());
 			}
 			return true;
 		} else

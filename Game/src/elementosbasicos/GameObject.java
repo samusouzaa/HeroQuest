@@ -17,10 +17,10 @@ public abstract class GameObject extends Objeto implements Personagem {
 	private int dadosAtq;
 	private int dadosDfs;
 	private Armadura armadura;
-	
-	//Posição no mapa que será configurado posteriormente
-	//private Posic pos;
-	
+
+	// Posição no mapa que será configurado posteriormente
+	// private Posic pos;
+
 	private Arma armaD;
 	private Arma armaE;
 
@@ -28,7 +28,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 	private ArrayList<Item> itens;
 	// Lista de magias
 	private ArrayList<Magia> magias;
-	
+
 	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
 		super(x, y);
 		this.hpcheio = hp;
@@ -38,31 +38,32 @@ public abstract class GameObject extends Objeto implements Personagem {
 		this.dadosDfs = dfs;
 		this.itens = new ArrayList<Item>();
 		this.magias = new ArrayList<Magia>();
-		//this.armadura.setValor_armadura(0);
+		// this.armadura.setValor_armadura(0);
 	}
-	///////RETIRAR
+
+	/////// RETIRAR
 	public int getHp() {
 		return this.hp;
 	}
-	
+
 	protected void Mover(Direcao direcao, Mapa mapa) {
 		int x = this.getX();
 		int y = this.getY();
-		switch(direcao) {
-			case UP:
-				x -= 1;
-				break;
-			case DOWN:
-				x += 1;
-				break;
-			case LEFT:
-				y -= 1;
-				break;
-			case RIGHT:
-				y += 1;
-				break;
+		switch (direcao) {
+		case UP:
+			x -= 1;
+			break;
+		case DOWN:
+			x += 1;
+			break;
+		case LEFT:
+			y -= 1;
+			break;
+		case RIGHT:
+			y += 1;
+			break;
 		}
-		if(mapa.verificarPosicao(x,y)) {
+		if (mapa.verificarPosicao(x, y)) {
 			mapa.removeObjeto(this);
 			this.atualizaCoordinate(x, y);
 			mapa.addObjeto(this);
@@ -95,9 +96,8 @@ public abstract class GameObject extends Objeto implements Personagem {
 		return false;
 	}
 
-
 	protected Arma escolhaArmas() throws ArmaInvalidaException {
-		
+
 		if (armaE != null) {
 			System.out.println("1 - " + armaE);
 		} else {
@@ -148,7 +148,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 	protected void Atacar(GameObject inimigo, Arma arma) throws ArmaInvalidaException {
 
 		int numeroDados = dadosAtq;
-		
+
 		if (arma != null)
 			numeroDados += arma.getDano();
 
@@ -184,21 +184,24 @@ public abstract class GameObject extends Objeto implements Personagem {
 			hp += cura;
 
 	}
-	
+
 	public void adicionaMagia(Magia magia) {
 		magias.add(magia);
 	}
-	
+
 	public void escolheMagia(Mapa mapa) {
 		for (Magia magia : magias)
-			System.out.println(magias.indexOf(magia)+1 +"."+ " "+magia.toString());
+			System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
 		Scanner keyboard = new Scanner(System.in);
 		int magia_escolhida = keyboard.nextInt();
+
 		lancaMagia(magia_escolhida, mapa);
+
 	}
-	
-	protected void lancaMagia(int posic, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria
-											// todas com números e ele escolheria a que ele quer lançar
+
+	protected void lancaMagia(int posicao, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia
+														// apareceria
+		// todas com números e ele escolheria a que ele quer lançar
 
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
 		if (ip < dado) {
@@ -206,12 +209,14 @@ public abstract class GameObject extends Objeto implements Personagem {
 			return;
 		}
 
-		Magia magia = magias.get(posic - 1);
-
-		magia.Usar(this, mapa);
+		Magia magia = magias.get(posicao - 1);
+		try {
+			magia.Usar(this, mapa);
+		} catch (DigitoInvalidoException exception) {
+			System.out.println(exception.getMessage());
+		}
 	}
 
-	
 	public void mudarPosicao(int x, int y) {
 		this.atualizaCoordinate(x, y);
 	}
