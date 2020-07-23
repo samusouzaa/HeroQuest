@@ -112,7 +112,7 @@ public class HeroQuest {
 						} 
 						catch (DigitoInvalidoException exception) {
 							System.out.println(exception.getMessage());
-						}
+						}  
 						acao = true;
 					}
 					

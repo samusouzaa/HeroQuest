@@ -18,12 +18,11 @@ import java.util.Scanner;
 public abstract class Heroi extends GameObject {
 
 	public Heroi(int x, int y, int hp, int ip, int atq, int dfs) {
-		super(x, y,hp, ip, atq, dfs);
+		super(x, y, hp, ip, atq, dfs);
 		this.Visto();
 	}
 
 	private ArrayList<GameObject> inimigos_proximos = new ArrayList<GameObject>();
-
 
 	public void Andar(Mapa mapa) throws DigitoInvalidoException {
 		// Jogar dados
@@ -93,7 +92,7 @@ public abstract class Heroi extends GameObject {
 		return dadoAliado;
 	}
 
-	public GameObject inimigosTurno(Mapa mapa, Arma arma) {
+	public GameObject inimigosTurno(Mapa mapa, Arma arma) throws DigitoInvalidoException {
 
 		int x = this.getX();
 		int y = this.getY();
@@ -167,16 +166,12 @@ public abstract class Heroi extends GameObject {
 
 			Scanner keyboard = new Scanner(System.in);
 			int inimigo_escolhido = keyboard.nextInt();
-
-			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
+			inimigos_proximos.clear();
+			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) { // TODO
 				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
-				inimigos_proximos.clear();
 				return inimigo_atacado;
-			}
-
-			else {
-				inimigos_proximos.clear();
-				return null;
+			} else {
+				throw new DigitoInvalidoException();
 			}
 		}
 
@@ -184,7 +179,7 @@ public abstract class Heroi extends GameObject {
 			return null;
 	}
 
-	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException {
+	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException { // TODO ajeitar exc
 
 		Arma arma_ataque = null;
 
@@ -196,15 +191,14 @@ public abstract class Heroi extends GameObject {
 			String s = in.nextLine().toLowerCase(); // tudo minusculo
 			if (s.compareTo("y") == 0) {
 				try {
-					arma_ataque = escolhaArmas();
+					arma_ataque = escolhaArmas(); //isso ta ok
 				} catch (ArmaInvalidaException e) {
 					System.out.print(e.getMessage());
 				}
 			} else if (s.compareTo("n") == 0) {
 				System.out.println("Não há armas disponíveis");
 
-			}
-			else {
+			} else {
 				throw new DigitoInvalidoException();
 			}
 		}
@@ -212,8 +206,8 @@ public abstract class Heroi extends GameObject {
 		if (inimigo != null) {
 			try {
 				this.Atacar(inimigo, arma_ataque);
-			} catch (ArmaInvalidaException e) {
-				System.out.print(e.getMessage());
+			} catch (ArmaInvalidaException exception) {
+				System.out.print(exception.getMessage());
 			}
 			return true;
 		} else
