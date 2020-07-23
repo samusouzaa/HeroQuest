@@ -2,6 +2,8 @@ package elementosbasicos.personagens;
 
 import java.util.Random;
 
+import elementosbasicos.Mapa;
+
 public class EsqueletoMago extends Inimigo{
 	
 	private static final int ATAQUE = 1;
@@ -14,7 +16,7 @@ public class EsqueletoMago extends Inimigo{
 	}
 	
 	public void mudarPosicao() {
-		int proxima_posicao = new Random().nextInt(7) + 1;
+		int proxima_posicao = new Random().nextInt(8) + 1;
 		
 		if (proxima_posicao == 1) {
 			int x = getX() - 1;
@@ -68,6 +70,18 @@ public class EsqueletoMago extends Inimigo{
 	@Override
 	public String toString() {
 		return "em";
+	}
+
+	@Override
+	public void Vez() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Andar(Mapa mapa) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -45,6 +45,14 @@ public abstract class GameObject extends Objeto implements Personagem {
 	public int getHp() {
 		return this.hp;
 	}
+	
+	protected Arma getArmaD() {
+		return this.armaD;
+	}
+	
+	protected Arma getArmaE() {
+		return this.armaE;
+	}
 
 	protected void Mover(Direcao direcao, Mapa mapa) {
 		int x = this.getX();

@@ -167,11 +167,14 @@ public abstract class Heroi extends GameObject {
 
 			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
 				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
+				inimigos_proximos.clear();
 				return inimigo_atacado;
 			}
 
-			else
+			else {
+				inimigos_proximos.clear();
 				return null;
+			}
 		}
 
 		else

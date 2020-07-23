@@ -1,5 +1,7 @@
 package elementosbasicos.personagens;
 
+import elementosbasicos.Mapa;
+
 public class Esqueleto extends Inimigo {
 	private static final int ATAQUE = 1;
 	private static final int DEFESA = 1;
@@ -13,6 +15,18 @@ public class Esqueleto extends Inimigo {
 	@Override
 	public String toString() {
 		return "ee";
+	}
+
+	@Override
+	public void Vez() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Andar(Mapa mapa) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
