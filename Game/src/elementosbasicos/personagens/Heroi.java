@@ -167,7 +167,7 @@ public abstract class Heroi extends GameObject {
 			Scanner keyboard = new Scanner(System.in);
 			int inimigo_escolhido = keyboard.nextInt();
 			inimigos_proximos.clear();
-			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) { // TODO
+			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) { 
 				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
 				return inimigo_atacado;
 			} else {
@@ -179,7 +179,7 @@ public abstract class Heroi extends GameObject {
 			return null;
 	}
 
-	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException { // TODO ajeitar exc
+	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException { 
 
 		Arma arma_ataque = null;
 

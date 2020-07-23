@@ -94,7 +94,7 @@ public class HeroQuest {
 				
 
 					System.out.println("Selecione sua acao [w/a/m/n]");
-					command = keyboard.nextLine();
+					command = keyboard.nextLine().toLowerCase();
 					if(command.compareTo("w") == 0 && !andar) {
 						try {
 						heroi.Andar(mapa);
