@@ -137,6 +137,16 @@ public class HeroQuest {
 				
 			}
 			
+			for(GameObject inimigo : inimigos) {
+				if (inimigo.getVisibilidade())
+					try {
+						((Inimigo) inimigo).realizaAtaque(mapa);
+					}
+					catch (DigitoInvalidoException exception) {
+						System.out.println(exception.getMessage());
+					}
+			}
+			
 //			if(Ganhou()) {
 //				System.out.println("Voce ganhou");
 //				break;

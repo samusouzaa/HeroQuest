@@ -2,8 +2,6 @@ package elementosbasicos.personagens;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-
 import Externos.Dados;
 import Externos.TipoDado;
 import Usaveis.Arma;
@@ -105,7 +103,7 @@ public abstract class Inimigo extends GameObject {
 			return null;
 	}
 
-	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException, ArmaInvalidaException {
+	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException {
 
 		Arma arma_ataque = null;
 
