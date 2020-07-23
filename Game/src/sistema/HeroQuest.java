@@ -1,5 +1,8 @@
 package sistema;
 
+//TESTE MAGIAS
+import Usaveis.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,10 +19,31 @@ public class HeroQuest {
 		Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
 		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
-
+		
+		
+		//TESTE MAGIAS
+		Fireball magia1 = new Fireball();
+		MagicMissile magia2 = new MagicMissile();
+		
+		
+		feiticeiro.adicionaMagia(magia1);
+		feiticeiro.adicionaMagia(magia2);
+		
+		//TESTE
+		Goblin goblin = new Goblin(1, 9);
+		
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
-
+		
+		//TESTE
+		inimigos.add(goblin);
+		
+		//TESTE ATAQUE
+		Arma arma1 = new Arma(TipoArma.ESPADACURTA, "A");
+		Arma arma2 = new Arma(TipoArma.ESPADALONGA, "B");
+		feiticeiro.equipar(true, arma1);
+		feiticeiro.equipar(false, arma2);
+		
 		herois.add(feiticeiro);
 		herois.add(elfo);
 		herois.add(barbaro);
@@ -31,6 +55,7 @@ public class HeroQuest {
 		mapa.addObjeto(barbaro);
 		mapa.addObjeto(elfo);
 		mapa.addObjeto(anao);
+		mapa.addObjeto(goblin);
 	}
 	
 	public boolean Ganhou() {
@@ -66,7 +91,7 @@ public class HeroQuest {
 				acao = false;
 				while (!andar || !acao) {
 				
-					System.out.println("Selecione sua aÃ§Ã£o [w/a/m/n]");
+					System.out.println("Selecione sua ação [w/a/m/n]");
 					command = keyboard.nextLine();
 					if(command.compareTo("w") == 0 && !andar) {
 						heroi.Andar(mapa);
@@ -75,12 +100,12 @@ public class HeroQuest {
 					}
 					
 					else if (command.compareTo("a") == 0 && !acao) {
-						heroi.Atacar(null);
+						((Heroi) heroi).realizaAtaque(mapa);
 						acao = true;
 					}
 					
 					else if (command.compareTo("m") == 0 && !acao) {
-						//Usar magia
+						heroi.escolheMagia(mapa);
 						acao = true;
 					}
 					
@@ -90,6 +115,8 @@ public class HeroQuest {
 					
 					else
 						System.out.println("Voce ja usou esta acao");
+					
+					System.out.println("vida goblin: " + ((GameObject) mapa.getObjetoMapa(1, 9)).getHp());
 				}
 				
 			}
