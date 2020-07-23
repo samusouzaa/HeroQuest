@@ -81,7 +81,7 @@ public class HeroQuest {
 		boolean andar, acao;
 		
 		while(true) {
-			mapa.printMap();
+			
 			
 			//Vez dos herois
 			for(GameObject heroi : herois) {
@@ -91,7 +91,7 @@ public class HeroQuest {
 				acao = false;
 				while (!andar || !acao) {
 				
-					System.out.println("Selecione sua ação [w/a/m/n]");
+					System.out.println("Selecione sua acao [w/a/m/n]");
 					command = keyboard.nextLine();
 					if(command.compareTo("w") == 0 && !andar) {
 						heroi.Andar(mapa);
@@ -116,20 +116,22 @@ public class HeroQuest {
 					else
 						System.out.println("Voce ja usou esta acao");
 					
+					mapa.printMap();
+					
 					System.out.println("vida goblin: " + ((GameObject) mapa.getObjetoMapa(1, 9)).getHp());
 				}
 				
 			}
 			
-			if(Ganhou()) {
-				System.out.println("Voce ganhou");
-				break;
-			}
-			
-			if(Perdeu()) {
-				System.out.println("Voce perdeu");
-				break;
-			}
+//			if(Ganhou()) {
+//				System.out.println("Voce ganhou");
+//				break;
+//			}
+//			
+//			if(Perdeu()) {
+//				System.out.println("Voce perdeu");
+//				break;
+//			}
 			
 		}
 		
