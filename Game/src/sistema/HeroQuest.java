@@ -32,6 +32,23 @@ public class HeroQuest {
 		mapa.addObjeto(elfo);
 		mapa.addObjeto(anao);
 	}
+	
+	public boolean Ganhou() {
+		for (GameObject inimigo : inimigos) {
+			if(!inimigo.isAlive())
+				return false;
+		}
+		return true;
+	}
+	
+	public boolean Perdeu() {
+		for (GameObject aliado : herois) {
+			if(!aliado.isAlive())
+				return false;
+		}
+		return true;
+	}
+	
 
 	public void Jogar() {
 		Scanner keyboard = new Scanner(System.in);
@@ -53,6 +70,7 @@ public class HeroQuest {
 					command = keyboard.nextLine();
 					if(command.compareTo("w") == 0 && !andar) {
 						heroi.Andar(mapa);
+						mapa.Ver(heroi.getX(), heroi.getY());
 						andar = true;
 					}
 					
@@ -74,6 +92,16 @@ public class HeroQuest {
 						System.out.println("Voce ja usou esta acao");
 				}
 				
+			}
+			
+			if(Ganhou()) {
+				System.out.println("Voce ganhou");
+				break;
+			}
+			
+			if(Perdeu()) {
+				System.out.println("Voce perdeu");
+				break;
 			}
 			
 		}

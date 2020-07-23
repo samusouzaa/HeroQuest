@@ -186,7 +186,7 @@ public class Mapa {
 	public void printMap() {
 		for (int i = 0; i < ALTURA; i++) {
 			for (int j = 0; j < LARGURA; j++) {
-				if (mapa[i][j] == null)
+				if (mapa[i][j] == null || !(mapa[i][j].getVisibilidade()))
 					System.out.printf("  ");
 
 				else
@@ -201,28 +201,38 @@ public class Mapa {
 
 		for (int i = 0; i < ALTURA; i++) {
 			for (int j = 0; j < LARGURA; j++) {
-				if(!(mapa[i][j] instanceof GameObject))
-				copia.mapa[i][j] = this.mapa[i][j];
+				if(mapa[i][j] != null && mapa[i][j].copiavel())
+					copia.mapa[i][j] = this.mapa[i][j];
 			}
 		}
 
 		return copia;
 	}
-
-//	public boolean isWon() {
-//		for (GameObject inimigo : inimigos) {
-//			if(!inimigo.isAlive())
-//				return false;
-//		}
-//		return true;
-//	}
-//	
-//	public boolean isLost() {
-//		for (GameObject aliado : aliados) {
-//			if(!aliado.isAlive())
-//				return false;
-//		}
-//		return true;
-//	}
-//	
+	
+	public void Ver(int x, int y) {
+		for (int i = x; i < ALTURA; i++) {
+			if(mapa[i][y] instanceof Parede)
+				break;
+			mapa[i][y].Visto();
+		}
+		
+		for (int i = x; i < 0; i++) {
+			if(mapa[i][y] instanceof Parede)
+				break;
+			mapa[i][y].Visto();
+		}
+		
+		for (int i = y; i < 0; i++) {
+			if(mapa[x][i] instanceof Parede)
+				break;
+			mapa[x][i].Visto();
+		}
+		
+		for (int i = y; i < LARGURA; i++) {
+			if(mapa[x][i] instanceof Parede)
+				break;
+			mapa[x][i].Visto();
+		}
+		
+	}
 }

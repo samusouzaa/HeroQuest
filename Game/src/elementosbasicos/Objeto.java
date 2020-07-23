@@ -44,6 +44,14 @@ private boolean visivel;
 		return;
 	}
 	
+	public boolean copiavel() {
+		return true;
+	}
+	
+	public boolean getVisibilidade() {
+		return visivel;
+	}
+	
 	@Override
 	public String toString() {
 		return " ";

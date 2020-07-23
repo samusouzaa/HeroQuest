@@ -128,7 +128,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 		return 0;
 	}
 
-	protected boolean isAlive() {
+	public boolean isAlive() {
 		if (hp <= 0)
 			return false;
 		return true;
@@ -226,6 +226,11 @@ public abstract class GameObject extends Objeto implements Personagem {
 		Item item = itens.get(posic - 1);
 
 		item.Usar();
+	}
+	
+	@Override
+	public boolean copiavel() {
+		return false;
 	}
 
 }
