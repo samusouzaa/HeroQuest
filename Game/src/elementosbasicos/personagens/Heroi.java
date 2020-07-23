@@ -83,8 +83,6 @@ public abstract class Heroi extends GameObject {
 		return dadoAliado;
 	}
 
-	
-	
 	public GameObject inimigosTurno(Mapa mapa, Arma arma){
 		
 		int x = this.getX();

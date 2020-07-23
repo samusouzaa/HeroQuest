@@ -1,5 +1,8 @@
 package sistema;
 
+//TESTE MAGIAS
+import Usaveis.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,11 +20,22 @@ public class HeroQuest {
 		Barbaro barbaro = new Barbaro(1, 3);
 		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
 		
+		
+		//TESTE MAGIAS
+		Fireball magia1 = new Fireball();
+		MagicMissile magia2 = new MagicMissile();
+		
+		
+		feiticeiro.adicionaMagia(magia1);
+		feiticeiro.adicionaMagia(magia2);
+		
+		//TESTE
 		Goblin goblin = new Goblin(1, 9);
 		
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
-
+		
+		//TESTE
 		inimigos.add(goblin);
 		
 		herois.add(feiticeiro);
@@ -67,7 +81,7 @@ public class HeroQuest {
 					}
 					
 					else if (command.compareTo("m") == 0 && !acao) {
-						//Usar magia
+						heroi.escolheMagia(mapa);
 						acao = true;
 					}
 					

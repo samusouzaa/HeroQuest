@@ -188,11 +188,19 @@ public abstract class GameObject extends Objeto implements Personagem {
 		magias.add(magia);
 	}
 	
-	public void lancaMagia(int posic, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria
+	public void escolheMagia(Mapa mapa) {
+		for (Magia magia : magias)
+			System.out.println(magias.indexOf(magia)+1 +"."+ " "+magia.toString());
+		Scanner keyboard = new Scanner(System.in);
+		int magia_escolhida = keyboard.nextInt();
+		lancaMagia(magia_escolhida, mapa);
+	}
+	
+	protected void lancaMagia(int posic, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria
 											// todas com números e ele escolheria a que ele quer lançar
 
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
-		if (dado < ip) {
+		if (ip < dado) {
 			System.out.println("Magia fracassou");
 			return;
 		}
@@ -201,18 +209,10 @@ public abstract class GameObject extends Objeto implements Personagem {
 
 		magia.Usar(this, mapa);
 	}
-	
-	//////ARRUMAR
+
 	
 	public void mudarPosicao(int x, int y) {
 		this.atualizaCoordinate(x, y);
 	}
-	/*
-	protected void usarMagia(int posic, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia apareceria todas
-											// com números e ele escolheria a que ele quer lançar
-		Magia magia = magias.get(posic - 1);
-
-		magia.Usar(this, mapa);
-}*/
 
 }
