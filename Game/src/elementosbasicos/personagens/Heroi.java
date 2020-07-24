@@ -48,40 +48,35 @@ public abstract class Heroi extends GameObject {
 				System.out.println("Digite a próxima direção");
 				String command = keyboard.nextLine();
 
-				try {
-					if (command.compareTo("w") == 0)
-						direcao = Direcao.UP;
-					else if (command.compareTo("a") == 0)
-						direcao = Direcao.LEFT;
-					else if (command.compareTo("d") == 0)
-						direcao = Direcao.RIGHT;
-					else if (command.compareTo("s") == 0)
-						direcao = Direcao.DOWN;
-					else
-						throw new DigitoInvalidoException(); // OK
-				} catch (DigitoInvalidoException exception) {
-					
-					System.out.println(exception.getMessage());
-				}
-
-				this.Mover(direcao, copia);
-
-				copia.printMap();
+				if (command.compareTo("w") == 0)
+					direcao = Direcao.UP;
+				else if (command.compareTo("a") == 0)
+					direcao = Direcao.LEFT;
+				else if (command.compareTo("d") == 0)
+					direcao = Direcao.RIGHT;
+				else if (command.compareTo("s") == 0)
+					direcao = Direcao.DOWN;
+				else
+					throw new DigitoInvalidoException(); // OK
 			}
-			System.out.println("Esta é a posição desejada? [Y/N]");
 
-			String command = keyboard.nextLine().toLowerCase();
-			if (command.compareTo("y") == 0)
-				conferido = true;
-			else
-				conferido = false;
+			this.Mover(direcao, copia);
 
-			verificado = mapa.verificarPosicao(getX(), getY());
-
+			copia.printMap();
 		}
+		System.out.println("Esta é a posição desejada? [Y/N]");
+
+		String command = keyboard.nextLine().toLowerCase();
+		if (command.compareTo("y") == 0)
+			conferido = true;
+		else
+			conferido = false;
+
+		verificado = mapa.verificarPosicao(getX(), getY());
 
 		mapa.addObjeto(this);
 		mapa.printMap();
+
 	}
 
 	protected int Defender() {
@@ -95,14 +90,14 @@ public abstract class Heroi extends GameObject {
 		}
 		return dadoAliado;
 	}
-	
+
 	public void escolheMagia(Mapa mapa) {
-		
+
 		if (magias.size() <= 0) {
 			System.out.println("Voce nao tem magias");
 			return;
 		}
-		
+
 		for (Magia magia : magias)
 			System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
 		Scanner keyboard = new Scanner(System.in);
@@ -129,7 +124,8 @@ public abstract class Heroi extends GameObject {
 			// verifica inimigos acima
 			if (mapa.getObjetoMapa(x, y + i) instanceof Inimigo) {
 				System.out.println(
-						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y + i).toString() + " (vida: " + ((GameObject) mapa.getObjetoMapa(x, y + i)).getHp() + ")");
+						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y + i).toString()
+								+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x, y + i)).getHp() + ")");
 				inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x, y + i));
 				posicao_inimigo++;
 				existe_inimigo = true;
@@ -143,7 +139,8 @@ public abstract class Heroi extends GameObject {
 			// verifica inimigos na direita
 			if (mapa.getObjetoMapa(x + i, y) instanceof Inimigo) {
 				System.out.println(
-						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x + i, y).toString()+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x + i, y)).getHp() + ")");
+						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x + i, y).toString()
+								+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x + i, y)).getHp() + ")");
 				inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x + i, y));
 				posicao_inimigo++;
 				existe_inimigo = true;
@@ -157,7 +154,8 @@ public abstract class Heroi extends GameObject {
 			// verifica inimigos embaixo
 			if (mapa.getObjetoMapa(x, y - i) instanceof Inimigo) {
 				System.out.println(
-						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y - i).toString()+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x, y - i)).getHp() + ")");
+						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y - i).toString()
+								+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x, y - i)).getHp() + ")");
 				inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x, y - i));
 				posicao_inimigo++;
 				existe_inimigo = true;
@@ -171,7 +169,8 @@ public abstract class Heroi extends GameObject {
 			// verifica inimigos na esquerda
 			if (mapa.getObjetoMapa(x - i, y) instanceof Inimigo) {
 				System.out.println(
-						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x - i, y).toString()+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x-i, y)).getHp() + ")");
+						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x - i, y).toString()
+								+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x - i, y)).getHp() + ")");
 				inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x - i, y));
 				posicao_inimigo++;
 				existe_inimigo = true;
@@ -233,8 +232,9 @@ public abstract class Heroi extends GameObject {
 			do {
 				try {
 					this.Atacar(inimigo, arma_ataque);
-					System.out.println("Vida do " + inimigo.toString() + " ap�s o ataque: " + inimigo.getHp());
+					System.out.println("Vida do " + inimigo.toString() + " apos o ataque: " + inimigo.getHp());
 				} catch (ArmaInvalidaException exception) {
+					valido = false;
 					System.out.print(exception.getMessage());
 				}
 			} while (!valido);
