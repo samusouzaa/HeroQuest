@@ -29,8 +29,8 @@ public abstract class GameObject extends Objeto implements Personagem {
 	// Lista de magias
 	private ArrayList<Magia> magias;
 
-	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
-		super(x, y);
+	public GameObject(int x, int y, int hp, int ip, int atq, int dfs, String icon) {
+		super(x, y, icon);
 		this.hpcheio = hp;
 		this.hp = hp;
 		this.ip = ip;
@@ -47,7 +47,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 	}
 
 
-	protected void Mover(Direcao direcao, Mapa mapa) {
+	public void Mover(Direcao direcao, Mapa mapa) {
 		int x = this.getX();
 		int y = this.getY();
 		switch (direcao) {

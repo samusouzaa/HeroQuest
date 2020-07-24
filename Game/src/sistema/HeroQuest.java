@@ -46,17 +46,19 @@ public class HeroQuest {
 		feiticeiro.equipar(false, arma2);
 		
 		herois.add(feiticeiro);
-		herois.add(elfo);
-		herois.add(barbaro);
-		herois.add(anao);
+		//herois.add(elfo);
+		//herois.add(barbaro);
+		//herois.add(anao);
 
 		mapa = new Mapa();
-
+		mapa.CriarMapaPadrao();
+		Porta porta = new Porta(2,3);
+		mapa.addObjeto(porta);
 		mapa.addObjeto(feiticeiro);
-		mapa.addObjeto(barbaro);
-		mapa.addObjeto(elfo);
-		mapa.addObjeto(anao);
-		mapa.addObjeto(goblin);
+//		mapa.addObjeto(barbaro);
+//		mapa.addObjeto(elfo);
+//		mapa.addObjeto(anao);
+//		mapa.addObjeto(goblin);
 	}
 	
 	public boolean Ganhou() {
@@ -121,6 +123,10 @@ public class HeroQuest {
 						acao = true;
 					}
 					
+					else if (command.compareTo("o") == 0) {
+						mapa.AbrirPorta(heroi);
+					}
+					
 					else if (command.compareTo("n") == 0) {
 						break;
 					}
@@ -131,7 +137,7 @@ public class HeroQuest {
 					mapa.Ver(heroi.getX(), heroi.getY());
 					mapa.printMap();
 					
-					System.out.println("vida goblin: " + ((GameObject) mapa.getObjetoMapa(1, 9)).getHp());
+					//System.out.println("vida goblin: " + ((GameObject) mapa.getObjetoMapa(1, 9)).getHp());
 
 				}
 				

@@ -6,8 +6,8 @@ import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 
 public class Inimigo extends GameObject {
-	public Inimigo(int x, int y, int hp, int ip, int atq, int defesa) {
-		super(x, y, hp, ip, atq, defesa);
+	public Inimigo(int x, int y, int hp, int ip, int atq, int defesa, String icon) {
+		super(x, y, hp, ip, atq, defesa, icon);
 	}
 	
 	public void Andar(Mapa mapa) {
@@ -15,7 +15,7 @@ public class Inimigo extends GameObject {
 	}
 	
 	protected int Defender() {
-		int numeroDados = this.getDefesa(); // + armadura.getDefesa; obs.: inimigos não possuem aramadura
+		int numeroDados = this.getDefesa(); // + armadura.getDefesa; obs.: inimigos nï¿½o possuem aramadura
 		int aux;
 		int dadoAliado = 0;
 		for (int i = 0; i < numeroDados; i++) {

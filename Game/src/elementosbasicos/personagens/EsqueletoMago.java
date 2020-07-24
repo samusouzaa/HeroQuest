@@ -8,9 +8,10 @@ public class EsqueletoMago extends Inimigo{
 	private static final int DEFESA = 2;
 	private static final int HP = 4;
 	private static final int IP = 6;
+	private static final String ICON = "em";
 	
 	public EsqueletoMago(int x, int y) {
-		super(x, y, HP, IP, ATAQUE, DEFESA);
+		super(x, y, HP, IP, ATAQUE, DEFESA, ICON);
 	}
 	
 	public void mudarPosicao() {
@@ -64,10 +65,4 @@ public class EsqueletoMago extends Inimigo{
 			atualizaCoordinate(x,y);
 		}
 	}
-	
-	@Override
-	public String toString() {
-		return "em";
-	}
-	
 }

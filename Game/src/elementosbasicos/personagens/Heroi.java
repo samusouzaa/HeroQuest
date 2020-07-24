@@ -17,8 +17,8 @@ import java.util.Scanner;
 
 public abstract class Heroi extends GameObject {
 
-	public Heroi(int x, int y, int hp, int ip, int atq, int dfs) {
-		super(x, y,hp, ip, atq, dfs);
+	public Heroi(int x, int y, int hp, int ip, int atq, int dfs, String icon) {
+		super(x, y,hp, ip, atq, dfs, icon);
 		this.Visto();
 	}
 

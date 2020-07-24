@@ -5,10 +5,12 @@ import Externos.Coordenada;
 public abstract class Objeto  {
 private Coordenada coordenada;
 private boolean visivel;
+private String icon;
 	
-	public Objeto(int x, int y) {
+	public Objeto(int x, int y, String icon) {
 		coordenada = new Coordenada(x,y);
 		visivel = false;
+		this.icon = icon;
 	}
 	
 	protected Coordenada getCoordinate() {
@@ -54,7 +56,7 @@ private boolean visivel;
 	
 	@Override
 	public String toString() {
-		return " ";
+		return icon;
 	}
 
 	

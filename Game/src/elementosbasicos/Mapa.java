@@ -12,7 +12,6 @@ public class Mapa {
 
 	public Mapa() {
 		mapa = new Objeto[ALTURA][LARGURA];
-		CriarMapaPadrao();
 	}
 
 	public boolean verificarPosicao(int x, int y) {
@@ -41,7 +40,7 @@ public class Mapa {
 		mapa[objeto.getX()][objeto.getY()] = null;
 	}
 
-	private void CriarMapaPadrao() {
+	public void CriarMapaPadrao() {
 		for (int i = 0; i < LARGURA; i++) {
 			Parede parede1 = new Parede(0, i);
 			this.addObjeto(parede1);
@@ -186,7 +185,7 @@ public class Mapa {
 	public void printMap() {
 		for (int i = 0; i < ALTURA; i++) {
 			for (int j = 0; j < LARGURA; j++) {
-				if (mapa[i][j] == null || !(mapa[i][j].getVisibilidade()))
+				if (mapa[i][j] == null)
 					System.out.printf("  ");
 
 				else
@@ -194,6 +193,20 @@ public class Mapa {
 			}
 			System.out.println();
 		}
+	}
+	
+	public void AbrirPorta(GameObject object) {
+		int x = object.getX();
+		int y = object.getY();
+		
+		if (mapa[x+1][y] instanceof Porta)
+			mapa[x+1][y] = null;
+		if (mapa[x-1][y] instanceof Porta)
+			mapa[x-1][y] = null;
+		if (mapa[x][y+1] instanceof Porta)
+			mapa[x+1][y+1] = null;
+		if (mapa[x+1][y-1] instanceof Porta)
+			mapa[x+1][y-1] = null;
 	}
 
 	public Mapa getCopia() {
