@@ -188,16 +188,16 @@ public abstract class Heroi extends GameObject {
 		Arma arma_ataque = null;
 
 		if (Armado()) {
-			System.out.println("Usar armas disponíveis?"); // excecao pra caso a arma for null
+			System.out.println("Usar armas disponíveis?"); 
 			System.out.println("y = sim");
 			System.out.println("n = não");
 			Scanner in = new Scanner(System.in);
-			String s = in.nextLine().toLowerCase(); // tudo minusculo
+			String s = in.nextLine().toLowerCase(); 
 			if (s.compareTo("y") == 0) {
 				boolean valido = true;
 				do {
 					try {
-						arma_ataque = escolhaArmas(); // isso ta ok
+						arma_ataque = escolhaArmas(); 
 					} catch (ArmaInvalidaException e) {
 						valido = false;
 						System.out.print(e.getMessage());
