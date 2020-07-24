@@ -31,7 +31,7 @@ public abstract class Heroi extends GameObject {
 
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
-		Direcao direcao = Direcao.UP; //inicializei pq ele tava reclamando
+		Direcao direcao = Direcao.UP; // inicializei pq ele tava reclamando
 		boolean conferido = false;
 		boolean verificado = false;
 		int xi = getX();
@@ -58,7 +58,7 @@ public abstract class Heroi extends GameObject {
 					else if (command.compareTo("s") == 0)
 						direcao = Direcao.DOWN;
 					else
-						throw new DigitoInvalidoException();
+						throw new DigitoInvalidoException(); // OK
 				} catch (DigitoInvalidoException exception) {
 					System.out.println(exception.getMessage());
 					valido = false;
@@ -68,7 +68,7 @@ public abstract class Heroi extends GameObject {
 
 				copia.printMap();
 			}
-			System.out.println("Esta é a posição desejada [Y/N]");
+			System.out.println("Esta é a posição desejada? [Y/N]");
 
 			String command = keyboard.nextLine();
 			if (command.compareTo("Y") == 0)
@@ -96,7 +96,7 @@ public abstract class Heroi extends GameObject {
 		return dadoAliado;
 	}
 
-	public GameObject inimigosTurno(Mapa mapa, Arma arma) throws DigitoInvalidoException {
+	private GameObject inimigosTurno(Mapa mapa, Arma arma) throws DigitoInvalidoException {
 
 		int x = this.getX();
 		int y = this.getY();
@@ -194,11 +194,16 @@ public abstract class Heroi extends GameObject {
 			Scanner in = new Scanner(System.in);
 			String s = in.nextLine().toLowerCase(); // tudo minusculo
 			if (s.compareTo("y") == 0) {
-				try {
-					arma_ataque = escolhaArmas(); // isso ta ok
-				} catch (ArmaInvalidaException e) {
-					System.out.print(e.getMessage());
-				}
+				boolean valido = true;
+				do {
+					try {
+						arma_ataque = escolhaArmas(); // isso ta ok
+					} catch (ArmaInvalidaException e) {
+						valido = false;
+						System.out.print(e.getMessage());
+					}
+				} while (!valido);
+
 			} else if (s.compareTo("n") == 0) {
 				System.out.println("Não há armas disponíveis");
 
@@ -208,11 +213,14 @@ public abstract class Heroi extends GameObject {
 		}
 		GameObject inimigo = inimigosTurno(mapa, arma_ataque);
 		if (inimigo != null) {
-			try {
-				this.Atacar(inimigo, arma_ataque);
-			} catch (ArmaInvalidaException exception) {
-				System.out.print(exception.getMessage());
-			}
+			boolean valido = true;
+			do {
+				try {
+					this.Atacar(inimigo, arma_ataque);
+				} catch (ArmaInvalidaException exception) {
+					System.out.print(exception.getMessage());
+				}
+			} while (!valido);
 			return true;
 		} else
 			return false;
