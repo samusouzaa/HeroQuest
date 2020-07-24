@@ -17,13 +17,13 @@ import java.util.Scanner;
 
 public abstract class Heroi extends GameObject {
 
+
 	public Heroi(int x, int y, int hp, int ip, int atq, int dfs, String icon) {
 		super(x, y,hp, ip, atq, dfs, icon);
 		this.Visto();
 	}
 
 	private ArrayList<GameObject> inimigos_proximos = new ArrayList<GameObject>();
-
 
 	public void Andar(Mapa mapa) throws DigitoInvalidoException {
 		// Jogar dados
@@ -32,7 +32,7 @@ public abstract class Heroi extends GameObject {
 
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
-		Direcao direcao;
+		Direcao direcao = Direcao.UP; // inicializei pq ele tava reclamando
 		boolean conferido = false;
 		boolean verificado = false;
 		int xi = getX();
@@ -47,31 +47,35 @@ public abstract class Heroi extends GameObject {
 
 				System.out.println("Digite a próxima direção");
 				String command = keyboard.nextLine();
+				boolean valido = true;
 
-				if (command.compareTo("w") == 0)
-					direcao = Direcao.UP;
-				else if (command.compareTo("a") == 0)
-					direcao = Direcao.LEFT;
-				else if (command.compareTo("d") == 0)
-					direcao = Direcao.RIGHT;
-				else if (command.compareTo("s") == 0)
-					direcao = Direcao.DOWN;
-				else
-					throw new DigitoInvalidoException();
+				try {
+					if (command.compareTo("w") == 0)
+						direcao = Direcao.UP;
+					else if (command.compareTo("a") == 0)
+						direcao = Direcao.LEFT;
+					else if (command.compareTo("d") == 0)
+						direcao = Direcao.RIGHT;
+					else if (command.compareTo("s") == 0)
+						direcao = Direcao.DOWN;
+					else
+						throw new DigitoInvalidoException(); // OK
+				} catch (DigitoInvalidoException exception) {
+					System.out.println(exception.getMessage());
+					valido = false;
+				}
 
 				this.Mover(direcao, copia);
 
 				copia.printMap();
 			}
-			System.out.println("Esta é a posição desejada [Y/N]");
+			System.out.println("Esta é a posição desejada? [Y/N]");
 
 			String command = keyboard.nextLine();
 			if (command.compareTo("Y") == 0)
 				conferido = true;
-			else if (command.compareTo("N") == 0)
-				conferido = false;
 			else
-				throw new DigitoInvalidoException();
+				conferido = false;
 
 			verificado = mapa.verificarPosicao(getX(), getY());
 
@@ -93,7 +97,7 @@ public abstract class Heroi extends GameObject {
 		return dadoAliado;
 	}
 
-	public GameObject inimigosTurno(Mapa mapa, Arma arma) {
+	private GameObject inimigosTurno(Mapa mapa, Arma arma) throws DigitoInvalidoException {
 
 		int x = this.getX();
 		int y = this.getY();
@@ -167,14 +171,13 @@ public abstract class Heroi extends GameObject {
 
 			Scanner keyboard = new Scanner(System.in);
 			int inimigo_escolhido = keyboard.nextInt();
-
+			inimigos_proximos.clear();
 			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
 				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
 				return inimigo_atacado;
+			} else {
+				throw new DigitoInvalidoException();
 			}
-
-			else
-				return null;
 		}
 
 		else
@@ -186,32 +189,39 @@ public abstract class Heroi extends GameObject {
 		Arma arma_ataque = null;
 
 		if (Armado()) {
-			System.out.println("Usar armas disponíveis?"); // excecao pra caso a arma for null
+			System.out.println("Usar armas disponíveis?"); 
 			System.out.println("y = sim");
 			System.out.println("n = não");
 			Scanner in = new Scanner(System.in);
-			String s = in.nextLine().toLowerCase(); // tudo minusculo
+			String s = in.nextLine().toLowerCase(); 
 			if (s.compareTo("y") == 0) {
-				try {
-					arma_ataque = escolhaArmas();
-				} catch (ArmaInvalidaException e) {
-					System.out.print(e.getMessage());
-				}
+				boolean valido = true;
+				do {
+					try {
+						arma_ataque = escolhaArmas(); 
+					} catch (ArmaInvalidaException e) {
+						valido = false;
+						System.out.print(e.getMessage());
+					}
+				} while (!valido);
+
 			} else if (s.compareTo("n") == 0) {
 				System.out.println("Não há armas disponíveis");
 
-			}
-			else {
+			} else {
 				throw new DigitoInvalidoException();
 			}
 		}
 		GameObject inimigo = inimigosTurno(mapa, arma_ataque);
 		if (inimigo != null) {
-			try {
-				this.Atacar(inimigo, arma_ataque);
-			} catch (ArmaInvalidaException e) {
-				System.out.print(e.getMessage());
-			}
+			boolean valido = true;
+			do {
+				try {
+					this.Atacar(inimigo, arma_ataque);
+				} catch (ArmaInvalidaException exception) {
+					System.out.print(exception.getMessage());
+				}
+			} while (!valido);
 			return true;
 		} else
 			return false;

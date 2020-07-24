@@ -52,8 +52,8 @@ public class HeroQuest {
 
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
-		Porta porta = new Porta(2,3);
-		mapa.addObjeto(porta);
+
+
 		mapa.addObjeto(feiticeiro);
 //		mapa.addObjeto(barbaro);
 //		mapa.addObjeto(elfo);
