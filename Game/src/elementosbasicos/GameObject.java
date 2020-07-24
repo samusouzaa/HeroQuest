@@ -27,7 +27,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 	// Lista de itens
 	private ArrayList<Item> itens;
 	// Lista de magias
-	private ArrayList<Magia> magias;
+	protected ArrayList<Magia> magias;
 
 	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
 		super(x, y);
@@ -198,21 +198,12 @@ public abstract class GameObject extends Objeto implements Personagem {
 		magias.add(magia);
 	}
 
-	public void escolheMagia(Mapa mapa) {
-		for (Magia magia : magias)
-			System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
-		Scanner keyboard = new Scanner(System.in);
-		int magia_escolhida = keyboard.nextInt();
-
-		lancaMagia(magia_escolhida, mapa);
-
-	}
-
 	protected void lancaMagia(int posicao, Mapa mapa) { // Minha ideia é que quando um jogador quiser lançar uma magia
 														// apareceria
 		// todas com números e ele escolheria a que ele quer lançar
 
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
+
 		if (ip < dado) {
 			System.out.println("Magia fracassou");
 			return;
@@ -234,5 +225,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 	public boolean copiavel() {
 		return false;
 	}
+
+	public abstract void escolheMagia(Mapa mapa);
 
 }

@@ -20,6 +20,6 @@ public class Elfo extends Heroi {
 	@Override
 	public void Vez() {
 		System.out.println("Vez do elfo");
-		System.out.println("Vida:" + HP);
+		System.out.println("Vida:" + this.getHp());
 	}
 }

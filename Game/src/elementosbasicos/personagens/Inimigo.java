@@ -2,7 +2,10 @@ package elementosbasicos.personagens;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+
 import Externos.Dados;
+import Externos.Direcao;
 import Externos.TipoDado;
 import Usaveis.Arma;
 import elementosbasicos.GameObject;
