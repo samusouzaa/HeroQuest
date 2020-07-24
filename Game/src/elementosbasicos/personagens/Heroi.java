@@ -31,7 +31,7 @@ public abstract class Heroi extends GameObject {
 
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
-		Direcao direcao;
+		Direcao direcao = Direcao.UP; //inicializei pq ele tava reclamando
 		boolean conferido = false;
 		boolean verificado = false;
 		int xi = getX();
@@ -46,17 +46,23 @@ public abstract class Heroi extends GameObject {
 
 				System.out.println("Digite a próxima direção");
 				String command = keyboard.nextLine();
+				boolean valido = true;
 
-				if (command.compareTo("w") == 0)
-					direcao = Direcao.UP;
-				else if (command.compareTo("a") == 0)
-					direcao = Direcao.LEFT;
-				else if (command.compareTo("d") == 0)
-					direcao = Direcao.RIGHT;
-				else if (command.compareTo("s") == 0)
-					direcao = Direcao.DOWN;
-				else
-					throw new DigitoInvalidoException();
+				try {
+					if (command.compareTo("w") == 0)
+						direcao = Direcao.UP;
+					else if (command.compareTo("a") == 0)
+						direcao = Direcao.LEFT;
+					else if (command.compareTo("d") == 0)
+						direcao = Direcao.RIGHT;
+					else if (command.compareTo("s") == 0)
+						direcao = Direcao.DOWN;
+					else
+						throw new DigitoInvalidoException();
+				} catch (DigitoInvalidoException exception) {
+					System.out.println(exception.getMessage());
+					valido = false;
+				}
 
 				this.Mover(direcao, copia);
 
@@ -67,10 +73,8 @@ public abstract class Heroi extends GameObject {
 			String command = keyboard.nextLine();
 			if (command.compareTo("Y") == 0)
 				conferido = true;
-			else if (command.compareTo("N") == 0)
-				conferido = false;
 			else
-				throw new DigitoInvalidoException();
+				conferido = false;
 
 			verificado = mapa.verificarPosicao(getX(), getY());
 
@@ -167,7 +171,7 @@ public abstract class Heroi extends GameObject {
 			Scanner keyboard = new Scanner(System.in);
 			int inimigo_escolhido = keyboard.nextInt();
 			inimigos_proximos.clear();
-			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) { 
+			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
 				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
 				return inimigo_atacado;
 			} else {
@@ -179,7 +183,7 @@ public abstract class Heroi extends GameObject {
 			return null;
 	}
 
-	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException { 
+	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException {
 
 		Arma arma_ataque = null;
 
@@ -191,7 +195,7 @@ public abstract class Heroi extends GameObject {
 			String s = in.nextLine().toLowerCase(); // tudo minusculo
 			if (s.compareTo("y") == 0) {
 				try {
-					arma_ataque = escolhaArmas(); //isso ta ok
+					arma_ataque = escolhaArmas(); // isso ta ok
 				} catch (ArmaInvalidaException e) {
 					System.out.print(e.getMessage());
 				}
