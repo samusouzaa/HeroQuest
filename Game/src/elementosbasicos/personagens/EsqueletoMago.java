@@ -1,8 +1,17 @@
 package elementosbasicos.personagens;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
+import Externos.Dados;
+import Externos.Direcao;
+import Externos.TipoDado;
+import Usaveis.Magia;
+import Usaveis.MagicMissile;
+import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
+import excecoes.DigitoInvalidoException;
 
 public class EsqueletoMago extends Inimigo{
 	
@@ -15,57 +24,8 @@ public class EsqueletoMago extends Inimigo{
 		super(x, y, HP, IP, ATAQUE, DEFESA);
 	}
 	
-	public void mudarPosicao() {
-		int proxima_posicao = new Random().nextInt(8) + 1;
-		
-		if (proxima_posicao == 1) {
-			int x = getX() - 1;
-			int y = getY() + 1;
-			atualizaCoordinate(x,y);
-		}
-		
-		else if (proxima_posicao == 2) {
-			int x = getX();
-			int y = getY() + 1;
-			atualizaCoordinate(x,y);
-		}
-		
-		else if (proxima_posicao == 3) {
-			int x = getX() + 1;
-			int y = getY() + 1;
-			atualizaCoordinate(x,y);
-		}
-		
-		else if (proxima_posicao == 4) {
-			int x = getX() - 1;
-			int y = getY();
-			atualizaCoordinate(x,y);
-		}
-		
-		else if (proxima_posicao == 5) {
-			int x = getX() + 1;
-			int y = getY();
-			atualizaCoordinate(x,y);
-		}
-		
-		else if (proxima_posicao == 6) {
-			int x = getX() - 1;
-			int y = getY() - 1;	
-			atualizaCoordinate(x,y);
-		}
-		
-		else if (proxima_posicao == 7) {
-			int x = getX();
-			int y = getY() - 1;
-			atualizaCoordinate(x,y);
-		}
-		
-		else if (proxima_posicao == 8) {
-			int x = getX() + 1;
-			int y = getY() - 1;
-			atualizaCoordinate(x,y);
-		}
-	}
+	MagicMissile magia_esqueleto = new MagicMissile();
+	
 	
 	@Override
 	public String toString() {
@@ -74,14 +34,47 @@ public class EsqueletoMago extends Inimigo{
 
 	@Override
 	public void Vez() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Ataque do Esquleto Mago:");
 	}
 
 	@Override
 	public void Andar(Mapa mapa) {
-		// TODO Auto-generated method stub
+		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		
+		ArrayList<Direcao> lugares_andar = new ArrayList<Direcao>();
+		
+		if (mapa.verificarPosicao(this.getX()-1, this.getY()))
+			lugares_andar.add(Direcao.UP);
+		
+		if (mapa.verificarPosicao(this.getX()+1, this.getY()))
+			lugares_andar.add(Direcao.DOWN);
+		
+		if (mapa.verificarPosicao(this.getX(), this.getY()+1))
+			lugares_andar.add(Direcao.RIGHT);
+		
+		if (mapa.verificarPosicao(this.getX(), this.getY()-1))
+			lugares_andar.add(Direcao.LEFT);
+		
+		if (lugares_andar.size() == 0)
+			return;
+		
+		else {
+			int posicao = new Random().nextInt(lugares_andar.size());
+			for (int i = 0; i < passos; i++) {
+				if (mapa.verificarPosicao(this, lugares_andar.get(posicao))) {
+					this.Mover(lugares_andar.get(posicao), mapa);
+					mapa.printMap();
+				}
+				else
+					break;
+			}
+			
+		}	
+	}
+	public void escolheMagia(Mapa mapa) {
+
+		lancaMagia(1, mapa);	//unica magia que ele possui
+
 	}
 	
 }

@@ -20,7 +20,7 @@ public class Barbaro extends Heroi {
 	@Override
 	public void Vez() {
 		System.out.println("Vez do barbaro");
-		System.out.println("Vida:" + HP);
+		System.out.println("Vida:" + this.getHp());
 	}
 
 }

@@ -16,20 +16,22 @@ public class HeroQuest {
 	private ArrayList<GameObject> inimigos;
 
 	public HeroQuest() {
-		Anao anao = new Anao(1, 1);
+		Anao anao = new Anao(14, 1);
 		Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
-		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
 
-		// TESTE MAGIAS
+		Feiticeiro feiticeiro = new Feiticeiro(13, 4);
 		Fireball magia1 = new Fireball();
 		MagicMissile magia2 = new MagicMissile();
-
+		Teleport magia3 = new Teleport();
+	
 		feiticeiro.adicionaMagia(magia1);
 		feiticeiro.adicionaMagia(magia2);
-
-		// TESTE
-		Goblin goblin = new Goblin(1, 9);
+		feiticeiro.adicionaMagia(magia3);
+		
+		//TESTE
+		EsqueletoMago goblin = new EsqueletoMago(14, 9);
+		goblin.adicionaMagia(magia2);
 
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
@@ -128,9 +130,6 @@ public class HeroQuest {
 
 					mapa.Ver(heroi.getX(), heroi.getY());
 					mapa.printMap();
-
-					System.out.println("vida goblin: " + ((GameObject) mapa.getObjetoMapa(1, 9)).getHp());
-
 				}
 
 			}
@@ -139,9 +138,16 @@ public class HeroQuest {
 				if (inimigo.getVisibilidade())
 					try {
 						((Inimigo) inimigo).realizaAtaque(mapa);
-					} catch (DigitoInvalidoException exception) {
+						inimigo.escolheMagia(mapa);
+						inimigo.Andar(mapa);
+						
+						
+					}
+					 catch (DigitoInvalidoException exception) {
 						System.out.println(exception.getMessage());
 					}
+					
+				}
 			}
 
 //			if(Ganhou()) {
@@ -157,5 +163,3 @@ public class HeroQuest {
 		}
 
 	}
-
-}

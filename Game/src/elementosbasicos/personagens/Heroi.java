@@ -5,6 +5,7 @@ import Externos.Dados;
 import Externos.Direcao;
 import Externos.TipoDado;
 import Usaveis.Arma;
+import Usaveis.Magia;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 import elementosbasicos.Parede;
@@ -94,6 +95,22 @@ public abstract class Heroi extends GameObject {
 		}
 		return dadoAliado;
 	}
+	
+	public void escolheMagia(Mapa mapa) {
+		
+		if (magias.size() <= 0) {
+			System.out.println("Voce nao tem magias");
+			return;
+		}
+		
+		for (Magia magia : magias)
+			System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
+		Scanner keyboard = new Scanner(System.in);
+		int magia_escolhida = keyboard.nextInt();
+
+		lancaMagia(magia_escolhida, mapa);
+
+	}
 
 	private GameObject inimigosTurno(Mapa mapa, Arma arma) throws DigitoInvalidoException {
 
@@ -112,7 +129,7 @@ public abstract class Heroi extends GameObject {
 			// verifica inimigos acima
 			if (mapa.getObjetoMapa(x, y + i) instanceof Inimigo) {
 				System.out.println(
-						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y + i).toString());
+						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y + i).toString() + " (vida: " + ((GameObject) mapa.getObjetoMapa(x, y + i)).getHp() + ")");
 				inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x, y + i));
 				posicao_inimigo++;
 				existe_inimigo = true;
@@ -126,7 +143,7 @@ public abstract class Heroi extends GameObject {
 			// verifica inimigos na direita
 			if (mapa.getObjetoMapa(x + i, y) instanceof Inimigo) {
 				System.out.println(
-						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x + i, y).toString());
+						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x + i, y).toString()+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x + i, y)).getHp() + ")");
 				inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x + i, y));
 				posicao_inimigo++;
 				existe_inimigo = true;
@@ -140,7 +157,7 @@ public abstract class Heroi extends GameObject {
 			// verifica inimigos embaixo
 			if (mapa.getObjetoMapa(x, y - i) instanceof Inimigo) {
 				System.out.println(
-						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y - i).toString());
+						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x, y - i).toString()+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x, y - i)).getHp() + ")");
 				inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x, y - i));
 				posicao_inimigo++;
 				existe_inimigo = true;
@@ -154,7 +171,7 @@ public abstract class Heroi extends GameObject {
 			// verifica inimigos na esquerda
 			if (mapa.getObjetoMapa(x - i, y) instanceof Inimigo) {
 				System.out.println(
-						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x - i, y).toString());
+						"Pressione " + posicao_inimigo + " para atacar o " + mapa.getObjetoMapa(x - i, y).toString()+ " (vida: " + ((GameObject) mapa.getObjetoMapa(x-i, y)).getHp() + ")");
 				inimigos_proximos.add((GameObject) mapa.getObjetoMapa(x - i, y));
 				posicao_inimigo++;
 				existe_inimigo = true;
@@ -216,6 +233,7 @@ public abstract class Heroi extends GameObject {
 			do {
 				try {
 					this.Atacar(inimigo, arma_ataque);
+					System.out.println("Vida do " + inimigo.toString() + " após o ataque: " + inimigo.getHp());
 				} catch (ArmaInvalidaException exception) {
 					System.out.print(exception.getMessage());
 				}

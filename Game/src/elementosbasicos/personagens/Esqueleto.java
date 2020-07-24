@@ -1,5 +1,13 @@
 package elementosbasicos.personagens;
 
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+import Externos.Dados;
+import Externos.Direcao;
+import Externos.TipoDado;
+import Usaveis.Magia;
 import elementosbasicos.Mapa;
 
 public class Esqueleto extends Inimigo {
@@ -19,14 +27,46 @@ public class Esqueleto extends Inimigo {
 
 	@Override
 	public void Vez() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Ataque do Esquleto:");
 	}
 
 	@Override
 	public void Andar(Mapa mapa) {
-		// TODO Auto-generated method stub
+		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		
+		ArrayList<Direcao> lugares_andar = new ArrayList<Direcao>();
+		
+		if (mapa.verificarPosicao(this.getX()-1, this.getY()))
+			lugares_andar.add(Direcao.UP);
+		
+		if (mapa.verificarPosicao(this.getX()+1, this.getY()))
+			lugares_andar.add(Direcao.DOWN);
+		
+		if (mapa.verificarPosicao(this.getX(), this.getY()+1))
+			lugares_andar.add(Direcao.RIGHT);
+		
+		if (mapa.verificarPosicao(this.getX(), this.getY()-1))
+			lugares_andar.add(Direcao.LEFT);
+		
+		if (lugares_andar.size() == 0)
+			return;
+		
+		else {
+			int posicao = new Random().nextInt(lugares_andar.size());
+			for (int i = 0; i < passos; i++) {
+				if (mapa.verificarPosicao(this, lugares_andar.get(posicao))) {
+					this.Mover(lugares_andar.get(posicao), mapa);
+					mapa.printMap();
+				}
+				else
+					break;
+			}
+			
+		}	
+	}
+	
+public void escolheMagia(Mapa mapa) {
+		return;		//nao pode usar magia
 	}
 
 }
