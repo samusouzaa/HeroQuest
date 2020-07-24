@@ -31,7 +31,7 @@ public abstract class Heroi extends GameObject {
 
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		Scanner keyboard = new Scanner(System.in);
-		Direcao direcao = Direcao.UP; // inicializei pq ele tava reclamando
+		Direcao direcao = null; // inicializei pq ele tava reclamando
 		boolean conferido = false;
 		boolean verificado = false;
 		int xi = getX();
@@ -46,7 +46,6 @@ public abstract class Heroi extends GameObject {
 
 				System.out.println("Digite a próxima direção");
 				String command = keyboard.nextLine();
-				boolean valido = true;
 
 				try {
 					if (command.compareTo("w") == 0)
@@ -60,8 +59,8 @@ public abstract class Heroi extends GameObject {
 					else
 						throw new DigitoInvalidoException(); // OK
 				} catch (DigitoInvalidoException exception) {
+					
 					System.out.println(exception.getMessage());
-					valido = false;
 				}
 
 				this.Mover(direcao, copia);
@@ -70,8 +69,8 @@ public abstract class Heroi extends GameObject {
 			}
 			System.out.println("Esta é a posição desejada? [Y/N]");
 
-			String command = keyboard.nextLine();
-			if (command.compareTo("Y") == 0)
+			String command = keyboard.nextLine().toLowerCase();
+			if (command.compareTo("y") == 0)
 				conferido = true;
 			else
 				conferido = false;
@@ -188,16 +187,16 @@ public abstract class Heroi extends GameObject {
 		Arma arma_ataque = null;
 
 		if (Armado()) {
-			System.out.println("Usar armas disponíveis?"); 
+			System.out.println("Usar armas disponíveis?");
 			System.out.println("y = sim");
 			System.out.println("n = não");
 			Scanner in = new Scanner(System.in);
-			String s = in.nextLine().toLowerCase(); 
+			String s = in.nextLine().toLowerCase();
 			if (s.compareTo("y") == 0) {
 				boolean valido = true;
 				do {
 					try {
-						arma_ataque = escolhaArmas(); 
+						arma_ataque = escolhaArmas();
 					} catch (ArmaInvalidaException e) {
 						valido = false;
 						System.out.print(e.getMessage());
