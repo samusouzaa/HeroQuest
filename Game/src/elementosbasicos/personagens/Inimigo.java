@@ -12,7 +12,7 @@ import excecoes.ArmaInvalidaException;
 import excecoes.DigitoInvalidoException;
 
 
-public class Inimigo extends GameObject {
+public abstract class Inimigo extends GameObject {
 	public Inimigo(int x, int y, int hp, int ip, int atq, int defesa, String icon) {
 		super(x, y, hp, ip, atq, defesa, icon);
 	}

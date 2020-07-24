@@ -62,6 +62,7 @@ public abstract class Heroi extends GameObject {
 						throw new DigitoInvalidoException(); // OK
 				} catch (DigitoInvalidoException exception) {
 					System.out.println(exception.getMessage());
+					i--;
 					valido = false;
 				}
 
