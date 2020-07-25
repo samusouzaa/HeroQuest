@@ -27,11 +27,14 @@ public class HeroQuest {
 		Barbaro barbaro = new Barbaro(1, 3);
 		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
 		
+		//teste
+		feiticeiro.setPlayer(true);
+		
 		herois.add(feiticeiro);
 		herois.add(elfo);
 		herois.add(barbaro);
 		herois.add(anao);
-
+		
 		mapa = new Mapa();
 
 		mapa.addObjeto(feiticeiro);
