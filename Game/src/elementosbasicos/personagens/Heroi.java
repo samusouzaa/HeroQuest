@@ -17,9 +17,8 @@ import java.util.Scanner;
 
 public abstract class Heroi extends GameObject {
 
-
 	public Heroi(int x, int y, int hp, int ip, int atq, int dfs, String icon) {
-		super(x, y,hp, ip, atq, dfs, icon);
+		super(x, y, hp, ip, atq, dfs, icon);
 		this.Visto();
 	}
 
@@ -190,16 +189,16 @@ public abstract class Heroi extends GameObject {
 		Arma arma_ataque = null;
 
 		if (Armado()) {
-			System.out.println("Usar armas disponíveis?"); 
+			System.out.println("Usar armas disponíveis?");
 			System.out.println("y = sim");
 			System.out.println("n = não");
 			Scanner in = new Scanner(System.in);
-			String s = in.nextLine().toLowerCase(); 
+			String s = in.nextLine().toLowerCase();
 			if (s.compareTo("y") == 0) {
 				boolean valido = true;
 				do {
 					try {
-						arma_ataque = escolhaArmas(); 
+						arma_ataque = escolhaArmas();
 					} catch (ArmaInvalidaException e) {
 						valido = false;
 						System.out.print(e.getMessage());
