@@ -86,10 +86,9 @@ public abstract class Heroi extends GameObject {
 					conferido = false;
 
 				verificado = mapa.verificarPosicao(getX(), getY());
-
-				mapa.addObjeto(this);
-				mapa.printMap();
 			}
+			mapa.addObjeto(this);
+			mapa.printMap();
 		}
 
 		else {
