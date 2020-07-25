@@ -7,7 +7,7 @@ public class ListaItens {
 	
 	Map<String, Item> lista_itens = new HashMap<>();
 	
-	protected void adicionaItem(Item item, String chave) {
+	public void adicionaItem(Item item, String chave) {
 		lista_itens.put(chave, item);
 	}
 	

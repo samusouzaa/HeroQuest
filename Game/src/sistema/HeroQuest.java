@@ -1,8 +1,6 @@
 package sistema;
 
-//TESTE MAGIAS
 import Usaveis.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,37 +12,18 @@ public class HeroQuest {
 	private Mapa mapa;
 	private ArrayList<GameObject> herois;
 	private ArrayList<GameObject> inimigos;
-
+	
+	InicializaUtilizaveis utilizaveis = new InicializaUtilizaveis();
+	
+	private ListaItens magias = utilizaveis.inicializaMagias();
+	private ListaItens armas = utilizaveis.InicializaArmas();
+	
 	public HeroQuest() {
-		Anao anao = new Anao(14, 1);
+		Anao anao = new Anao(1, 1);
 		Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
-
-		Feiticeiro feiticeiro = new Feiticeiro(13, 4);
-		Fireball magia1 = new Fireball();
-		MagicMissile magia2 = new MagicMissile();
-		Teleport magia3 = new Teleport();
-	
-		feiticeiro.adicionaMagia(magia1);
-		feiticeiro.adicionaMagia(magia2);
-		feiticeiro.adicionaMagia(magia3);
+		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
 		
-		//TESTE
-		EsqueletoMago goblin = new EsqueletoMago(14, 9);
-		goblin.adicionaMagia(magia2);
-
-		herois = new ArrayList<GameObject>();
-		inimigos = new ArrayList<GameObject>();
-
-		// TESTE
-		inimigos.add(goblin);
-
-		// TESTE ATAQUE
-		Arma arma1 = new Arma(TipoArma.ESPADACURTA, "A");
-		Arma arma2 = new Arma(TipoArma.ESPADALONGA, "B");
-		feiticeiro.equipar(true, arma1);
-		feiticeiro.equipar(false, arma2);
-
 		herois.add(feiticeiro);
 		herois.add(elfo);
 		herois.add(barbaro);
@@ -56,7 +35,7 @@ public class HeroQuest {
 		mapa.addObjeto(barbaro);
 		mapa.addObjeto(elfo);
 		mapa.addObjeto(anao);
-		mapa.addObjeto(goblin);
+		
 	}
 
 	public boolean Ganhou() {

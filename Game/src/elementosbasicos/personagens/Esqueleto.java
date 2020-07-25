@@ -27,7 +27,7 @@ public class Esqueleto extends Inimigo {
 
 	@Override
 	public void Vez() {
-		System.out.println("Ataque do Esquleto:");
+		System.out.println("Ataque do Esqueleto:");
 	}
 
 	@Override

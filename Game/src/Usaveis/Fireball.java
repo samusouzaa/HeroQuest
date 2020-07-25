@@ -1,17 +1,19 @@
 package Usaveis;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import Externos.Direcao;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 import elementosbasicos.Objeto;
+import elementosbasicos.personagens.Heroi;
 import elementosbasicos.personagens.Inimigo;
 import excecoes.DigitoInvalidoException;
 
 public class Fireball extends Magia {
 
-	private static final String nome = "Fireball";
+	private static final String nome = "FIREBALL";
 
 	public Fireball() {
 		super(nome);
@@ -52,26 +54,46 @@ public class Fireball extends Magia {
 		// TODO Auto-generated method stub
 		int x = gameobject.getX();
 		int y = gameobject.getY();
-
-		System.out.println("Digite a direção na qual você atirará");
-		Scanner keyboard = new Scanner(System.in);
-
-		String command = keyboard.nextLine().toLowerCase();
 		Direcao direcao = null;
-
-		if (command.compareTo("s") == 0)
-			direcao = Direcao.DOWN;
-
-		else if (command.compareTo("d") == 0)
-			direcao = Direcao.RIGHT;
-
-		else if (command.compareTo("a") == 0)
-			direcao = Direcao.LEFT;
-
-		else if (command.compareTo("w") == 0)
-			direcao = Direcao.UP;
-		else
-			throw new DigitoInvalidoException();
+		
+		if (((Heroi) gameobject).getPlayer()) {
+			System.out.println("Digite a direção na qual você atirará");
+			Scanner keyboard = new Scanner(System.in);
+	
+			String command = keyboard.nextLine().toLowerCase();
+	
+			if (command.compareTo("s") == 0)
+				direcao = Direcao.DOWN;
+	
+			else if (command.compareTo("d") == 0)
+				direcao = Direcao.RIGHT;
+	
+			else if (command.compareTo("a") == 0)
+				direcao = Direcao.LEFT;
+	
+			else if (command.compareTo("w") == 0)
+				direcao = Direcao.UP;
+			
+			else
+				throw new DigitoInvalidoException();
+		}
+		
+		else {
+			int lancar = new Random().nextInt(4);
+			
+			if(lancar == 0)
+				direcao = Direcao.DOWN;
+			
+			else if(lancar == 1)
+				direcao = Direcao.UP;
+			
+			else if(lancar == 2)
+				direcao = Direcao.RIGHT;
+			
+			else
+				direcao = Direcao.LEFT;
+			
+		}
 
 		Objeto alvo = getPrimeiroInimigo(x, y, direcao, mapa);
 
@@ -84,6 +106,8 @@ public class Fireball extends Magia {
 		for (GameObject inimigo : inimigosProximos) {
 			inimigo.receberDano(3);
 		}
+		
+		System.out.println("Fireball utilizado");
 
 	}
 

@@ -1,12 +1,18 @@
 package Usaveis;
 
-import elementosbasicos.Objeto;
-
 public abstract class Item{
 	
-	String chave;
+	private String chave;
 	
 	public Item(String chave) {
+		this.setChave(chave);
+	}
+
+	public String getChave() {
+		return chave;
+	}
+
+	public void setChave(String chave) {
 		this.chave = chave;
 	}
 	

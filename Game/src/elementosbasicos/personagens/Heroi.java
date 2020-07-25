@@ -14,6 +14,7 @@ import excecoes.DigitoInvalidoException;
 import excecoes.GameException;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public abstract class Heroi extends GameObject {
@@ -22,67 +23,108 @@ public abstract class Heroi extends GameObject {
 		super(x, y, hp, ip, atq, dfs);
 		this.Visto();
 	}
-
+	
+	private boolean eh_player = false;
+	
+	public void setPlayer(boolean eh_player) {
+		this.eh_player = eh_player;
+	}
+	
+	public boolean getPlayer() {
+		return eh_player;
+	}
+	
 	private ArrayList<GameObject> inimigos_proximos = new ArrayList<GameObject>();
-
+	
 	public void Andar(Mapa mapa) throws DigitoInvalidoException {
-		// Jogar dados
-		// se um ataque for realizado,ele nao andara mais
-		boolean atacou = false;
-
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
-		Scanner keyboard = new Scanner(System.in);
-		Direcao direcao = Direcao.UP; // inicializei pq ele tava reclamando
-		boolean conferido = false;
-		boolean verificado = false;
-		int xi = getX();
-		int yi = getY();
-		mapa.removeObjeto(this);
-
-		while (!conferido || !verificado) {
-			this.atualizaCoordinate(xi, yi);
-			Mapa copia = mapa.getCopia();
-			for (int i = 0; i < passos; i++) {
-				copia.addObjeto(this);
-
-				System.out.println("Digite a próxima direção");
-				String command = keyboard.nextLine();
-				boolean valido = true;
-
-				try {
-					if (command.compareTo("w") == 0)
-						direcao = Direcao.UP;
-					else if (command.compareTo("a") == 0)
-						direcao = Direcao.LEFT;
-					else if (command.compareTo("d") == 0)
-						direcao = Direcao.RIGHT;
-					else if (command.compareTo("s") == 0)
-						direcao = Direcao.DOWN;
-					else
-						throw new DigitoInvalidoException(); // OK
-				} catch (DigitoInvalidoException exception) {
-					System.out.println(exception.getMessage());
-					valido = false;
+		
+		if (eh_player) {
+			Scanner keyboard = new Scanner(System.in);
+			Direcao direcao = Direcao.UP; // inicializei pq ele tava reclamando
+			boolean conferido = false;
+			boolean verificado = false;
+			int xi = getX();
+			int yi = getY();
+			mapa.removeObjeto(this);
+	
+			while (!conferido || !verificado) {
+				this.atualizaCoordinate(xi, yi);
+				Mapa copia = mapa.getCopia();
+				for (int i = 0; i < passos; i++) {
+					copia.addObjeto(this);
+	
+					System.out.println("Digite a próxima direção");
+					String command = keyboard.nextLine();
+					boolean valido = true;
+	
+					try {
+						if (command.compareTo("w") == 0)
+							direcao = Direcao.UP;
+						else if (command.compareTo("a") == 0)
+							direcao = Direcao.LEFT;
+						else if (command.compareTo("d") == 0)
+							direcao = Direcao.RIGHT;
+						else if (command.compareTo("s") == 0)
+							direcao = Direcao.DOWN;
+						else
+							throw new DigitoInvalidoException(); // OK
+					} catch (DigitoInvalidoException exception) {
+						System.out.println(exception.getMessage());
+						valido = false;
+					}
+	
+					this.Mover(direcao, copia);
+	
+					copia.printMap();
 				}
-
-				this.Mover(direcao, copia);
-
-				copia.printMap();
+				System.out.println("Esta é a posição desejada? [Y/N]");
+	
+				String command = keyboard.nextLine();
+				if (command.compareTo("Y") == 0)
+					conferido = true;
+				else
+					conferido = false;
+	
+				verificado = mapa.verificarPosicao(getX(), getY());
+	
 			}
-			System.out.println("Esta é a posição desejada? [Y/N]");
-
-			String command = keyboard.nextLine();
-			if (command.compareTo("Y") == 0)
-				conferido = true;
-			else
-				conferido = false;
-
-			verificado = mapa.verificarPosicao(getX(), getY());
-
+	
+			mapa.addObjeto(this);
+			mapa.printMap();
 		}
-
-		mapa.addObjeto(this);
-		mapa.printMap();
+		
+		else {
+			ArrayList<Direcao> lugares_andar = new ArrayList<Direcao>();
+			
+			if (mapa.verificarPosicao(this.getX()-1, this.getY()))
+				lugares_andar.add(Direcao.UP);
+			
+			if (mapa.verificarPosicao(this.getX()+1, this.getY()))
+				lugares_andar.add(Direcao.DOWN);
+			
+			if (mapa.verificarPosicao(this.getX(), this.getY()+1))
+				lugares_andar.add(Direcao.RIGHT);
+			
+			if (mapa.verificarPosicao(this.getX(), this.getY()-1))
+				lugares_andar.add(Direcao.LEFT);
+			
+			if (lugares_andar.size() == 0)
+				return;
+			
+			else {
+				int posicao = new Random().nextInt(lugares_andar.size());
+				for (int i = 0; i < passos; i++) {
+					if (mapa.verificarPosicao(this, lugares_andar.get(posicao))) {
+						this.Mover(lugares_andar.get(posicao), mapa);
+						mapa.printMap();
+					}
+					else
+						break;
+				}
+				
+			}	
+		}
 	}
 
 	protected int Defender() {
@@ -104,16 +146,28 @@ public abstract class Heroi extends GameObject {
 			return;
 		}
 		
-		for (Magia magia : magias)
-			System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
-		Scanner keyboard = new Scanner(System.in);
-		int magia_escolhida = keyboard.nextInt();
-
-		lancaMagia(magia_escolhida, mapa);
+		else {
+			if(this.eh_player) {
+				
+			for (Magia magia : magias)
+				System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
+			Scanner keyboard = new Scanner(System.in);
+			int magia_escolhida = keyboard.nextInt();
+	
+			lancaMagia(magia_escolhida, mapa);
+			
+			}
+			
+			else {
+				int magia_escolhida = new Random().nextInt(magias.size());
+				lancaMagia(magia_escolhida + 1, mapa);
+			}
+				
+		}
 
 	}
 
-	private GameObject inimigosTurno(Mapa mapa, Arma arma) throws DigitoInvalidoException {
+	private GameObject inimigosTurno(Mapa mapa, Arma arma) {
 
 		int x = this.getX();
 		int y = this.getY();
@@ -182,17 +236,23 @@ public abstract class Heroi extends GameObject {
 
 		// Se existir algum inimigo proximo, perguntamos se o ataque ocorrer
 		if (existe_inimigo == true) {
-			// Se nao quiser realizar ataque
-			System.out.println("Pressione qualquer outra tecla se n�o quiser realizar o ataque");
-
-			Scanner keyboard = new Scanner(System.in);
-			int inimigo_escolhido = keyboard.nextInt();
-			inimigos_proximos.clear();
-			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
-				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
+			if (this.eh_player) {
+				System.out.println("Pressione qualquer outra tecla se n�o quiser realizar o ataque");
+	
+				Scanner keyboard = new Scanner(System.in);
+				int inimigo_escolhido = keyboard.nextInt();
+				if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
+					inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
+					inimigos_proximos.clear();
+					return inimigo_atacado;
+				} 
+				else
+					return null;
+			}
+			else {
+				int inimigo_escolhido = new Random().nextInt(inimigos_proximos.size());
+				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido);
 				return inimigo_atacado;
-			} else {
-				throw new DigitoInvalidoException();
 			}
 		}
 
@@ -205,29 +265,42 @@ public abstract class Heroi extends GameObject {
 		Arma arma_ataque = null;
 
 		if (Armado()) {
-			System.out.println("Usar armas disponíveis?"); 
-			System.out.println("y = sim");
-			System.out.println("n = não");
-			Scanner in = new Scanner(System.in);
-			String s = in.nextLine().toLowerCase(); 
-			if (s.compareTo("y") == 0) {
-				boolean valido = true;
-				do {
-					try {
-						arma_ataque = escolhaArmas(); 
-					} catch (ArmaInvalidaException e) {
-						valido = false;
-						System.out.print(e.getMessage());
-					}
-				} while (!valido);
-
-			} else if (s.compareTo("n") == 0) {
-				System.out.println("Não há armas disponíveis");
-
-			} else {
-				throw new DigitoInvalidoException();
+			if (this.eh_player) {
+				System.out.println("Usar armas disponíveis?"); 
+				System.out.println("y = sim");
+				System.out.println("n = não");
+				Scanner in = new Scanner(System.in);
+				String s = in.nextLine().toLowerCase(); 
+				if (s.compareTo("y") == 0) {
+					boolean valido = true;
+					do {
+						try {
+							arma_ataque = escolhaArmas(); 
+						} catch (ArmaInvalidaException e) {
+							valido = false;
+							System.out.print(e.getMessage());
+						}
+					} while (!valido);
+	
+				} else if (s.compareTo("n") == 0) {
+					System.out.println("Não há armas disponíveis");
+	
+				} else {
+					throw new DigitoInvalidoException();
+				}
+			}
+			
+			else {
+				int escolhe_arma = new Random().nextInt(2);
+				
+				if (escolhe_arma == 0)
+					arma_ataque = this.getArmaD();
+				
+				else
+					arma_ataque = this.getArmaE();
 			}
 		}
+		
 		GameObject inimigo = inimigosTurno(mapa, arma_ataque);
 		if (inimigo != null) {
 			boolean valido = true;

@@ -14,7 +14,7 @@ import Externos.Direcao;
 
 public class MagicMissile extends Magia {
 
-	private static final String nome = "MagicMissile";
+	private static final String nome = "MAGICMISSILE";
 
 	public MagicMissile() {
 		super(nome);
@@ -93,27 +93,48 @@ public class MagicMissile extends Magia {
 			int x = gameobject.getX();
 			int y = gameobject.getY();
 			if (gameobject instanceof Heroi) {
-				System.out.println("Digite a direção na qual você atirará");
-				Scanner keyboard = new Scanner(System.in);
-	
-				String command = keyboard.nextLine().toLowerCase();
-	
-				if(command.compareTo("s") == 0)
-					direcao = Direcao.DOWN;
+				if (((Heroi) gameobject).getPlayer()) {
+					System.out.println("Digite a direção na qual você atirará");
+					Scanner keyboard = new Scanner(System.in);
+		
+					String command = keyboard.nextLine().toLowerCase();
+		
+					if(command.compareTo("s") == 0)
+						direcao = Direcao.DOWN;
+					
+					else if(command.compareTo("d") == 0)
+						direcao = Direcao.RIGHT;
+					
+					else if(command.compareTo("a") == 0)
+						direcao = Direcao.LEFT;
+					
+					else if(command.compareTo("w") == 0)
+						direcao = Direcao.UP;
+					
+					else 
+						throw new DigitoInvalidoException();
+					
+					alvo = getPrimeiroInimigo(x, y, direcao, mapa);
+				}
 				
-				else if(command.compareTo("d") == 0)
-					direcao = Direcao.RIGHT;
-				
-				else if(command.compareTo("a") == 0)
-					direcao = Direcao.LEFT;
-				
-				else if(command.compareTo("w") == 0)
-					direcao = Direcao.UP;
-				
-				else 
-					throw new DigitoInvalidoException();
-				
-				alvo = getPrimeiroInimigo(x, y, direcao, mapa);
+				else {
+					int lancar = new Random().nextInt(4);
+					
+					if(lancar == 0)
+						direcao = Direcao.DOWN;
+					
+					else if(lancar == 1)
+						direcao = Direcao.UP;
+					
+					else if(lancar == 2)
+						direcao = Direcao.RIGHT;
+					
+					else
+						direcao = Direcao.LEFT;
+					
+					alvo = getPrimeiroInimigo(x, y, direcao, mapa);
+					
+				}
 				
 			}
 			
@@ -140,8 +161,11 @@ public class MagicMissile extends Magia {
 			if(alvo != null) {
 				alvo.receberDano(2);
 			}
+			
+			
 		}
-
+		
+		System.out.println("Magig Missile utilizado");
 	}
 
 }
