@@ -209,9 +209,9 @@ public class Mapa {
 		if (mapa[x - 1][y] instanceof Porta)
 			mapa[x - 1][y] = null;
 		if (mapa[x][y + 1] instanceof Porta)
-			mapa[x + 1][y + 1] = null;
-		if (mapa[x + 1][y - 1] instanceof Porta)
-			mapa[x + 1][y - 1] = null;
+			mapa[x][y + 1] = null;
+		if (mapa[x][y - 1] instanceof Porta)
+			mapa[x][y - 1] = null;
 	}
 
 	public Mapa getCopia() {
