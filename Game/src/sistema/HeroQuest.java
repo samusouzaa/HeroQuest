@@ -108,11 +108,7 @@ public class HeroQuest {
 					}
 
 					else if (command.compareTo("a") == 0 && !acao) {
-						try {
-							((Heroi) heroi).realizaAtaque(mapa);
-						} catch (DigitoInvalidoException exception) {
-							System.out.println(exception.getMessage());
-						}
+						((Heroi) heroi).realizaAtaque(mapa);
 						acao = true;
 					}
 
