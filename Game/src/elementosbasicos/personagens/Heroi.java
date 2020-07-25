@@ -107,7 +107,7 @@ public abstract class Heroi extends GameObject {
 
 	}
 
-	private GameObject inimigosTurno(Mapa mapa, Arma arma) throws DigitoInvalidoException {
+	private GameObject inimigosTurno(Mapa mapa, Arma arma) {
 
 		int x = this.getX();
 		int y = this.getY();
@@ -189,23 +189,22 @@ public abstract class Heroi extends GameObject {
 			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
 				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
 				return inimigo_atacado;
-			} else {
-				throw new DigitoInvalidoException();
-			}
-		}
+			} 
 
-		else
-			return null;
+		}
+		return null;
+
+
 	}
 
-	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException {
+	public boolean realizaAtaque(Mapa mapa) {
 
 		Arma arma_ataque = null;
 
 		if (Armado()) {
 			System.out.println("Usar armas disponíveis?");
-			System.out.println("y = sim");
-			System.out.println("n = não");
+			System.out.println("[Y/N]");
+
 			Scanner in = new Scanner(System.in);
 			String s = in.nextLine().toLowerCase();
 			if (s.compareTo("y") == 0) {
@@ -219,13 +218,11 @@ public abstract class Heroi extends GameObject {
 					}
 				} while (!valido);
 
-			} else if (s.compareTo("n") == 0) {
+			} else
 				System.out.println("Não há armas disponíveis");
 
-			} else {
-				throw new DigitoInvalidoException();
-			}
 		}
+
 		GameObject inimigo = inimigosTurno(mapa, arma_ataque);
 		if (inimigo != null) {
 			boolean valido = true;
