@@ -46,7 +46,7 @@ public abstract class Heroi extends GameObject {
 				copia.addObjeto(this);
 
 				System.out.println("Digite a próxima direção");
-				String command = keyboard.nextLine();
+				String command = keyboard.nextLine().toLowerCase();
 
 				try {
 					if (command.compareTo("w") == 0)
