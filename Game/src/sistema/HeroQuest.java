@@ -2,7 +2,6 @@ package sistema;
 
 import Usaveis.*;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -16,20 +15,21 @@ public class HeroQuest {
 	private Mapa mapa;
 	private ArrayList<GameObject> herois;
 	private ArrayList<GameObject> inimigos;
-	
+
 	InicializaUtilizaveis utilizaveis = new InicializaUtilizaveis();
-	
+
 	private ListaItens magias = utilizaveis.inicializaMagias();
 	private ListaItens armas = utilizaveis.inicializaArmas();
 	private ListaItens itens = utilizaveis.inicializaItens();
-	
+
 	public HeroQuest() {
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
-		
+
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
 		loadMapFromFile();
+		EscolherPersonagem();
 //		mapa.CriarMapaPadrao();
 //
 //
@@ -107,16 +107,15 @@ public class HeroQuest {
 						System.out.println("Voce ja usou esta acao"); // na entendeu
 
 					mapa.Ver(heroi.getX(), heroi.getY());
-					mapa.Ver(heroi.getX()+1, heroi.getY());
-					mapa.Ver(heroi.getX()-1, heroi.getY());
-					mapa.Ver(heroi.getX(), heroi.getY()+1);
-					mapa.Ver(heroi.getX(), heroi.getY()-1);
+					mapa.Ver(heroi.getX() + 1, heroi.getY());
+					mapa.Ver(heroi.getX() - 1, heroi.getY());
+					mapa.Ver(heroi.getX(), heroi.getY() + 1);
+					mapa.Ver(heroi.getX(), heroi.getY() - 1);
 					mapa.printMap();
 					EnterrarCorpos(inimigos);
 				}
 
 			}
-
 
 			for (GameObject inimigo : inimigos) {
 				if (inimigo.getVisibilidade())
@@ -125,17 +124,14 @@ public class HeroQuest {
 						((Inimigo) inimigo).realizaAtaque(mapa);
 						inimigo.escolheMagia(mapa);
 						inimigo.Andar(mapa);
-						
-						
-					}
-					 catch (DigitoInvalidoException exception) {
+
+					} catch (DigitoInvalidoException exception) {
 						System.out.println(exception.getMessage());
 					}
-					EnterrarCorpos(herois);
-				}
-			
+				EnterrarCorpos(herois);
 			}
 
+		}
 
 //			if(Ganhou()) {
 //				System.out.println("Voce ganhou");
@@ -147,8 +143,7 @@ public class HeroQuest {
 //				break;
 //			}
 
-		}
-	
+	}
 
 	private void loadMapFromFile() {
 		try {
@@ -160,7 +155,7 @@ public class HeroQuest {
 			String numero;
 
 			while (myReader.hasNextLine()) {
-		        String data = myReader.nextLine();
+				String data = myReader.nextLine();
 				numero = myReader.nextLine();
 				int x = Integer.parseInt(numero);
 				numero = myReader.nextLine();
@@ -224,10 +219,10 @@ public class HeroQuest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void EnterrarCorpos(ArrayList<GameObject> corpos) {
 		for (int i = 0; i < corpos.size(); i++) {
-			if(corpos.get(i).getHp() <= 0) {
+			if (corpos.get(i).getHp() <= 0) {
 				mapa.removeObjeto(corpos.get(i));
 				corpos.remove(corpos.get(i));
 				i--;
@@ -235,5 +230,99 @@ public class HeroQuest {
 		}
 	}
 
-}
+	private void EscolherPersonagem() {
+		System.out.println("Quantos jogadores jogarão? [1/4]");
 
+		Scanner keyboard = new Scanner(System.in);
+		int command = keyboard.nextInt();
+		boolean b = false;
+		boolean a = false;
+		boolean f = false;
+		boolean e = false;
+		boolean existe;
+		String heroi = keyboard.nextLine();
+		for (int i = 0; i < command; i++) {
+			System.out.println("Escolha o personagem para jogador " + (i+1) + " [A/B/F/E]");
+			heroi = keyboard.nextLine().toLowerCase();
+			existe = false;
+
+			if (heroi.compareTo("a") == 0) {
+				if (!a) {
+					for (GameObject player : herois) {
+						if (player instanceof Anao) {
+							existe = true;
+							((Heroi) player).escolherPlayer();
+							a = true;
+						}
+					}
+					if (!existe) {
+						System.out.println("Personagem nao esta disponivel");
+						i--;
+					}
+
+				} else
+					System.out.println("Personagem ja foi escolhido");
+
+			}
+
+			else if (heroi.compareTo("b") == 0) {
+				if (!b) {
+					for (GameObject player : herois) {
+						if (player instanceof Barbaro) {
+							existe = true;
+							((Heroi) player).escolherPlayer();
+							b = true;
+						}
+
+					}
+					if (!existe) {
+						System.out.println("Personagem nao esta disponivel");
+						i--;
+					}
+				} else
+					System.out.println("Personagem ja foi escolhido");
+			}
+
+			else if (heroi.compareTo("f") == 0) {
+				if (!f) {
+					for (GameObject player : herois) {
+						if (player instanceof Feiticeiro) {
+							existe = true;
+							((Heroi) player).escolherPlayer();
+							f = true;
+						}
+					}
+					if (!existe) {
+						System.out.println("Personagem nao esta disponivel");
+						i--;
+					}
+
+				} else
+					System.out.println("Personagem ja foi escolhido");
+			}
+
+			else if (heroi.compareTo("e") == 0) {
+				if (!e) {
+					for (GameObject player : herois) {
+						if (player instanceof Elfo) {
+							existe = true;
+							((Heroi) player).escolherPlayer();
+							e = true;
+						}
+					}
+					if (!existe) {
+						System.out.println("Personagem nao esta disponivel");
+						i--;
+					}
+				} else
+					System.out.println("Personagem ja foi escolhido");
+
+			} else {
+				System.out.println("Comando invalido");
+				i--;
+			}
+
+		}
+	}
+
+}

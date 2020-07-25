@@ -21,8 +21,6 @@ public class Feiticeiro extends Heroi {
 		this.adicionaItem(punhal);
 		this.adicionaItem(punhal);
 		this.adicionaItem(punhal);
-		this.setPlayer(true);
-		
 	}
 	
 	@Override
