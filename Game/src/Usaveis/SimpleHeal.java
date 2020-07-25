@@ -6,7 +6,7 @@ import elementosbasicos.Mapa;
 
 public class SimpleHeal extends Magia {
 	
-	private static final String nome = "SimpleHeal";
+	private static final String nome = "SIMPLEHEAL";
 	
 	public SimpleHeal() {
 		super(nome);
@@ -15,6 +15,7 @@ public class SimpleHeal extends Magia {
 	public void Usar(GameObject gameobject, Mapa mapa) {
 		int dado = Dados.resultadoDado(TipoDado.COMUM);
 		gameobject.receberCura(dado);
+		System.out.println("Simple Heal utilizado");
 		
 	}
 }

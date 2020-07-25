@@ -6,6 +6,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Externos.Direcao;
+
 public class Mapa {
 
 	private Objeto[][] mapa;
@@ -255,5 +257,27 @@ public class Mapa {
 
 		}
 
+	}
+
+	public boolean verificarPosicao(GameObject objeto, Direcao direcao_andar) {
+		int x = objeto.getX();
+		int y = objeto.getY();
+		switch (direcao_andar) {
+			case UP:
+				x -= 1;
+				break;
+			case DOWN:
+				x += 1;
+				break;
+			case LEFT:
+				y -= 1;
+				break;
+			case RIGHT:
+				y += 1;
+				break;
+		}
+		if (verificarPosicao(x, y))
+			return true;
+		return false;
 	}
 }

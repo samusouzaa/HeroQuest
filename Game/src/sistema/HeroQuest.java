@@ -1,7 +1,7 @@
 package sistema;
 
-//TESTE MAGIAS
 import Usaveis.*;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +16,13 @@ public class HeroQuest {
 	private Mapa mapa;
 	private ArrayList<GameObject> herois;
 	private ArrayList<GameObject> inimigos;
-
+	
+	InicializaUtilizaveis utilizaveis = new InicializaUtilizaveis();
+	
+	private ListaItens magias = utilizaveis.inicializaMagias();
+	private ListaItens armas = utilizaveis.inicializaArmas();
+	private ListaItens itens = utilizaveis.inicializaItens();
+	
 	public HeroQuest() {
 		
 //		Anao anao = new Anao(1, 1);
@@ -64,6 +70,7 @@ public class HeroQuest {
 ////		mapa.addObjeto(elfo);
 ////		mapa.addObjeto(anao);
 ////		mapa.addObjeto(goblin);
+
 	}
 
 	public boolean Ganhou() {
@@ -111,11 +118,7 @@ public class HeroQuest {
 					}
 
 					else if (command.compareTo("a") == 0 && !acao) {
-						try {
-							((Heroi) heroi).realizaAtaque(mapa);
-						} catch (DigitoInvalidoException exception) {
-							System.out.println(exception.getMessage());
-						}
+						((Heroi) heroi).realizaAtaque(mapa);
 						acao = true;
 					}
 
@@ -137,13 +140,27 @@ public class HeroQuest {
 
 					mapa.Ver(heroi.getX(), heroi.getY());
 					mapa.printMap();
-
-					// System.out.println("vida goblin: " + ((GameObject) mapa.getObjetoMapa(1,
-					// 9)).getHp());
-
 				}
 
 			}
+
+
+			for (GameObject inimigo : inimigos) {
+				if (inimigo.getVisibilidade())
+					try {
+						((Inimigo) inimigo).realizaAtaque(mapa);
+						inimigo.escolheMagia(mapa);
+						inimigo.Andar(mapa);
+						
+						
+					}
+					 catch (DigitoInvalidoException exception) {
+						System.out.println(exception.getMessage());
+					}
+					
+				}
+			}
+
 
 //			if(Ganhou()) {
 //				System.out.println("Voce ganhou");
@@ -158,6 +175,7 @@ public class HeroQuest {
 		}
 
 	}
+
 
 	public void loadMapFromFile() {
 		try {
@@ -235,3 +253,4 @@ public class HeroQuest {
 	}
 
 }
+
