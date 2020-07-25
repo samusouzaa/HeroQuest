@@ -28,9 +28,9 @@ public abstract class GameObject extends Objeto implements Personagem {
 	protected ArrayList<Item> itens;
 	// Lista de magias
 	protected ArrayList<Magia> magias;
-	
-	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
-		super(x, y);
+
+	public GameObject(int x, int y, int hp, int ip, int atq, int dfs, String icon) {
+		super(x, y, icon);
 		this.hpcheio = hp;
 		this.hp = hp;
 		this.ip = ip;

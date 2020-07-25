@@ -19,8 +19,8 @@ import java.util.Scanner;
 
 public abstract class Heroi extends GameObject {
 
-	public Heroi(int x, int y, int hp, int ip, int atq, int dfs) {
-		super(x, y, hp, ip, atq, dfs);
+	public Heroi(int x, int y, int hp, int ip, int atq, int dfs, String icon) {
+		super(x, y, hp, ip, atq, dfs, icon);
 		this.Visto();
 	}
 	
@@ -54,7 +54,7 @@ public abstract class Heroi extends GameObject {
 				for (int i = 0; i < passos; i++) {
 					copia.addObjeto(this);
 
-					System.out.println("Digite a próxima direção");
+					System.out.println("Digite a prï¿½xima direï¿½ï¿½o");
 					String command = keyboard.nextLine().toLowerCase();
 
 					try {
@@ -77,7 +77,7 @@ public abstract class Heroi extends GameObject {
 
 					copia.printMap();
 				}
-				System.out.println("Esta é a posição desejada? [Y/N]");
+				System.out.println("Esta ï¿½ a posiï¿½ï¿½o desejada? [Y/N]");
 
 				String command = keyboard.nextLine().toLowerCase();
 				if (command.compareTo("y") == 0)
@@ -86,10 +86,9 @@ public abstract class Heroi extends GameObject {
 					conferido = false;
 
 				verificado = mapa.verificarPosicao(getX(), getY());
-
-				mapa.addObjeto(this);
-				mapa.printMap();
 			}
+			mapa.addObjeto(this);
+			mapa.printMap();
 		}
 
 		else {
@@ -283,7 +282,7 @@ public abstract class Heroi extends GameObject {
 		boolean utilizou_punhal = false;
 		
 		if(this.temPunhal()) {
-			System.out.println("Você possui um punhal, deseja utilizá-lo? Você não poderá atacar com suas armas após essa ação");
+			System.out.println("Vocï¿½ possui um punhal, deseja utilizï¿½-lo? Vocï¿½ nï¿½o poderï¿½ atacar com suas armas apï¿½s essa aï¿½ï¿½o");
 			System.out.println("y = sim");
 			System.out.println("n = nÃ£o");
 			Scanner in = new Scanner(System.in);
@@ -297,9 +296,8 @@ public abstract class Heroi extends GameObject {
 				utilizou_punhal = true;
 				}
 			else
-				System.out.println("Voce poderá usá-lo no próximo turno");
+				System.out.println("Voce poderï¿½ usï¿½-lo no prï¿½ximo turno");
 
-		} 
 		
 		if (Armado() && !utilizou_punhal) {
 

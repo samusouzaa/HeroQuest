@@ -18,21 +18,20 @@ public class Goblin extends Inimigo {
 	private static final int DEFESA = 1;
 	private static final int HP = 5;
 	private static final int IP = 6;
+	private static final String ICON = "go";
 	
 	Arma punhal = new Arma(TipoArma.PUNHAL, "PUNHAL");
 	
 	public Goblin(int x, int y) {
-		super(x, y, HP, IP, ATAQUE, DEFESA);
+
+		super(x, y, HP, IP, ATAQUE, DEFESA, ICON);
 		this.adicionaItem(punhal);
 		this.adicionaItem(punhal);
 		this.adicionaItem(punhal);
 		
 	}
 	
-	@Override
-	public String toString() {
-		return "go";
-	}
+
 
 	@Override
 	public void Vez() {
@@ -134,5 +133,4 @@ public class Goblin extends Inimigo {
 	public void escolheMagia(Mapa mapa) {
 		return;		//nao pode usar magia
 	}
-	
 }

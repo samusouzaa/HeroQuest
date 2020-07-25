@@ -1,6 +1,10 @@
 package sistema;
 
 import Usaveis.*;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,30 +27,21 @@ public class HeroQuest {
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
 		
-		Anao anao = new Anao(1, 1);
-		Elfo elfo = new Elfo(1, 2);
-		Barbaro barbaro = new Barbaro(1, 3);
-		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
-		
-		Goblin goblin = new Goblin(1,11);
-		inimigos.add(goblin);
-		
-		herois.add(feiticeiro);
-		herois.add(elfo);
-		herois.add(barbaro);
-		herois.add(anao);
-		
 		mapa = new Mapa();
+		mapa.CriarMapaPadrao();
+		loadMapFromFile();
+//		mapa.CriarMapaPadrao();
+//
+//
+//		mapa.addObjeto(feiticeiro);
+////		mapa.addObjeto(barbaro);
+////		mapa.addObjeto(elfo);
+////		mapa.addObjeto(anao);
+////		mapa.addObjeto(goblin);
 
-		mapa.addObjeto(feiticeiro);
-		mapa.addObjeto(barbaro);
-		mapa.addObjeto(elfo);
-		mapa.addObjeto(anao);
-		mapa.addObjeto(goblin);
-		
 	}
 
-	public boolean Ganhou() {
+	private boolean Ganhou() {
 		for (GameObject inimigo : inimigos) {
 			if (!inimigo.isAlive())
 				return false;
@@ -54,7 +49,7 @@ public class HeroQuest {
 		return true;
 	}
 
-	public boolean Perdeu() {
+	private boolean Perdeu() {
 		for (GameObject aliado : herois) {
 			if (!aliado.isAlive())
 				return false;
@@ -62,7 +57,7 @@ public class HeroQuest {
 		return true;
 	}
 
-	public void Jogar() {
+	protected void Jogar() {
 		Scanner keyboard = new Scanner(System.in);
 		String command;
 		boolean andar, acao;
@@ -77,19 +72,15 @@ public class HeroQuest {
 				acao = false;
 				while (!andar || !acao) {
 
-					System.out.println("Selecione sua acao [w/a/m/n]"); // TODO ajeitar o else
-					command = keyboard.nextLine().toLowerCase();
+					System.out.println("Selecione sua acao [w/a/m/n]");
+					command = keyboard.nextLine();
 					if (command.compareTo("w") == 0 && !andar) {
-						boolean valido = true;
-						do {
-							try {
-								heroi.Andar(mapa);
+						try {
+							heroi.Andar(mapa);
 
-							} catch (DigitoInvalidoException exception) {
-								valido = false;
-								System.out.println(exception.getMessage());
-							}
-						} while (!valido);
+						} catch (DigitoInvalidoException exception) {
+							System.out.println(exception.getMessage());
+						}
 
 						andar = true;
 					}
@@ -104,6 +95,10 @@ public class HeroQuest {
 						acao = true;
 					}
 
+					else if (command.compareTo("o") == 0) {
+						mapa.AbrirPorta(heroi);
+					}
+
 					else if (command.compareTo("n") == 0) {
 						break;
 					}
@@ -112,10 +107,16 @@ public class HeroQuest {
 						System.out.println("Voce ja usou esta acao"); // na entendeu
 
 					mapa.Ver(heroi.getX(), heroi.getY());
+					mapa.Ver(heroi.getX()+1, heroi.getY());
+					mapa.Ver(heroi.getX()-1, heroi.getY());
+					mapa.Ver(heroi.getX(), heroi.getY()+1);
+					mapa.Ver(heroi.getX(), heroi.getY()-1);
 					mapa.printMap();
+					EnterrarCorpos(inimigos);
 				}
 
 			}
+
 
 			for (GameObject inimigo : inimigos) {
 				if (inimigo.getVisibilidade())
@@ -130,9 +131,11 @@ public class HeroQuest {
 					 catch (DigitoInvalidoException exception) {
 						System.out.println(exception.getMessage());
 					}
-					
+					EnterrarCorpos(herois);
 				}
+			
 			}
+
 
 //			if(Ganhou()) {
 //				System.out.println("Voce ganhou");
@@ -145,5 +148,92 @@ public class HeroQuest {
 //			}
 
 		}
+	
 
+	private void loadMapFromFile() {
+		try {
+			File myObj = new File("mapa.txt");
+			System.out.println(myObj.getAbsolutePath());
+			Scanner myReader = new Scanner(myObj);
+			int i = 0;
+			int maior = 0;
+			String numero;
+
+			while (myReader.hasNextLine()) {
+		        String data = myReader.nextLine();
+				numero = myReader.nextLine();
+				int x = Integer.parseInt(numero);
+				numero = myReader.nextLine();
+				int y = Integer.parseInt(numero);
+
+				if (data.compareTo("X") == 0) {
+					Parede parede = new Parede(x, y, true);
+					mapa.addObjeto(parede);
+				}
+
+				else if (data.compareTo("P") == 0) {
+					Porta porta = new Porta(x, y);
+					mapa.addObjeto(porta);
+				}
+
+				else if (data.compareTo("A") == 0) {
+					Anao anao = new Anao(x, y);
+					mapa.addObjeto(anao);
+					herois.add(anao);
+				}
+
+				else if (data.compareTo("E") == 0) {
+					Elfo elfo = new Elfo(x, y);
+					mapa.addObjeto(elfo);
+					herois.add(elfo);
+				}
+
+				else if (data.compareTo("B") == 0) {
+					Barbaro barbaro = new Barbaro(x, y);
+					mapa.addObjeto(barbaro);
+					herois.add(barbaro);
+				}
+
+				else if (data.compareTo("F") == 0) {
+					Feiticeiro feiticeiro = new Feiticeiro(x, y);
+					mapa.addObjeto(feiticeiro);
+					herois.add(feiticeiro);
+				}
+
+				else if (data.compareTo("e") == 0) {
+					Esqueleto esqueleto = new Esqueleto(x, y);
+					mapa.addObjeto(esqueleto);
+					inimigos.add(esqueleto);
+				}
+
+				else if (data.compareTo("m") == 0) {
+					EsqueletoMago esqueleto = new EsqueletoMago(x, y);
+					mapa.addObjeto(esqueleto);
+					inimigos.add(esqueleto);
+				}
+
+				else if (data.compareTo("g") == 0) {
+					Goblin goblin = new Goblin(x, y);
+					mapa.addObjeto(goblin);
+					inimigos.add(goblin);
+				}
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("Não foi possível encontrar mapa");
+			e.printStackTrace();
+		}
 	}
+	
+	private void EnterrarCorpos(ArrayList<GameObject> corpos) {
+		for (int i = 0; i < corpos.size(); i++) {
+			if(corpos.get(i).getHp() <= 0) {
+				mapa.removeObjeto(corpos.get(i));
+				corpos.remove(corpos.get(i));
+				i--;
+			}
+		}
+	}
+
+}
+

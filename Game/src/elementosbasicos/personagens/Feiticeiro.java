@@ -6,9 +6,11 @@ public class Feiticeiro extends Heroi {
 	private static final int DEFESA = 2;
 	private static final int HP = 4;
 	private static final int IP = 6;
+	private static final String ICON = "FE";
+	
 	
 	public Feiticeiro(int x, int y) {
-		super(x, y, HP, IP, ATAQUE, DEFESA);
+		super(x, y, HP, IP, ATAQUE, DEFESA, ICON);
 		Fireball fireball = new Fireball();
 		MagicMissile magic_missile = new MagicMissile();
 		Teleport teleport = new Teleport();
@@ -21,11 +23,6 @@ public class Feiticeiro extends Heroi {
 		this.adicionaItem(punhal);
 		this.setPlayer(true);
 		
-	}
-	
-	@Override
-	public String toString() {
-		return "FE";
 	}
 	
 	@Override

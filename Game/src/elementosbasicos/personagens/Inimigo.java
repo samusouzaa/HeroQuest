@@ -14,9 +14,10 @@ import elementosbasicos.Parede;
 import excecoes.ArmaInvalidaException;
 import excecoes.DigitoInvalidoException;
 
+
 public abstract class Inimigo extends GameObject {
-	public Inimigo(int x, int y, int hp, int ip, int atq, int defesa) {
-		super(x, y, hp, ip, atq, defesa);
+	public Inimigo(int x, int y, int hp, int ip, int atq, int defesa, String icon) {
+		super(x, y, hp, ip, atq, defesa, icon);
 	}
 
 	private ArrayList<GameObject> herois_proximos = new ArrayList<GameObject>();

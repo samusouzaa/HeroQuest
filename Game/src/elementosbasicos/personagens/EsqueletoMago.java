@@ -20,18 +20,14 @@ public class EsqueletoMago extends Inimigo{
 	private static final int DEFESA = 2;
 	private static final int HP = 4;
 	private static final int IP = 6;
+	private static final String ICON = "em";
 	
 	public EsqueletoMago(int x, int y) {
-		super(x, y, HP, IP, ATAQUE, DEFESA);
+		super(x, y, HP, IP, ATAQUE, DEFESA, ICON);
 		MagicMissile magia_esqueleto = new MagicMissile();
 		this.adicionaMagia(magia_esqueleto);
 	}
 	
-	@Override
-	public String toString() {
-		return "em";
-	}
-
 	@Override
 	public void Vez() {
 		System.out.println("Ataque do Esquleto Mago:");
@@ -91,5 +87,5 @@ public class EsqueletoMago extends Inimigo{
 		lancaMagia(1, mapa);	//unica magia que ele possui
 
 	}
-	
+
 }
