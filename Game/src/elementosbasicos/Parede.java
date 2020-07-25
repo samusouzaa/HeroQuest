@@ -8,5 +8,9 @@ public class Parede extends Objeto {
 		super(x, y, ICON );
 		this.Visto();
 	}
+	
+	public Parede(int x, int y, boolean b) {
+		super(x, y, ICON );
+	}
 
 }

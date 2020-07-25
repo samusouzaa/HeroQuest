@@ -56,7 +56,10 @@ private String icon;
 	
 	@Override
 	public String toString() {
-		return icon;
+		if(visivel)
+			return icon;
+		else
+			return "  ";
 	}
 
 	
