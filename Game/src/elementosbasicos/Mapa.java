@@ -1,7 +1,10 @@
 package elementosbasicos;
 
 import elementosbasicos.personagens.*;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Mapa {
 
@@ -194,19 +197,19 @@ public class Mapa {
 			System.out.println();
 		}
 	}
-	
+
 	public void AbrirPorta(GameObject object) {
 		int x = object.getX();
 		int y = object.getY();
-		
-		if (mapa[x+1][y] instanceof Porta)
-			mapa[x+1][y] = null;
-		if (mapa[x-1][y] instanceof Porta)
-			mapa[x-1][y] = null;
-		if (mapa[x][y+1] instanceof Porta)
-			mapa[x+1][y+1] = null;
-		if (mapa[x+1][y-1] instanceof Porta)
-			mapa[x+1][y-1] = null;
+
+		if (mapa[x + 1][y] instanceof Porta)
+			mapa[x + 1][y] = null;
+		if (mapa[x - 1][y] instanceof Porta)
+			mapa[x - 1][y] = null;
+		if (mapa[x][y + 1] instanceof Porta)
+			mapa[x + 1][y + 1] = null;
+		if (mapa[x + 1][y - 1] instanceof Porta)
+			mapa[x + 1][y - 1] = null;
 	}
 
 	public Mapa getCopia() {
@@ -214,43 +217,43 @@ public class Mapa {
 
 		for (int i = 0; i < ALTURA; i++) {
 			for (int j = 0; j < LARGURA; j++) {
-				if(mapa[i][j] != null && mapa[i][j].copiavel())
+				if (mapa[i][j] != null && mapa[i][j].copiavel())
 					copia.mapa[i][j] = this.mapa[i][j];
 			}
 		}
 
 		return copia;
 	}
-	
+
 	public void Ver(int x, int y) {
-		for (int i = x+1; i < ALTURA; i++) {
-			if(mapa[i][y] != null) {
+		for (int i = x + 1; i < ALTURA; i++) {
+			if (mapa[i][y] != null) {
 				mapa[i][y].Visto();
 				break;
 			}
 		}
-		
-		for (int i = x-1; i > 0; i--) {
-			if(mapa[i][y]!=null) {
+
+		for (int i = x - 1; i > 0; i--) {
+			if (mapa[i][y] != null) {
 				mapa[i][y].Visto();
 				break;
 			}
 		}
-		
-		for (int i = y-1; i > 0; i--) {
-			if(mapa[x][i] != null) {
+
+		for (int i = y - 1; i > 0; i--) {
+			if (mapa[x][i] != null) {
 				mapa[x][i].Visto();
 				break;
 			}
 		}
-		
-		for (int i = y+1; i < LARGURA; i++) {
-			if(mapa[x][i] != null) {
+
+		for (int i = y + 1; i < LARGURA; i++) {
+			if (mapa[x][i] != null) {
 				mapa[x][i].Visto();
-				break;}
-			
-			
+				break;
+			}
+
 		}
-		
+
 	}
 }
