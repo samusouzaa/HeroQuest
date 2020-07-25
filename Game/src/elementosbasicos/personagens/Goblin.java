@@ -6,7 +6,9 @@ import java.util.Scanner;
 import Externos.Dados;
 import Externos.Direcao;
 import Externos.TipoDado;
+import Usaveis.Arma;
 import Usaveis.Magia;
+import Usaveis.TipoArma;
 import elementosbasicos.Mapa;
 import elementosbasicos.Objeto;
 import elementosbasicos.Parede;
@@ -17,10 +19,14 @@ public class Goblin extends Inimigo {
 	private static final int HP = 5;
 	private static final int IP = 6;
 	
+	//Arma punhal = new Arma(TipoArma.PUNHAL, "PUNHAL");
+	
 	public Goblin(int x, int y) {
 		super(x, y, HP, IP, ATAQUE, DEFESA);
+		//this.equipar(true, punhal);
+		//this.equipar(false, punhal);
 		
-	} 
+	}
 	
 	@Override
 	public String toString() {

@@ -16,7 +16,8 @@ public class HeroQuest {
 	InicializaUtilizaveis utilizaveis = new InicializaUtilizaveis();
 	
 	private ListaItens magias = utilizaveis.inicializaMagias();
-	private ListaItens armas = utilizaveis.InicializaArmas();
+	private ListaItens armas = utilizaveis.inicializaArmas();
+	private ListaItens itens = utilizaveis.inicializaItens();
 	
 	public HeroQuest() {
 		herois = new ArrayList<GameObject>();
@@ -26,9 +27,6 @@ public class HeroQuest {
 		Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
 		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
-		
-		//teste
-		feiticeiro.setPlayer(true);
 		
 		herois.add(feiticeiro);
 		herois.add(elfo);

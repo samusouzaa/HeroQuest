@@ -7,7 +7,9 @@ import java.util.Scanner;
 import Externos.Dados;
 import Externos.Direcao;
 import Externos.TipoDado;
+import Usaveis.Arma;
 import Usaveis.Magia;
+import Usaveis.TipoArma;
 import elementosbasicos.Mapa;
 
 public class Esqueleto extends Inimigo {
@@ -18,6 +20,26 @@ public class Esqueleto extends Inimigo {
 	
 	public Esqueleto(int x, int y) {
 		super(x, y, HP, IP, ATAQUE, DEFESA);
+		this.equipar(true, escolheArma());
+	}
+	
+	public Arma escolheArma() {
+		Arma arma_esqueleto;
+		int escolha = new Random().nextInt(4);
+		
+		if(escolha == 0)
+			arma_esqueleto = new Arma(TipoArma.ESPADACURTA, "ESPADACURTA");
+		
+		else if (escolha == 1)
+			arma_esqueleto = new Arma(TipoArma.ESPADALONGA, "ESPADALONGA");
+		
+		else if (escolha == 2)
+			arma_esqueleto = new Arma(TipoArma.LANCA, "LANCA");
+		
+		else
+			arma_esqueleto = new Arma(TipoArma.ARCO, "ARCO");
+		
+		return arma_esqueleto;
 	}
 	
 	@Override

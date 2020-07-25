@@ -1,14 +1,19 @@
 package elementosbasicos.personagens;
 
+import Usaveis.Arma;
+import Usaveis.TipoArma;
+
 public class Anao extends Heroi {
 	private static final int ATAQUE = 2;
 	private static final int DEFESA = 2;
 	private static final int HP = 7;
 	private static final int IP = 3;
 	
+	Arma espada_curta = new Arma(TipoArma.ESPADACURTA, "ESPADACURTA");
+	
 	public Anao(int x, int y) {
 		super(x, y,HP, IP, ATAQUE, DEFESA);
-		//this.equipar(true, arma);
+		this.equipar(true, espada_curta);
 	}
 	
 	@Override

@@ -6,6 +6,7 @@ import Usaveis.*;
 public class InicializaUtilizaveis {
 	private ListaItens magias = new ListaItens();
 	private ListaItens armas = new ListaItens();
+	private ListaItens itens = new ListaItens();
 	
 	public ListaItens inicializaMagias() {
 
@@ -23,12 +24,12 @@ public class InicializaUtilizaveis {
 		return magias;
 	}
 	
-	public ListaItens InicializaArmas() {
+	public ListaItens inicializaArmas() {
 		
 		Arma espada_curta = new Arma(TipoArma.ESPADACURTA, "ESPADACURTA");
 		Arma espada_longa = new Arma(TipoArma.ESPADALONGA, "ESPADALONGA");
 		Arma lanca = new Arma(TipoArma.LANCA, "LANCA");
-		Arma punhal = new Arma(TipoArma.PUNHAL, "PUNHAL");
+		Arma punhal = new Arma(TipoArma.ARCO, "ARCO");
 		
 		armas.adicionaItem(espada_curta, espada_curta.getChave());
 		armas.adicionaItem(espada_longa, espada_longa.getChave());
@@ -38,4 +39,7 @@ public class InicializaUtilizaveis {
 		return armas;
 	}
 	
+	public ListaItens inicializaItens() {
+		return itens;
+	}
 }

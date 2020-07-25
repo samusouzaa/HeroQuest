@@ -1,4 +1,5 @@
 package elementosbasicos.personagens;
+import Usaveis.*;
 
 public class Feiticeiro extends Heroi {
 	private static final int ATAQUE = 1;
@@ -6,8 +7,16 @@ public class Feiticeiro extends Heroi {
 	private static final int HP = 4;
 	private static final int IP = 6;
 	
+	Fireball fireball = new Fireball();
+	MagicMissile magic_missile = new MagicMissile();
+	Teleport teleport = new Teleport();
+	
 	public Feiticeiro(int x, int y) {
 		super(x, y, HP, IP, ATAQUE, DEFESA);
+		this.adicionaMagia(fireball);
+		this.adicionaMagia(magic_missile);
+		this.adicionaMagia(teleport);
+		
 	}
 	
 	@Override
