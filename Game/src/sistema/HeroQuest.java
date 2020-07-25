@@ -19,6 +19,9 @@ public class HeroQuest {
 	private ListaItens armas = utilizaveis.InicializaArmas();
 	
 	public HeroQuest() {
+		herois = new ArrayList<GameObject>();
+		inimigos = new ArrayList<GameObject>();
+		
 		Anao anao = new Anao(1, 1);
 		Elfo elfo = new Elfo(1, 2);
 		Barbaro barbaro = new Barbaro(1, 3);
@@ -87,11 +90,7 @@ public class HeroQuest {
 					}
 
 					else if (command.compareTo("a") == 0 && !acao) {
-						try {
-							((Heroi) heroi).realizaAtaque(mapa);
-						} catch (DigitoInvalidoException exception) {
-							System.out.println(exception.getMessage());
-						}
+						((Heroi) heroi).realizaAtaque(mapa);
 						acao = true;
 					}
 

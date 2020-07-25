@@ -45,11 +45,11 @@ public abstract class GameObject extends Objeto implements Personagem {
 	public int getHp() {
 		return this.hp;
 	}
-	
+
 	protected Arma getArmaD() {
 		return this.armaD;
 	}
-	
+
 	protected Arma getArmaE() {
 		return this.armaE;
 	}
@@ -210,17 +210,21 @@ public abstract class GameObject extends Objeto implements Personagem {
 		}
 
 		Magia magia = magias.get(posicao - 1);
-		try {
-			magia.Usar(this, mapa);
-		} catch (DigitoInvalidoException exception) {
-			System.out.println(exception.getMessage());
-		}
+		boolean valido = true;
+		do {
+			try {
+				magia.Usar(this, mapa);
+			} catch (DigitoInvalidoException exception) {
+				valido = false;
+				System.out.println(exception.getMessage());
+			}
+		} while (!valido);
 	}
 
 	public void mudarPosicao(int x, int y) {
 		this.atualizaCoordinate(x, y);
 	}
-	
+
 	@Override
 	public boolean copiavel() {
 		return false;
