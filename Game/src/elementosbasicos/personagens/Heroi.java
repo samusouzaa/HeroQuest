@@ -48,34 +48,39 @@ public abstract class Heroi extends GameObject {
 				System.out.println("Digite a próxima direção");
 				String command = keyboard.nextLine();
 
-				if (command.compareTo("w") == 0)
-					direcao = Direcao.UP;
-				else if (command.compareTo("a") == 0)
-					direcao = Direcao.LEFT;
-				else if (command.compareTo("d") == 0)
-					direcao = Direcao.RIGHT;
-				else if (command.compareTo("s") == 0)
-					direcao = Direcao.DOWN;
-				else
-					throw new DigitoInvalidoException(); // OK
+				try {
+					if (command.compareTo("w") == 0)
+						direcao = Direcao.UP;
+					else if (command.compareTo("a") == 0)
+						direcao = Direcao.LEFT;
+					else if (command.compareTo("d") == 0)
+						direcao = Direcao.RIGHT;
+					else if (command.compareTo("s") == 0)
+						direcao = Direcao.DOWN;
+					else
+						throw new DigitoInvalidoException(); // OK
+				} catch (DigitoInvalidoException exception) {
+
+					System.out.println(exception.getMessage());
+				}
+
+				this.Mover(direcao, copia);
+
+				copia.printMap();
 			}
+			System.out.println("Esta é a posição desejada? [Y/N]");
 
-			this.Mover(direcao, copia);
+			String command = keyboard.nextLine().toLowerCase();
+			if (command.compareTo("y") == 0)
+				conferido = true;
+			else
+				conferido = false;
 
-			copia.printMap();
+			verificado = mapa.verificarPosicao(getX(), getY());
+
+			mapa.addObjeto(this);
+			mapa.printMap();
 		}
-		System.out.println("Esta é a posição desejada? [Y/N]");
-
-		String command = keyboard.nextLine().toLowerCase();
-		if (command.compareTo("y") == 0)
-			conferido = true;
-		else
-			conferido = false;
-
-		verificado = mapa.verificarPosicao(getX(), getY());
-
-		mapa.addObjeto(this);
-		mapa.printMap();
 
 	}
 
@@ -189,11 +194,10 @@ public abstract class Heroi extends GameObject {
 			if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
 				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
 				return inimigo_atacado;
-			} 
+			}
 
 		}
 		return null;
-
 
 	}
 
