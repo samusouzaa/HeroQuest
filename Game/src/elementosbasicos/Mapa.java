@@ -228,6 +228,8 @@ public class Mapa {
 	}
 
 	public void Ver(int x, int y) {
+		if(mapa[x][y] != null && !(mapa[x][y] instanceof GameObject))
+			return;
 		for (int i = x + 1; i < ALTURA; i++) {
 			if (mapa[i][y] != null) {
 				mapa[i][y].Visto();
