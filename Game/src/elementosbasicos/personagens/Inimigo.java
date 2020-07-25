@@ -18,23 +18,23 @@ public abstract class Inimigo extends GameObject {
 	public Inimigo(int x, int y, int hp, int ip, int atq, int defesa) {
 		super(x, y, hp, ip, atq, defesa);
 	}
-	
+
 	private ArrayList<GameObject> herois_proximos = new ArrayList<GameObject>();
-	
+
 	public abstract void Andar(Mapa mapa);
-	
+
 	protected int Defender() {
-		int numeroDados = this.getDefesa(); // + armadura.getDefesa; obs.: herois não possuem aramadura
+		int numeroDados = this.getDefesa(); // + armadura.getDefesa; obs.: herois nï¿½o possuem aramadura
 		int aux;
 		int dadoAliado = 0;
 		for (int i = 0; i < numeroDados; i++) {
 			aux = Dados.resultadoDado(TipoDado.LUTA);
-			if(aux== 6)
+			if (aux == 6)
 				dadoAliado += 1;
 		}
 		return dadoAliado;
 	}
-	
+
 	public GameObject heroisTurno(Mapa mapa, Arma arma) {
 
 		int x = this.getX();
@@ -112,10 +112,10 @@ public abstract class Inimigo extends GameObject {
 
 		if (Armado()) {
 			int escolhe_arma = new Random().nextInt(2);
-			
+
 			if (escolhe_arma == 0)
 				arma_ataque = this.getArmaD();
-			
+
 			else
 				arma_ataque = this.getArmaE();
 		}
@@ -125,7 +125,6 @@ public abstract class Inimigo extends GameObject {
 			try {
 				this.Atacar(heroi, arma_ataque);
 			} catch (ArmaInvalidaException e) {
-				System.out.print(e.getMessage());
 			}
 			return true;
 		} else
@@ -133,4 +132,3 @@ public abstract class Inimigo extends GameObject {
 	}
 
 }
-
