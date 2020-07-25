@@ -23,22 +23,22 @@ public abstract class Heroi extends GameObject {
 		super(x, y, hp, ip, atq, dfs, icon);
 		this.Visto();
 	}
-	
+
 	private boolean eh_player = false;
-	
+
 	public void setPlayer(boolean eh_player) {
 		this.eh_player = eh_player;
 	}
-	
+
 	public boolean getPlayer() {
 		return eh_player;
 	}
-	
+
 	private ArrayList<GameObject> inimigos_proximos = new ArrayList<GameObject>();
-	
+
 	public void Andar(Mapa mapa) throws DigitoInvalidoException {
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
-		
+
 		if (eh_player) {
 			Scanner keyboard = new Scanner(System.in);
 			Direcao direcao = Direcao.UP; // inicializei pq ele tava reclamando
@@ -47,7 +47,7 @@ public abstract class Heroi extends GameObject {
 			int xi = getX();
 			int yi = getY();
 			mapa.removeObjeto(this);
-	
+
 			while (!conferido || !verificado) {
 				this.atualizaCoordinate(xi, yi);
 				Mapa copia = mapa.getCopia();
@@ -93,34 +93,33 @@ public abstract class Heroi extends GameObject {
 
 		else {
 			ArrayList<Direcao> lugares_andar = new ArrayList<Direcao>();
-			
-			if (mapa.verificarPosicao(this.getX()-1, this.getY()))
+
+			if (mapa.verificarPosicao(this.getX() - 1, this.getY()))
 				lugares_andar.add(Direcao.UP);
-			
-			if (mapa.verificarPosicao(this.getX()+1, this.getY()))
+
+			if (mapa.verificarPosicao(this.getX() + 1, this.getY()))
 				lugares_andar.add(Direcao.DOWN);
-			
-			if (mapa.verificarPosicao(this.getX(), this.getY()+1))
+
+			if (mapa.verificarPosicao(this.getX(), this.getY() + 1))
 				lugares_andar.add(Direcao.RIGHT);
-			
-			if (mapa.verificarPosicao(this.getX(), this.getY()-1))
+
+			if (mapa.verificarPosicao(this.getX(), this.getY() - 1))
 				lugares_andar.add(Direcao.LEFT);
-			
+
 			if (lugares_andar.size() == 0)
 				return;
-			
+
 			else {
 				int posicao = new Random().nextInt(lugares_andar.size());
 				for (int i = 0; i < passos; i++) {
 					if (mapa.verificarPosicao(this, lugares_andar.get(posicao))) {
 						this.Mover(lugares_andar.get(posicao), mapa);
 						mapa.printMap();
-					}
-					else
+					} else
 						break;
 				}
-				
-			}	
+
+			}
 		}
 
 	}
@@ -136,7 +135,7 @@ public abstract class Heroi extends GameObject {
 		}
 		return dadoAliado;
 	}
-	
+
 	public int BloquearMagia() {
 		int numeroDados = this.getIp();
 		int aux;
@@ -148,7 +147,7 @@ public abstract class Heroi extends GameObject {
 				dadoAliado += 1;
 		}
 		return dadoAliado;
-		
+
 	}
 
 	public void escolheMagia(Mapa mapa) {
@@ -157,24 +156,24 @@ public abstract class Heroi extends GameObject {
 			System.out.println("Voce nao tem magias");
 			return;
 		}
-		
+
 		else {
-			if(this.eh_player) {
-				
-			for (Magia magia : magias)
-				System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
-			Scanner keyboard = new Scanner(System.in);
-			int magia_escolhida = keyboard.nextInt();
-	
-			lancaMagia(magia_escolhida, mapa);
-			
+			if (this.eh_player) {
+
+				for (Magia magia : magias)
+					System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
+				Scanner keyboard = new Scanner(System.in);
+				int magia_escolhida = keyboard.nextInt();
+
+				lancaMagia(magia_escolhida, mapa);
+
 			}
-			
+
 			else {
 				int magia_escolhida = new Random().nextInt(magias.size());
 				lancaMagia(magia_escolhida + 1, mapa);
 			}
-				
+
 		}
 
 	}
@@ -254,18 +253,16 @@ public abstract class Heroi extends GameObject {
 		if (existe_inimigo == true) {
 			if (this.eh_player) {
 				System.out.println("Pressione qualquer outra tecla se n�o quiser realizar o ataque");
-	
+
 				Scanner keyboard = new Scanner(System.in);
 				int inimigo_escolhido = keyboard.nextInt();
 				if (inimigo_escolhido > 0 && inimigo_escolhido <= posicao_inimigo - 1) {
 					inimigo_atacado = inimigos_proximos.get(inimigo_escolhido - 1);
 					inimigos_proximos.clear();
 					return inimigo_atacado;
-				} 
-				else
+				} else
 					return null;
-			}
-			else {
+			} else {
 				int inimigo_escolhido = new Random().nextInt(inimigos_proximos.size());
 				inimigo_atacado = inimigos_proximos.get(inimigo_escolhido);
 				return inimigo_atacado;
@@ -282,9 +279,9 @@ public abstract class Heroi extends GameObject {
 		boolean utilizou_punhal = false;
 		
 		if(this.temPunhal()) {
-			System.out.println("Voc� possui um punhal, deseja utiliz�-lo? Voc� n�o poder� atacar com suas armas ap�s essa a��o");
+			System.out.println("Você possui um punhal, deseja utilizá-lo? Você não poderá atacar com suas armas após essa ação");
 			System.out.println("y = sim");
-			System.out.println("n = não");
+			System.out.println("n = nÃ£o");
 			Scanner in = new Scanner(System.in);
 			String s = in.nextLine().toLowerCase(); 
 			if (s.compareTo("y") == 0) {
@@ -296,15 +293,16 @@ public abstract class Heroi extends GameObject {
 				utilizou_punhal = true;
 				}
 			else
-				System.out.println("Voce poder� us�-lo no pr�ximo turno");
+				System.out.println("Voce poderá usá-lo no próximo turno");
 
+		} 
 		
 		if (Armado() && !utilizou_punhal) {
 
 			if (this.eh_player) {
-				System.out.println("Usar armas ou disponíveis?"); 
+				System.out.println("Usar armas ou disponÃ­veis?"); 
 				System.out.println("y = sim");
-				System.out.println("n = não");
+				System.out.println("n = nÃ£o");
 				Scanner in = new Scanner(System.in);
 				String s = in.nextLine().toLowerCase(); 
 				if (s.compareTo("y") == 0) {
@@ -349,5 +347,8 @@ public abstract class Heroi extends GameObject {
 		} else
 			return false;
 	}
-
+	
+	public void escolherPlayer() {
+		eh_player = true;
+	}
 }
