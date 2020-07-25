@@ -15,7 +15,7 @@ public abstract class Dados{
 		int resultado = new Random().nextInt(6) + 1;
 		
 		if(tipo_dado == TipoDado.COMUM) {
-			System.out.printf("Voce tirou o numero %d no dado\n", resultado);
+			System.out.printf("Tirou o numero %d no dado\n", resultado);
 		}
 		
 		else {

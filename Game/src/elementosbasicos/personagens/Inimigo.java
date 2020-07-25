@@ -24,7 +24,7 @@ public abstract class Inimigo extends GameObject {
 	public abstract void Andar(Mapa mapa);
 
 	protected int Defender() {
-		int numeroDados = this.getDefesa(); // + armadura.getDefesa; obs.: herois n�o possuem aramadura
+		int numeroDados = this.getDefesa();
 		int aux;
 		int dadoAliado = 0;
 		for (int i = 0; i < numeroDados; i++) {
@@ -33,6 +33,20 @@ public abstract class Inimigo extends GameObject {
 				dadoAliado += 1;
 		}
 		return dadoAliado;
+	}
+	
+	public int BloquearMagia() {
+		int numeroDados = this.getIp();
+		int aux;
+		int dadoAliado = 0;
+		System.out.println("Dados de Bloqueio da Magia");
+		for (int i = 0; i < numeroDados; i++) {
+			aux = Dados.resultadoDado(TipoDado.LUTA);
+			if (aux == 6)
+				dadoAliado += 1;
+		}
+		return dadoAliado;
+		
 	}
 
 	public GameObject heroisTurno(Mapa mapa, Arma arma) {
@@ -109,8 +123,18 @@ public abstract class Inimigo extends GameObject {
 	public boolean realizaAtaque(Mapa mapa) throws DigitoInvalidoException {
 
 		Arma arma_ataque = null;
+		boolean utilizou_punhal = false;
+		
+		if(this.temPunhal()) { 
+			int posicao_punhal = this.retornaPosPunhal();
+			if (posicao_punhal < 0)
+				return false;
+			arma_ataque = (Arma) this.itens.get(posicao_punhal);
+			this.excluiItem(posicao_punhal);
+			utilizou_punhal = true;
+		} 
 
-		if (Armado()) {
+		if (Armado() && !utilizou_punhal) {
 			int escolhe_arma = new Random().nextInt(2);
 
 			if (escolhe_arma == 0)

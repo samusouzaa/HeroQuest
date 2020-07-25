@@ -28,6 +28,9 @@ public class HeroQuest {
 		Barbaro barbaro = new Barbaro(1, 3);
 		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
 		
+		Goblin goblin = new Goblin(1,11);
+		inimigos.add(goblin);
+		
 		herois.add(feiticeiro);
 		herois.add(elfo);
 		herois.add(barbaro);
@@ -39,6 +42,7 @@ public class HeroQuest {
 		mapa.addObjeto(barbaro);
 		mapa.addObjeto(elfo);
 		mapa.addObjeto(anao);
+		mapa.addObjeto(goblin);
 		
 	}
 
@@ -116,6 +120,7 @@ public class HeroQuest {
 			for (GameObject inimigo : inimigos) {
 				if (inimigo.getVisibilidade())
 					try {
+						inimigo.Vez();
 						((Inimigo) inimigo).realizaAtaque(mapa);
 						inimigo.escolheMagia(mapa);
 						inimigo.Andar(mapa);

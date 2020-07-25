@@ -7,15 +7,19 @@ public class Feiticeiro extends Heroi {
 	private static final int HP = 4;
 	private static final int IP = 6;
 	
-	Fireball fireball = new Fireball();
-	MagicMissile magic_missile = new MagicMissile();
-	Teleport teleport = new Teleport();
-	
 	public Feiticeiro(int x, int y) {
 		super(x, y, HP, IP, ATAQUE, DEFESA);
+		Fireball fireball = new Fireball();
+		MagicMissile magic_missile = new MagicMissile();
+		Teleport teleport = new Teleport();
+		Arma punhal = new Arma(TipoArma.PUNHAL, "PUNHAL");
 		this.adicionaMagia(fireball);
 		this.adicionaMagia(magic_missile);
 		this.adicionaMagia(teleport);
+		this.adicionaItem(punhal);
+		this.adicionaItem(punhal);
+		this.adicionaItem(punhal);
+		this.setPlayer(true);
 		
 	}
 	

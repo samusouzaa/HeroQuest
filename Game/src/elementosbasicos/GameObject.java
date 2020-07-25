@@ -16,7 +16,7 @@ public abstract class GameObject extends Objeto implements Personagem {
 	private int ip;
 	private int dadosAtq;
 	private int dadosDfs;
-	private Armadura armadura;
+	protected Armadura armadura = new Armadura(null, 0);
 
 	// Posição no mapa que será configurado posteriormente
 	// private Posic pos;
@@ -25,10 +25,10 @@ public abstract class GameObject extends Objeto implements Personagem {
 	private Arma armaE;
 
 	// Lista de itens
-	private ArrayList<Item> itens;
+	protected ArrayList<Item> itens;
 	// Lista de magias
 	protected ArrayList<Magia> magias;
-
+	
 	public GameObject(int x, int y, int hp, int ip, int atq, int dfs) {
 		super(x, y);
 		this.hpcheio = hp;
@@ -38,12 +38,23 @@ public abstract class GameObject extends Objeto implements Personagem {
 		this.dadosDfs = dfs;
 		this.itens = new ArrayList<Item>();
 		this.magias = new ArrayList<Magia>();
-		// this.armadura.setValor_armadura(0);
 	}
 
-	/////// RETIRAR
+	
 	public int getHp() {
 		return this.hp;
+	}
+	
+	public int getIp() {
+		return this.ip;
+	}
+	
+	public int getArmadura() {
+		return armadura.getValor_armadura();
+	}
+	
+	public void setArmadura(Armadura armadura) {
+		this.armadura = armadura;
 	}
 
 	protected Arma getArmaD() {
@@ -53,7 +64,30 @@ public abstract class GameObject extends Objeto implements Personagem {
 	protected Arma getArmaE() {
 		return this.armaE;
 	}
-
+	
+	protected boolean temPunhal() {
+		for(Item item : itens) {
+			if(item instanceof Item)
+				return true;
+		}
+		return false;			
+	}
+	
+	protected int retornaPosPunhal() {
+		for(Item item : itens) {
+			if(item instanceof Item)
+				return itens.indexOf(item);
+		}
+		return -1;
+	}
+	
+	protected void excluiItem(int posicao) {
+		itens.remove(posicao);
+	}
+	
+	protected void adicionaItem(Item item) {
+		itens.add(item);
+	}
 
 	public void Mover(Direcao direcao, Mapa mapa) {
 		int x = this.getX();
@@ -163,13 +197,15 @@ public abstract class GameObject extends Objeto implements Personagem {
 
 		int dadoAliado = 0;
 		int aux;
-
+		
+		System.out.println("Dados de Ataque:");
 		for (int i = 0; i < numeroDados; i++) {
 			aux = Dados.resultadoDado(TipoDado.LUTA);
 			if (0 < aux && aux < 4)
 				dadoAliado += 1;
 		}
-
+		
+		System.out.println("\nDados de Defesa:");
 		int dadoInimigo = inimigo.Defender(); // Função será criada posteriormente e devolve o número de escudos
 
 		int resultado = dadoAliado - dadoInimigo;
@@ -179,6 +215,8 @@ public abstract class GameObject extends Objeto implements Personagem {
 	}
 
 	protected abstract int Defender();
+	
+	public abstract int BloquearMagia();
 
 	public abstract void Andar(Mapa mapa) throws DigitoInvalidoException;
 
