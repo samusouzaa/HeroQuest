@@ -83,7 +83,7 @@ public class MagicMissile extends Magia {
 
 	
 	public void Usar(GameObject gameobject, Mapa mapa) throws DigitoInvalidoException {
-		
+		System.out.println("Magic Missile será utilizado");
 		Direcao direcao = null;
 		Objeto alvo = null;
 		
@@ -158,14 +158,22 @@ public class MagicMissile extends Magia {
 					
 			}
 	
-			if(alvo != null) {
-				alvo.receberDano(2);
+			if(alvo != null && !(alvo instanceof Parede)) {
+				if(((GameObject) alvo).BloquearMagia() > 0) {
+					System.out.println("A magia foi bloqueada pelo: " + alvo.toString());
+					}
+				else {
+					alvo.receberDano(2);
+					System.out.println("Magic Missile deu 2 de dano no: " + alvo.toString());
+				}
 			}
+			
+			else
+				System.out.println("Magic Missile não encontrou um alvo");
 			
 			
 		}
 		
-		System.out.println("Magig Missile utilizado");
 	}
 
 }

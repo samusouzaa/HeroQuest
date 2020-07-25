@@ -126,7 +126,7 @@ public abstract class Heroi extends GameObject {
 	}
 
 	protected int Defender() {
-		int numeroDados = this.getDefesa(); // + armadura.getDefesa;
+		int numeroDados = this.getDefesa() + this.getArmadura();
 		int aux;
 		int dadoAliado = 0;
 		for (int i = 0; i < numeroDados; i++) {
@@ -135,6 +135,20 @@ public abstract class Heroi extends GameObject {
 				dadoAliado += 1;
 		}
 		return dadoAliado;
+	}
+	
+	public int BloquearMagia() {
+		int numeroDados = this.getIp();
+		int aux;
+		int dadoAliado = 0;
+		System.out.println("Dados de Bloqueio da Magia");
+		for (int i = 0; i < numeroDados; i++) {
+			aux = Dados.resultadoDado(TipoDado.LUTA);
+			if (aux > 3 && aux < 6)
+				dadoAliado += 1;
+		}
+		return dadoAliado;
+		
 	}
 
 	public void escolheMagia(Mapa mapa) {
@@ -265,10 +279,30 @@ public abstract class Heroi extends GameObject {
 	public boolean realizaAtaque(Mapa mapa) {
 
 		Arma arma_ataque = null;
+		boolean utilizou_punhal = false;
+		
+		if(this.temPunhal()) {
+			System.out.println("Voc� possui um punhal, deseja utiliz�-lo? Voc� n�o poder� atacar com suas armas ap�s essa a��o");
+			System.out.println("y = sim");
+			System.out.println("n = não");
+			Scanner in = new Scanner(System.in);
+			String s = in.nextLine().toLowerCase(); 
+			if (s.compareTo("y") == 0) {
+				int posicao_punhal = this.retornaPosPunhal();
+				if (posicao_punhal < 0)
+					return false;
+				arma_ataque = (Arma) this.itens.get(posicao_punhal);
+				this.excluiItem(posicao_punhal);
+				utilizou_punhal = true;
+				}
+			else
+				System.out.println("Voce poder� us�-lo no pr�ximo turno");
 
-		if (Armado()) {
+		
+		if (Armado() && !utilizou_punhal) {
+
 			if (this.eh_player) {
-				System.out.println("Usar armas disponíveis?"); 
+				System.out.println("Usar armas ou disponíveis?"); 
 				System.out.println("y = sim");
 				System.out.println("n = não");
 				Scanner in = new Scanner(System.in);

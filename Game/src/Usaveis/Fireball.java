@@ -7,6 +7,7 @@ import Externos.Direcao;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 import elementosbasicos.Objeto;
+import elementosbasicos.Parede;
 import elementosbasicos.personagens.Heroi;
 import elementosbasicos.personagens.Inimigo;
 import excecoes.DigitoInvalidoException;
@@ -51,7 +52,8 @@ public class Fireball extends Magia {
 	}
 
 	public void Usar(GameObject gameobject, Mapa mapa) throws DigitoInvalidoException {
-		// TODO Auto-generated method stub
+		
+		System.out.println("Fireball será utilizado");
 		int x = gameobject.getX();
 		int y = gameobject.getY();
 		Direcao direcao = null;
@@ -97,17 +99,31 @@ public class Fireball extends Magia {
 
 		Objeto alvo = getPrimeiroInimigo(x, y, direcao, mapa);
 
-		if (alvo != null) {
-			alvo.receberDano(6);
+		if (alvo != null && !(alvo instanceof Parede)) {
+			if(((GameObject) alvo).BloquearMagia() > 0)
+				System.out.println("A magia foi bloqueada pelo alvo principal(" + alvo.toString() + ")");
+			else {
+				alvo.receberDano(6);
+				System.out.println("Fireball deu 6 de dano no alvo principal(" + alvo.toString() + ")");
+			}
+		}
+		
+		else {
+			System.out.println("Fireball não acertou nenhum alvo principal");
 		}
 
 		ArrayList<GameObject> inimigosProximos = getInimigos(alvo.getX(), alvo.getY(), mapa);
 
 		for (GameObject inimigo : inimigosProximos) {
-			inimigo.receberDano(3);
+			if(inimigo.BloquearMagia() > 0)
+				System.out.println("A magia foi bloqueada por um dos alvos secundarios(" + alvo.toString() + ")");
+			else {	
+				inimigo.receberDano(3);
+				System.out.println("Fireball deu 3 de dano em um alvo secundário(" + alvo.toString() + ")");
+			}
 		}
 		
-		System.out.println("Fireball utilizado");
+		
 
 	}
 

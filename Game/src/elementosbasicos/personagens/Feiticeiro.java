@@ -14,9 +14,13 @@ public class Feiticeiro extends Heroi {
 		Fireball fireball = new Fireball();
 		MagicMissile magic_missile = new MagicMissile();
 		Teleport teleport = new Teleport();
+		Arma punhal = new Arma(TipoArma.PUNHAL, "PUNHAL");
 		this.adicionaMagia(fireball);
 		this.adicionaMagia(magic_missile);
 		this.adicionaMagia(teleport);
+		this.adicionaItem(punhal);
+		this.adicionaItem(punhal);
+		this.adicionaItem(punhal);
 		this.setPlayer(true);
 		
 	}

@@ -26,6 +26,8 @@ public class Esqueleto extends Inimigo {
 	}
 	
 	public Arma escolheArma() {
+		
+		
 		Arma arma_esqueleto;
 		int escolha = new Random().nextInt(4);
 		
@@ -39,7 +41,7 @@ public class Esqueleto extends Inimigo {
 			arma_esqueleto = new Arma(TipoArma.LANCA, "LANCA");
 		
 		else
-			arma_esqueleto = new Arma(TipoArma.ARCO, "ARCO");
+			arma_esqueleto = new Arma(TipoArma.PUNHAL, "PUNHAL");
 		
 		return arma_esqueleto;
 	}
@@ -51,6 +53,12 @@ public class Esqueleto extends Inimigo {
 
 	@Override
 	public void Andar(Mapa mapa) {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		
 		ArrayList<Direcao> lugares_andar = new ArrayList<Direcao>();
@@ -73,6 +81,12 @@ public class Esqueleto extends Inimigo {
 		else {
 			int posicao = new Random().nextInt(lugares_andar.size());
 			for (int i = 0; i < passos; i++) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if (mapa.verificarPosicao(this, lugares_andar.get(posicao))) {
 					this.Mover(lugares_andar.get(posicao), mapa);
 					mapa.printMap();

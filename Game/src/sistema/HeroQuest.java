@@ -24,41 +24,9 @@ public class HeroQuest {
 	private ListaItens itens = utilizaveis.inicializaItens();
 	
 	public HeroQuest() {
-		
-//		Anao anao = new Anao(1, 1);
-//		Elfo elfo = new Elfo(1, 2);
-//		Barbaro barbaro = new Barbaro(1, 3);
-//		Feiticeiro feiticeiro = new Feiticeiro(1, 4);
-//		
-//		
-//		//TESTE MAGIAS
-//		Fireball magia1 = new Fireball();
-//		MagicMissile magia2 = new MagicMissile();
-//		
-//		
-//		feiticeiro.adicionaMagia(magia1);
-//		feiticeiro.adicionaMagia(magia2);
-//		
-//		//TESTE
-//		Goblin goblin = new Goblin(1, 9);
-//		
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
-//		
-//		//TESTE
-//		inimigos.add(goblin);
-//		
-//		//TESTE ATAQUE
-//		Arma arma1 = new Arma(TipoArma.ESPADACURTA, "A");
-//		Arma arma2 = new Arma(TipoArma.ESPADALONGA, "B");
-//		feiticeiro.equipar(true, arma1);
-//		feiticeiro.equipar(false, arma2);
-//		
-//		herois.add(feiticeiro);
-//		//herois.add(elfo);
-//		//herois.add(barbaro);
-//		//herois.add(anao);
-//
+		
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
 		loadMapFromFile();
@@ -153,6 +121,7 @@ public class HeroQuest {
 			for (GameObject inimigo : inimigos) {
 				if (inimigo.getVisibilidade())
 					try {
+						inimigo.Vez();
 						((Inimigo) inimigo).realizaAtaque(mapa);
 						inimigo.escolheMagia(mapa);
 						inimigo.Andar(mapa);

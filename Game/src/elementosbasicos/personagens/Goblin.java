@@ -20,12 +20,14 @@ public class Goblin extends Inimigo {
 	private static final int IP = 6;
 	private static final String ICON = "go";
 	
-	//Arma punhal = new Arma(TipoArma.PUNHAL, "PUNHAL");
+	Arma punhal = new Arma(TipoArma.PUNHAL, "PUNHAL");
 	
 	public Goblin(int x, int y) {
+
 		super(x, y, HP, IP, ATAQUE, DEFESA, ICON);
-		//this.equipar(true, punhal);
-		//this.equipar(false, punhal);
+		this.adicionaItem(punhal);
+		this.adicionaItem(punhal);
+		this.adicionaItem(punhal);
 		
 	}
 	
@@ -39,6 +41,12 @@ public class Goblin extends Inimigo {
 
 	@Override
 	public void Andar(Mapa mapa) {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		int x = this.getX();
 		int y = this.getY();
@@ -73,6 +81,12 @@ public class Goblin extends Inimigo {
 		}
 		
 		for (int i = 0;i< passos; i++) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (mapa.verificarPosicao(this, direcao_andar)) {
 				this.Mover(direcao_andar, mapa);
 				mapa.printMap();

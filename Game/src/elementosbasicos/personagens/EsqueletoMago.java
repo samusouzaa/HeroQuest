@@ -12,6 +12,7 @@ import Usaveis.MagicMissile;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 import excecoes.DigitoInvalidoException;
+import java.lang.Thread;
 
 public class EsqueletoMago extends Inimigo{
 	
@@ -34,6 +35,14 @@ public class EsqueletoMago extends Inimigo{
 
 	@Override
 	public void Andar(Mapa mapa) {
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		int passos = Dados.resultadoDado(TipoDado.COMUM);
 		
 		ArrayList<Direcao> lugares_andar = new ArrayList<Direcao>();
@@ -56,9 +65,16 @@ public class EsqueletoMago extends Inimigo{
 		else {
 			int posicao = new Random().nextInt(lugares_andar.size());
 			for (int i = 0; i < passos; i++) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if (mapa.verificarPosicao(this, lugares_andar.get(posicao))) {
 					this.Mover(lugares_andar.get(posicao), mapa);
 					mapa.printMap();
+				
 				}
 				else
 					break;
