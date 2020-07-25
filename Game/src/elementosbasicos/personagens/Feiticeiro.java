@@ -17,6 +17,7 @@ public class Feiticeiro extends Heroi {
 		this.adicionaMagia(fireball);
 		this.adicionaMagia(magic_missile);
 		this.adicionaMagia(teleport);
+		this.setPlayer(true);
 		
 	}
 	
