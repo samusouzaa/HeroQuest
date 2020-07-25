@@ -73,7 +73,7 @@ public class HeroQuest {
 
 	}
 
-	public boolean Ganhou() {
+	private boolean Ganhou() {
 		for (GameObject inimigo : inimigos) {
 			if (!inimigo.isAlive())
 				return false;
@@ -81,7 +81,7 @@ public class HeroQuest {
 		return true;
 	}
 
-	public boolean Perdeu() {
+	private boolean Perdeu() {
 		for (GameObject aliado : herois) {
 			if (!aliado.isAlive())
 				return false;
@@ -89,7 +89,7 @@ public class HeroQuest {
 		return true;
 	}
 
-	public void Jogar() {
+	protected void Jogar() {
 		Scanner keyboard = new Scanner(System.in);
 		String command;
 		boolean andar, acao;
@@ -139,7 +139,12 @@ public class HeroQuest {
 						System.out.println("Voce ja usou esta acao"); // na entendeu
 
 					mapa.Ver(heroi.getX(), heroi.getY());
+					mapa.Ver(heroi.getX()+1, heroi.getY());
+					mapa.Ver(heroi.getX()-1, heroi.getY());
+					mapa.Ver(heroi.getX(), heroi.getY()+1);
+					mapa.Ver(heroi.getX(), heroi.getY()-1);
 					mapa.printMap();
+					EnterrarCorpos(inimigos);
 				}
 
 			}
@@ -157,8 +162,9 @@ public class HeroQuest {
 					 catch (DigitoInvalidoException exception) {
 						System.out.println(exception.getMessage());
 					}
-					
+					EnterrarCorpos(herois);
 				}
+			
 			}
 
 
@@ -173,11 +179,9 @@ public class HeroQuest {
 //			}
 
 		}
+	
 
-	}
-
-
-	public void loadMapFromFile() {
+	private void loadMapFromFile() {
 		try {
 			File myObj = new File("mapa.txt");
 			System.out.println(myObj.getAbsolutePath());
@@ -249,6 +253,16 @@ public class HeroQuest {
 		} catch (FileNotFoundException e) {
 			System.out.println("Não foi possível encontrar mapa");
 			e.printStackTrace();
+		}
+	}
+	
+	private void EnterrarCorpos(ArrayList<GameObject> corpos) {
+		for (int i = 0; i < corpos.size(); i++) {
+			if(corpos.get(i).getHp() <= 0) {
+				mapa.removeObjeto(corpos.get(i));
+				corpos.remove(corpos.get(i));
+				i--;
+			}
 		}
 	}
 
