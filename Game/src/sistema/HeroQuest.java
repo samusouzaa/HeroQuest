@@ -30,12 +30,6 @@ public class HeroQuest {
 		
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
-	
-		Bau bau = new Bau(14, 20, armas, itens, magias);
-		Bau bau2 = new Bau(16, 20, armas, itens, magias);
-		mapa.addObjeto(bau);
-		mapa.addObjeto(bau2);
-
 		loadRandomMap();
 		boolean valido = true;
 		do {
@@ -252,6 +246,11 @@ public class HeroQuest {
 					mapa.addObjeto(goblin);
 					inimigos.add(goblin);
 				}
+				
+				else if (data.compareTo("b") == 0) {
+					Bau bau = new Bau(x, y, armas, itens, magias);
+					mapa.addObjeto(bau);
+				}
 			}
 
 		} catch (FileNotFoundException e) {
@@ -334,6 +333,12 @@ public class HeroQuest {
 		mapa.addObjeto(porta);
 		porta = new Porta(10, 17);
 		mapa.addObjeto(porta);
+		
+		Bau bau = new Bau(2, 20, armas, itens, magias);
+		Bau bau2 = new Bau(23, 7, armas, itens, magias);
+		mapa.addObjeto(bau);
+		mapa.addObjeto(bau2);
+
 
 		AdicionarMonstroAleatorio(3, 4);
 		AdicionarMonstroAleatorio(8, 4);
