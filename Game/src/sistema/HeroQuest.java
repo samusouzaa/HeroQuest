@@ -5,6 +5,7 @@ import Usaveis.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import elementosbasicos.*;
@@ -28,33 +29,33 @@ public class HeroQuest {
 
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
-		loadMapFromFile();
+		loadRandomMap();
 		EscolherPersonagem();
-//		mapa.CriarMapaPadrao();
-//
-//
-//		mapa.addObjeto(feiticeiro);
-////		mapa.addObjeto(barbaro);
-////		mapa.addObjeto(elfo);
-////		mapa.addObjeto(anao);
-////		mapa.addObjeto(goblin);
+
+	}
+
+	public HeroQuest(String filename) {
+		herois = new ArrayList<GameObject>();
+		inimigos = new ArrayList<GameObject>();
+
+		mapa = new Mapa();
+		mapa.CriarMapaPadrao();
+		
+		loadMapFromFile(filename);
+		EscolherPersonagem();
 
 	}
 
 	private boolean Ganhou() {
-		for (GameObject inimigo : inimigos) {
-			if (!inimigo.isAlive())
-				return false;
-		}
-		return true;
+		if(inimigos.isEmpty())
+			return true;
+		return false;
 	}
 
 	private boolean Perdeu() {
-		for (GameObject aliado : herois) {
-			if (!aliado.isAlive())
-				return false;
-		}
-		return true;
+		if(herois.isEmpty())
+			return true;
+		return false;
 	}
 
 	protected void Jogar() {
@@ -62,7 +63,7 @@ public class HeroQuest {
 		String command;
 		boolean andar, acao;
 
-		while (true) {
+		while (!Ganhou() && !Perdeu()) {
 
 			// Vez dos herois
 			for (GameObject heroi : herois) {
@@ -73,7 +74,7 @@ public class HeroQuest {
 				while (!andar || !acao) {
 
 					System.out.println("Selecione sua acao [w/a/m/n]");
-					command = keyboard.nextLine();
+					command = keyboard.nextLine().toLowerCase();
 					if (command.compareTo("w") == 0 && !andar) {
 						try {
 							heroi.Andar(mapa);
@@ -88,6 +89,7 @@ public class HeroQuest {
 					else if (command.compareTo("a") == 0 && !acao) {
 						((Heroi) heroi).realizaAtaque(mapa);
 						acao = true;
+						EnterrarCorpos(inimigos);
 					}
 
 					else if (command.compareTo("m") == 0 && !acao) {
@@ -112,7 +114,6 @@ public class HeroQuest {
 					mapa.Ver(heroi.getX(), heroi.getY() + 1);
 					mapa.Ver(heroi.getX(), heroi.getY() - 1);
 					mapa.printMap();
-					EnterrarCorpos(inimigos);
 				}
 
 			}
@@ -129,25 +130,24 @@ public class HeroQuest {
 						System.out.println(exception.getMessage());
 					}
 				EnterrarCorpos(herois);
+				mapa.printMap();
 			}
 
 		}
 
-//			if(Ganhou()) {
-//				System.out.println("Voce ganhou");
-//				break;
-//			}
-//			
-//			if(Perdeu()) {
-//				System.out.println("Voce perdeu");
-//				break;
-//			}
+		if (Ganhou()) {
+			System.out.println("Voce ganhou");
+		}
+
+		else {
+			System.out.println("Voce perdeu");
+		}
 
 	}
 
-	private void loadMapFromFile() {
+	private void loadMapFromFile(String filename) {
 		try {
-			File myObj = new File("mapa.txt");
+			File myObj = new File(filename);
 			System.out.println(myObj.getAbsolutePath());
 			Scanner myReader = new Scanner(myObj);
 			int i = 0;
@@ -230,6 +230,108 @@ public class HeroQuest {
 		}
 	}
 
+	private void loadRandomMap() {
+		Porta porta = new Porta(10, 17);
+		mapa.addObjeto(porta);
+		porta = new Porta(13, 14);
+		mapa.addObjeto(porta);
+		porta = new Porta(13, 21);
+		mapa.addObjeto(porta);
+		porta = new Porta(17, 17);
+		mapa.addObjeto(porta);
+
+		Anao anao = new Anao(13, 17);
+		Elfo elfo = new Elfo(13, 18);
+		Barbaro barbaro = new Barbaro(14, 17);
+		Feiticeiro feiticeiro = new Feiticeiro(14, 18);
+		mapa.addObjeto(anao);
+		mapa.addObjeto(feiticeiro);
+		mapa.addObjeto(elfo);
+		mapa.addObjeto(barbaro);
+
+		herois.add(feiticeiro);
+		herois.add(barbaro);
+		herois.add(elfo);
+		herois.add(anao);
+
+		porta = new Porta(10, 12);
+		mapa.addObjeto(porta);
+		porta = new Porta(6, 12);
+		mapa.addObjeto(porta);
+		porta = new Porta(10, 7);
+		mapa.addObjeto(porta);
+		porta = new Porta(5, 4);
+		mapa.addObjeto(porta);
+		porta = new Porta(4, 7);
+		mapa.addObjeto(porta);
+
+		porta = new Porta(15, 10);
+		mapa.addObjeto(porta);
+		porta = new Porta(18, 9);
+		mapa.addObjeto(porta);
+		porta = new Porta(16, 6);
+		mapa.addObjeto(porta);
+		porta = new Porta(21, 16);
+		mapa.addObjeto(porta);
+		porta = new Porta(11, 10);
+		mapa.addObjeto(porta);
+		porta = new Porta(20, 6);
+		mapa.addObjeto(porta);
+		porta = new Porta(22, 19);
+		mapa.addObjeto(porta);
+		porta = new Porta(20, 26);
+		mapa.addObjeto(porta);
+		porta = new Porta(15, 30);
+		mapa.addObjeto(porta);
+		porta = new Porta(20, 30);
+		mapa.addObjeto(porta);
+
+		porta = new Porta(8, 21);
+		mapa.addObjeto(porta);
+		porta = new Porta(4, 23);
+		mapa.addObjeto(porta);
+		porta = new Porta(5, 25);
+		mapa.addObjeto(porta);
+		porta = new Porta(10, 17);
+		mapa.addObjeto(porta);
+
+		AdicionarMonstroAleatorio(3, 4);
+		AdicionarMonstroAleatorio(8, 4);
+		AdicionarMonstroAleatorio(4, 9);
+		AdicionarMonstroAleatorio(10, 10);
+
+		AdicionarMonstroAleatorio(18, 4);
+		AdicionarMonstroAleatorio(19, 9);
+		AdicionarMonstroAleatorio(19, 11);
+		AdicionarMonstroAleatorio(22, 4);
+		AdicionarMonstroAleatorio(23, 10);
+		AdicionarMonstroAleatorio(22, 14);
+
+		AdicionarMonstroAleatorio(17, 26);
+		AdicionarMonstroAleatorio(19, 30);
+		AdicionarMonstroAleatorio(22, 22);
+		AdicionarMonstroAleatorio(22, 31);
+
+	}
+
+	private void AdicionarMonstroAleatorio(int x, int y) {
+		int resultado = new Random().nextInt(3) + 1;
+		Inimigo monstro = null;
+		switch (resultado) {
+		case 1:
+			monstro = new Goblin(x, y);
+			break;
+		case 2:
+			monstro = new EsqueletoMago(x, y);
+			break;
+		case 3:
+			monstro = new Esqueleto(x, y);
+			break;
+		}
+		mapa.addObjeto(monstro);
+		inimigos.add(monstro);
+	}
+
 	private void EscolherPersonagem() {
 		System.out.println("Quantos jogadores jogarão? [1/4]");
 
@@ -242,7 +344,7 @@ public class HeroQuest {
 		boolean existe;
 		String heroi = keyboard.nextLine();
 		for (int i = 0; i < command; i++) {
-			System.out.println("Escolha o personagem para jogador " + (i+1) + " [A/B/F/E]");
+			System.out.println("Escolha o personagem para jogador " + (i + 1) + " [A/B/F/E]");
 			heroi = keyboard.nextLine().toLowerCase();
 			existe = false;
 
