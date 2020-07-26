@@ -299,11 +299,21 @@ public abstract class Heroi extends GameObject {
 
 		else {
 			if (this.eh_player) {
-
+				
+				boolean lancar = true;
 				for (Magia magia : magias)
 					System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.getChave());
 				Scanner keyboard = new Scanner(System.in);
-				int magia_escolhida = keyboard.nextInt();
+				int magia_escolhida =0;
+				
+				while (lancar) {
+					magia_escolhida = keyboard.nextInt();
+					if (magia_escolhida > magias.size()) {
+						System.out.println("Digite uma magia válida");
+					}
+					else
+						lancar = false;
+				}
 
 				lancaMagia(magia_escolhida, mapa);
 
