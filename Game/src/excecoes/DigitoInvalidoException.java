@@ -3,7 +3,7 @@ package excecoes;
 public class DigitoInvalidoException extends GameException {
 
 	public DigitoInvalidoException() {
-		super("DÍGITO INVÁLIDO, TENTE NOVAMENTE!");
+		super("Dígito inválido, tente novamente!");
 	}
 
 	public DigitoInvalidoException(String message) {
