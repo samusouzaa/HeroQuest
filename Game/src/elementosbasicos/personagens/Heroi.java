@@ -62,7 +62,7 @@ public abstract class Heroi extends GameObject {
 				Mapa copia = mapa.getCopia();
 				for (int i = 0; i < passos; i++) {
 					copia.addObjeto(this);
-
+					copia.printMap();
 					System.out.println("Digite a pr�xima dire��o ou 'q' se desejar parar");
 					String command = keyboard.nextLine().toLowerCase();
 

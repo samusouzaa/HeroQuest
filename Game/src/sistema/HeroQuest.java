@@ -81,7 +81,7 @@ public class HeroQuest {
 		return false;
 	}
 
-	protected void Jogar() throws DigitoInvalidoException {
+	protected void Jogar()  {
 		Scanner keyboard = new Scanner(System.in);
 		String command;
 		boolean andar, acao;
@@ -138,7 +138,7 @@ public class HeroQuest {
 							break;
 						} else if (command.compareTo("a") != 0 || command.compareTo("w") != 0 || command.compareTo("s") != 0
 								|| command.compareTo("d") != 0) {
-							throw new DigitoInvalidoException();
+							System.out.println("Dígito inválido, tente novamente!");
 	
 						}
 	
@@ -164,8 +164,14 @@ public class HeroQuest {
 				
 				else {
 					System.out.println(heroi.toString() + " ir� andar");
-					heroi.Andar(mapa);
 					
+					try {
+						heroi.Andar(mapa);
+					} catch (DigitoInvalidoException e1) {
+						// TODO Auto-generated catch block
+						e1.getMessage();
+					}
+
 					mapa.Ver(heroi.getX(), heroi.getY());
 					mapa.Ver(heroi.getX() + 1, heroi.getY());
 					mapa.Ver(heroi.getX() - 1, heroi.getY());

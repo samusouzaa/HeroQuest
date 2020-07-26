@@ -37,7 +37,6 @@ private String icon;
 	public boolean isSameCoordiantes(Objeto object) {
 		return coordenada.equals(object);
 	}
-	
 	public void Visto() {
 		visivel = true;
 	}
