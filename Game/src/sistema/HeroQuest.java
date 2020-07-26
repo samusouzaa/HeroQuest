@@ -24,7 +24,7 @@ public class HeroQuest {
 	private ListaItens armas = utilizaveis.inicializaArmas();
 	private ListaItens itens = utilizaveis.inicializaItens();
 
-	public HeroQuest() {
+	protected HeroQuest() {
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
 		
@@ -46,7 +46,7 @@ public class HeroQuest {
 
 	}
 
-	public HeroQuest(String filename) {
+	protected HeroQuest(String filename) {
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
 
@@ -81,10 +81,12 @@ public class HeroQuest {
 		return false;
 	}
 
-	protected void Jogar() throws DigitoInvalidoException {
+	protected void Jogar() {
 		Scanner keyboard = new Scanner(System.in);
 		String command;
 		boolean andar, acao;
+		
+		Instrucoes();
 
 		while (!Ganhou() && !Perdeu()) {
 
@@ -134,7 +136,7 @@ public class HeroQuest {
 						break;
 					} else if (command.compareTo("a") != 0 || command.compareTo("w") != 0 || command.compareTo("s") != 0
 							|| command.compareTo("d") != 0) {
-						throw new DigitoInvalidoException();
+						System.out.println("Acao invalida");
 
 					}
 
@@ -334,7 +336,7 @@ public class HeroQuest {
 		porta = new Porta(10, 17);
 		mapa.addObjeto(porta);
 		
-		Bau bau = new Bau(2, 20, armas, itens, magias);
+		Bau bau = new Bau(3, 20, armas, itens, magias);
 		Bau bau2 = new Bau(23, 7, armas, itens, magias);
 		mapa.addObjeto(bau);
 		mapa.addObjeto(bau2);
@@ -475,6 +477,12 @@ public class HeroQuest {
 			}
 
 		}
+	}
+	
+	private void Instrucoes() {
+		System.out.println("------Instrucoes------");
+		System.out.println("No seu turno aperte w para andar, a para atacar, m para lançar magia, o para abir porta e t para abrir tesouro");
+		System.out.println("Mate todos os inimigos espalhados pelo mapa");
 	}
 
 }

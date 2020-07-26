@@ -204,13 +204,13 @@ public class Mapa {
 		int x = object.getX();
 		int y = object.getY();
 
-		if (mapa[x + 1][y] instanceof Porta)
+		if (mapa[x + 1][y] != null && mapa[x + 1][y].Abrivel())
 			mapa[x + 1][y] = null;
-		if (mapa[x - 1][y] instanceof Porta)
+		if (mapa[x - 1][y] != null && mapa[x - 1][y].Abrivel())
 			mapa[x - 1][y] = null;
-		if (mapa[x][y + 1] instanceof Porta)
+		if (mapa[x][y + 1] != null && mapa[x][y + 1].Abrivel())
 			mapa[x][y + 1] = null;
-		if (mapa[x][y - 1] instanceof Porta)
+		if (mapa[x][y - 1] != null && mapa[x][y - 1].Abrivel())
 			mapa[x][y - 1] = null;
 	}
 

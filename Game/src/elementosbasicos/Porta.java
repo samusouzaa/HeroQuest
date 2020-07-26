@@ -8,6 +8,11 @@ public class Porta extends Objeto{
 		super(x, y, ICON);
 	}
 	
+	@Override 
+	public boolean Abrivel() {
+		return true;
+	}
+	
 	@Override
 	public String toString() {
 		if(getVisibilidade())
