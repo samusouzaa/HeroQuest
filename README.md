@@ -2,5 +2,5 @@
 Trabalho de conclusão do curso de POO. 
 ft Lindinha as Samussouza, florzinha as thaisstein, and docinho as PedroAndrade
 
-Odiamos POO, liberalismo e monogamia
+Vamo refazer o conceituado jogo HeroQuest usando Java respeitando o princípios de POO
 
