@@ -11,12 +11,11 @@ public class Elfo extends Heroi {
 	private static final int IP = 4;
 	private static final String ICON = "EL";
 	
-	Arma espada_curta = new Arma(TipoArma.ESPADACURTA, "ESPADACURTA");
-	SimpleHeal simple_heal = new SimpleHeal();
-	
 	public Elfo(int x, int y) {
 
 		super(x, y, HP, IP, ATAQUE, DEFESA, ICON);
+		Arma espada_curta = new Arma(TipoArma.ESPADACURTA, "ESPADACURTA");
+		SimpleHeal simple_heal = new SimpleHeal();
 		this.equipar(true, espada_curta);
 		this.adicionaMagia(simple_heal);
 
