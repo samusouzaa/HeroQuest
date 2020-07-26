@@ -30,14 +30,6 @@ public class HeroQuest {
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
 		loadMapFromFile();
-//		mapa.CriarMapaPadrao();
-//
-//
-//		mapa.addObjeto(feiticeiro);
-////		mapa.addObjeto(barbaro);
-////		mapa.addObjeto(elfo);
-////		mapa.addObjeto(anao);
-////		mapa.addObjeto(goblin);
 
 	}
 
