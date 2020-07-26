@@ -69,7 +69,7 @@ public class HeroQuest {
 		return true;
 	}
 
-	protected void Jogar() {
+	protected void Jogar() throws DigitoInvalidoException {
 		Scanner keyboard = new Scanner(System.in);
 		String command;
 		boolean andar, acao;
@@ -113,9 +113,14 @@ public class HeroQuest {
 
 					else if (command.compareTo("n") == 0) {
 						break;
+					} else if (command.compareTo("a") != 0 || command.compareTo("w") != 0 || command.compareTo("s") != 0
+							|| command.compareTo("d") != 0) {
+						throw new DigitoInvalidoException();
+
 					}
 
 					else
+
 						System.out.println("Voce ja usou esta acao"); // na entendeu
 
 					mapa.Ver(heroi.getX(), heroi.getY());
