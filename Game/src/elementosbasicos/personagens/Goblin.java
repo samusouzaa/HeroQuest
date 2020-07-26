@@ -25,9 +25,9 @@ public class Goblin extends Inimigo {
 		Arma punhal = new Arma(TipoArma.PUNHAL, "PUNHAL");
 		this.adicionaItem(punhal);
 		this.adicionaItem(punhal);
-		this.adicionaItem(punhal);
-
+		this.adicionaItem(punhal);	
 	}
+
 
 	@Override
 	public void Vez() {
@@ -79,7 +79,6 @@ public class Goblin extends Inimigo {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (mapa.verificarPosicao(this, direcao_andar)) {
