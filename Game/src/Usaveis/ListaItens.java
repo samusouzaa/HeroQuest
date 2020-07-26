@@ -1,7 +1,9 @@
 package Usaveis;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class ListaItens {
 	
@@ -18,5 +20,12 @@ public class ListaItens {
 	
 	public void removerItem(String chave) {
 		lista_itens.remove(chave);
+	}
+	
+	public Item itemAleatorio() {
+		ArrayList<Item> itens = new ArrayList<Item>(lista_itens.values());
+		int item_ecolhido = new Random().nextInt(itens.size());
+		return itens.get(item_ecolhido);
+		 
 	}
 }

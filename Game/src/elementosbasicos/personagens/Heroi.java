@@ -5,7 +5,12 @@ import Externos.Dados;
 import Externos.Direcao;
 import Externos.TipoDado;
 import Usaveis.Arma;
+import Usaveis.Armadura;
+import Usaveis.Item;
 import Usaveis.Magia;
+import Usaveis.Moedas;
+import Usaveis.TipoArma;
+import elementosbasicos.Bau;
 import elementosbasicos.GameObject;
 import elementosbasicos.Mapa;
 import elementosbasicos.Parede;
@@ -123,7 +128,129 @@ public abstract class Heroi extends GameObject {
 		}
 
 	}
+	
+	protected Bau verificaTesouro(Heroi heroi, Mapa mapa) {
+		
+		int x = heroi.getX();
+		int y = heroi.getY();
+		
+		if (mapa.getObjetoMapa(x, y + 1) instanceof Bau) {
+			return (Bau) mapa.getObjetoMapa(x, y + 1);
+		}
+		
+		else if (mapa.getObjetoMapa(x, y - 1) instanceof Bau)
+			return (Bau) mapa.getObjetoMapa(x, y - 1);
+		
+		else if (mapa.getObjetoMapa(x+1, y) instanceof Bau)
+			return (Bau) mapa.getObjetoMapa(x+1, y);
 
+		else if (mapa.getObjetoMapa(x-1, y) instanceof Bau)
+			return (Bau) mapa.getObjetoMapa(x-1, y);
+		
+		else if (mapa.getObjetoMapa(x-1, y + 1) instanceof Bau)
+			return (Bau) mapa.getObjetoMapa(x-1, y + 1);
+		
+		else if (mapa.getObjetoMapa(x-1, y - 1) instanceof Bau)
+			return (Bau) mapa.getObjetoMapa(x-1, y - 1);
+		
+		else if (mapa.getObjetoMapa(x+1, y + 1) instanceof Bau)
+			return (Bau) mapa.getObjetoMapa(x+1, y + 1);
+		
+		else if (mapa.getObjetoMapa(x+1, y - 1) instanceof Bau)
+			return (Bau) mapa.getObjetoMapa(x+1, y - 1);
+		
+		else
+			return null;
+	}
+	
+	public void buscarTesouro(Heroi heroi, Mapa mapa) {
+		Bau bau;
+		
+		bau = verificaTesouro(heroi, mapa);
+		
+		if (bau != null) {
+			System.out.println("Você encontrou um bau, deseja abri-lo?");
+			System.out.println("y = sim");
+			System.out.println("n = nÃƒÂ£o");
+			Scanner in = new Scanner(System.in);
+			String s = in.nextLine().toLowerCase(); 
+			if (s.compareTo("y") == 0) {
+				bau.abrirBau(heroi);
+				}
+			else
+				System.out.println("O baú continuará nessa posição");
+
+		}
+		
+		else
+			return;
+	}
+	
+	public void adicionaItemBau(Item item) {
+		if (item instanceof Arma) {
+			if (((Arma) item).getDestrutivel()) {
+				this.adicionaItem(item);
+			}
+			else {
+				if(!this.ArmadoD()) {
+					System.out.println("A arma será equipada na mão direita");
+					this.equipar(false, (Arma) item);
+				}
+				
+				else if(!this.ArmadoE()) {
+					System.out.println("A arma será equipada na mão esquerda");
+					this.equipar(true, (Arma) item);
+				}
+				
+				else {
+					System.out.println("As duas maos estão cheias, deseja trocar de arma?");
+					System.out.println("y = sim");
+					System.out.println("n = nÃƒÂ£o");
+					Scanner in = new Scanner(System.in);
+					String s = in.nextLine().toLowerCase(); 
+					if (s.compareTo("y") == 0) {
+						System.out.println("1. Empunhar na direita");
+						System.out.println("2. Empunhar na esquerda");
+						int command = in.nextInt();
+						if (command == 1)
+							this.equipar(true, (Arma) item);
+						
+						else if (command == 2)
+							this.equipar(false, (Arma) item);
+						
+						else
+							System.out.println("A arma foi jogada fora");
+						
+					}
+						
+					else
+						System.out.println("A arma foi jogada fora");
+
+				}
+			}
+		}
+		
+		else if (item instanceof Magia) {
+			this.adicionaMagia((Magia) item);
+		}
+		
+		else if (item instanceof Moedas) {
+			this.adicionaItem(item);
+		}
+		
+		else if (item instanceof Armadura) {
+			System.out.println("Você tem uma " + this.armadura.getChave() + ", deseja trocar?");
+			System.out.println("y = sim");
+			System.out.println("n = nÃƒÂ£o");
+			Scanner in = new Scanner(System.in);
+			String s = in.nextLine().toLowerCase(); 
+			if (s.compareTo("y") == 0) {
+				this.setArmadura((Armadura) item);
+				}
+			else
+				System.out.println("A armadura do baú foi jogada fora");
+		}
+	}
 	protected int Defender() {
 		int numeroDados = this.getDefesa() + this.getArmadura();
 		int aux;
@@ -161,7 +288,7 @@ public abstract class Heroi extends GameObject {
 			if (this.eh_player) {
 
 				for (Magia magia : magias)
-					System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.toString());
+					System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.getChave());
 				Scanner keyboard = new Scanner(System.in);
 				int magia_escolhida = keyboard.nextInt();
 

@@ -25,10 +25,17 @@ public class HeroQuest {
 	public HeroQuest() {
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
-
+		
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
 		loadMapFromFile();
+		////////////////////////////////TESTE TIRA DEPOIS PELO AMOR DE DEUS////
+		Bau bau = new Bau(14, 20, armas, itens, magias);
+		Bau bau2 = new Bau(16, 20, armas, itens, magias);
+		mapa.addObjeto(bau);
+		mapa.addObjeto(bau2);
+		/////////////////////////////////FIM DO TESTE///////////////////////
+		
 		EscolherPersonagem();
 //		mapa.CriarMapaPadrao();
 //
@@ -72,7 +79,7 @@ public class HeroQuest {
 				acao = false;
 				while (!andar || !acao) {
 
-					System.out.println("Selecione sua acao [w/a/m/n]");
+					System.out.println("Selecione sua acao [w/a/m/n/o/t]");
 					command = keyboard.nextLine();
 					if (command.compareTo("w") == 0 && !andar) {
 						try {
@@ -97,6 +104,10 @@ public class HeroQuest {
 
 					else if (command.compareTo("o") == 0) {
 						mapa.AbrirPorta(heroi);
+					}
+					
+					else if (command.compareTo("t") == 0) {
+						((Heroi) heroi).buscarTesouro((Heroi) heroi, mapa);
 					}
 
 					else if (command.compareTo("n") == 0) {

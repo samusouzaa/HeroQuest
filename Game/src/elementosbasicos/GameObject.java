@@ -138,6 +138,20 @@ public abstract class GameObject extends Objeto implements Personagem {
 		}
 		return false;
 	}
+	
+	protected boolean ArmadoD() {
+		if (armaD != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	protected boolean ArmadoE() {
+		if (armaE != null) {
+			return true;
+		}
+		return false;
+	}
 
 	protected Arma escolhaArmas() throws ArmaInvalidaException {
 
