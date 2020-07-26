@@ -1,7 +1,7 @@
 package Usaveis;
 
 public enum TipoArma {
-	PUNHAL(7, 1, false, "arco"), ESPADACURTA(2, 3, false, "espada curta"), 
+	PUNHAL(7, 1, true, "punhal"), ESPADACURTA(2, 3, false, "espada curta"), 
 	ESPADALONGA(3, 5, false, "espada longa"), LANCA(4, 1, false, "lanca");
 
 	public final int alcance;

@@ -10,11 +10,10 @@ public class Anao extends Heroi {
 	private static final int IP = 3;
 	private static final String ICON = "AN";
 	
-	Arma espada_curta = new Arma(TipoArma.ESPADACURTA, "ESPADACURTA");
-	
 	public Anao(int x, int y) {
 
 		super(x, y,HP, IP, ATAQUE, DEFESA, ICON);
+		Arma espada_curta = new Arma(TipoArma.ESPADACURTA, "ESPADACURTA");
 		this.equipar(true, espada_curta);
 
 	}
