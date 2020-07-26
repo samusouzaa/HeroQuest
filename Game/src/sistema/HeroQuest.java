@@ -5,6 +5,7 @@ import Usaveis.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import elementosbasicos.*;
@@ -29,7 +30,18 @@ public class HeroQuest {
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
 		loadMapFromFile();
-		EscolherPersonagem();
+		boolean valido = true;
+		do {
+			try {
+				EscolherPersonagem();
+			} catch (InputMismatchException exception) {
+				valido = false;
+				System.out.println("Entrada inválida, tente novamente!");
+			} catch (DigitoInvalidoException exception) {
+				valido = false;
+				System.out.println(exception.getMessage());
+			}
+		} while (!valido);
 //		mapa.CriarMapaPadrao();
 //
 //
@@ -230,11 +242,15 @@ public class HeroQuest {
 		}
 	}
 
-	private void EscolherPersonagem() {
+	private void EscolherPersonagem() throws DigitoInvalidoException {
 		System.out.println("Quantos jogadores jogarão? [1/4]");
 
 		Scanner keyboard = new Scanner(System.in);
 		int command = keyboard.nextInt();
+		if (command < 1 || command > 4) {
+			throw new DigitoInvalidoException();
+
+		}
 		boolean b = false;
 		boolean a = false;
 		boolean f = false;
@@ -242,7 +258,7 @@ public class HeroQuest {
 		boolean existe;
 		String heroi = keyboard.nextLine();
 		for (int i = 0; i < command; i++) {
-			System.out.println("Escolha o personagem para jogador " + (i+1) + " [A/B/F/E]");
+			System.out.println("Escolha o personagem para jogador " + (i + 1) + " [A/B/F/E]");
 			heroi = keyboard.nextLine().toLowerCase();
 			existe = false;
 
