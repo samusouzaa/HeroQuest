@@ -22,6 +22,7 @@ public class Anao extends Heroi {
 	public void Vez() {
 		System.out.println("Vez do anao");
 		System.out.println("Vida:" + this.getHp());
+		System.out.println("Economia:" + this.getMoedas() + " moedas");
 	}
 
 }

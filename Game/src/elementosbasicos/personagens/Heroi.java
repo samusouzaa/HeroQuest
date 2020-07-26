@@ -30,7 +30,11 @@ public abstract class Heroi extends GameObject {
 	}
 
 	private boolean eh_player = false;
-
+	private int moedas = 0;
+	
+	protected int getMoedas() {
+		return moedas;
+	}
 	public void setPlayer(boolean eh_player) {
 		this.eh_player = eh_player;
 	}
@@ -46,7 +50,7 @@ public abstract class Heroi extends GameObject {
 
 		if (eh_player) {
 			Scanner keyboard = new Scanner(System.in);
-			Direcao direcao = Direcao.UP; // inicializei pq ele tava reclamando
+			Direcao direcao = null; 
 			boolean conferido = false;
 			boolean verificado = false;
 			int xi = getX();
@@ -59,7 +63,7 @@ public abstract class Heroi extends GameObject {
 				for (int i = 0; i < passos; i++) {
 					copia.addObjeto(this);
 
-					System.out.println("Digite a pr�xima dire��o");
+					System.out.println("Digite a pr�xima dire��o ou 'q' se desejar parar");
 					String command = keyboard.nextLine().toLowerCase();
 
 					try {
@@ -71,6 +75,8 @@ public abstract class Heroi extends GameObject {
 							direcao = Direcao.RIGHT;
 						else if (command.compareTo("s") == 0)
 							direcao = Direcao.DOWN;
+						else if (command.compareTo("q") == 0)
+							break;
 						else
 							throw new DigitoInvalidoException(); // OK
 					} catch (DigitoInvalidoException exception) {
@@ -235,6 +241,7 @@ public abstract class Heroi extends GameObject {
 		}
 		
 		else if (item instanceof Moedas) {
+			this.moedas += ((Moedas) item).getValor();
 			this.adicionaItem(item);
 		}
 		

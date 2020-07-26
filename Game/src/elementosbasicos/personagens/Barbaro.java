@@ -22,6 +22,7 @@ public class Barbaro extends Heroi {
 	public void Vez() {
 		System.out.println("Vez do barbaro");
 		System.out.println("Vida:" + this.getHp());
+		System.out.println("Economia:" + this.getMoedas() + " moedas");
 	}
 
 }
