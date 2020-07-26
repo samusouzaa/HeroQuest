@@ -17,7 +17,7 @@ public class Goblin extends Inimigo {
 	private static final int ATAQUE = 2;
 	private static final int DEFESA = 1;
 	private static final int HP = 5;
-	private static final int IP = 6;
+	private static final int IP = 2;
 	private static final String ICON = "go";
 
 	public Goblin(int x, int y) {
@@ -116,7 +116,7 @@ public class Goblin extends Inimigo {
 
 			heroi = mapa.getObjetoMapa(nx, ny);
 
-			if (heroi instanceof Parede)
+			if (!(heroi instanceof Heroi) && heroi != null)
 				return null;
 		}
 		return heroi;

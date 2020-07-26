@@ -89,69 +89,125 @@ public class HeroQuest {
 		while (!Ganhou() && !Perdeu()) {
 
 			// Vez dos herois
+			System.out.println("\n\n");
+			System.out.println("Turno dos Herois");
+			System.out.println("\n\n");
 			for (GameObject heroi : herois) {
 				heroi.Vez();
-
-				andar = false;
-				acao = false;
-				while (!andar || !acao) {
-
-					System.out.println("Selecione sua acao [w/a/m/n/o/t]");
-					command = keyboard.nextLine();
-
-					if (command.compareTo("w") == 0 && !andar) {
-						try {
-							heroi.Andar(mapa);
-
-						} catch (DigitoInvalidoException exception) {
-							System.out.println(exception.getMessage());
+				if (((Heroi) heroi).getPlayer()) {
+					andar = false;
+					acao = false;
+					while (!andar || !acao) {
+	
+						System.out.println("Selecione sua acao [w/a/m/n/o/t]");
+						command = keyboard.nextLine();
+	
+						if (command.compareTo("w") == 0 && !andar) {
+							try {
+								heroi.Andar(mapa);
+	
+							} catch (DigitoInvalidoException exception) {
+								System.out.println(exception.getMessage());
+							}
+	
+							andar = true;
 						}
-
-						andar = true;
+	
+						else if (command.compareTo("a") == 0 && !acao) {
+							((Heroi) heroi).realizaAtaque(mapa);
+							acao = true;
+							EnterrarCorpos(inimigos);
+						}
+	
+						else if (command.compareTo("m") == 0 && !acao) {
+							heroi.escolheMagia(mapa);
+							acao = true;
+							EnterrarCorpos(inimigos);
+						}
+	
+						else if (command.compareTo("o") == 0) {
+							mapa.AbrirPorta(heroi);
+						}
+						
+						else if (command.compareTo("t") == 0) {
+							((Heroi) heroi).buscarTesouro((Heroi) heroi, mapa);
+							acao = true;
+						}
+	
+						else if (command.compareTo("n") == 0) {
+							break;
+						} else if (command.compareTo("a") != 0 || command.compareTo("w") != 0 || command.compareTo("s") != 0
+								|| command.compareTo("d") != 0) {
+							throw new DigitoInvalidoException();
+	
+						}
+	
+						else
+	
+							System.out.println("Voce ja usou esta acao"); // na entendeu
+	
+						mapa.Ver(heroi.getX(), heroi.getY());
+						mapa.Ver(heroi.getX() + 1, heroi.getY());
+						mapa.Ver(heroi.getX() - 1, heroi.getY());
+						mapa.Ver(heroi.getX(), heroi.getY() + 1);
+						mapa.Ver(heroi.getX(), heroi.getY() - 1);
+						mapa.printMap();
 					}
-
-					else if (command.compareTo("a") == 0 && !acao) {
-						((Heroi) heroi).realizaAtaque(mapa);
-						acao = true;
-						EnterrarCorpos(inimigos);
-					}
-
-					else if (command.compareTo("m") == 0 && !acao) {
-						heroi.escolheMagia(mapa);
-						acao = true;
-					}
-
-					else if (command.compareTo("o") == 0) {
-						mapa.AbrirPorta(heroi);
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
 					
-					else if (command.compareTo("t") == 0) {
-						((Heroi) heroi).buscarTesouro((Heroi) heroi, mapa);
-						acao = true;
-					}
-
-					else if (command.compareTo("n") == 0) {
-						break;
-					} else if (command.compareTo("a") != 0 || command.compareTo("w") != 0 || command.compareTo("s") != 0
-							|| command.compareTo("d") != 0) {
-						throw new DigitoInvalidoException();
-
-					}
-
-					else
-
-						System.out.println("Voce ja usou esta acao"); // na entendeu
-
+					System.out.println("\n\n");
+				}
+				
+				else {
+					System.out.println(heroi.toString() + " irá andar");
+					heroi.Andar(mapa);
+					
 					mapa.Ver(heroi.getX(), heroi.getY());
 					mapa.Ver(heroi.getX() + 1, heroi.getY());
 					mapa.Ver(heroi.getX() - 1, heroi.getY());
 					mapa.Ver(heroi.getX(), heroi.getY() + 1);
 					mapa.Ver(heroi.getX(), heroi.getY() - 1);
 					mapa.printMap();
+					
+					int acao_controlada = new Random().nextInt(3);
+					
+					if (acao_controlada == 0) {
+						if (heroi.semMagia()) {
+							System.out.println(heroi.toString() + " irá atacar");
+							((Heroi) heroi).realizaAtaque(mapa);
+						}
+						
+						else {
+							System.out.println(heroi.toString() + " irá usar magia");
+							heroi.escolheMagia(mapa);
+						}
+					}
+						
+					else if(acao_controlada == 1) {
+						System.out.println(heroi.toString() + " irá atacar");
+						((Heroi) heroi).realizaAtaque(mapa);
+					}
+					
+					else {
+						System.out.println(heroi.toString() + " nao realizará outra acao no turno");
+					}
+					
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
+				System.out.println("\n\n");
 
 			}
-
+			
+			System.out.println("Turno dos Monstros");
+			System.out.println("\n\n");
 			for (GameObject inimigo : inimigos) {
 				if (inimigo.getVisibilidade())
 					try {
@@ -159,14 +215,18 @@ public class HeroQuest {
 						((Inimigo) inimigo).realizaAtaque(mapa);
 						inimigo.escolheMagia(mapa);
 						inimigo.Andar(mapa);
+						try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 
 					} catch (DigitoInvalidoException exception) {
 						System.out.println(exception.getMessage());
 					}
 				EnterrarCorpos(herois);
-				mapa.printMap();
 			}
-
+			mapa.printMap();
 		}
 
 		if (Ganhou()) {

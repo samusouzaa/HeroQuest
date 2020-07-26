@@ -19,7 +19,7 @@ public class EsqueletoMago extends Inimigo{
 	private static final int ATAQUE = 1;
 	private static final int DEFESA = 2;
 	private static final int HP = 4;
-	private static final int IP = 6;
+	private static final int IP = 4;
 	private static final String ICON = "em";
 	
 	public EsqueletoMago(int x, int y) {

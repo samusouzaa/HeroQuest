@@ -99,7 +99,7 @@ public class Fireball extends Magia {
 
 		Objeto alvo = getPrimeiroInimigo(x, y, direcao, mapa);
 
-		if (alvo != null && !(alvo instanceof Parede)) {
+		if (alvo instanceof GameObject) {
 			if(((GameObject) alvo).BloquearMagia() > 0)
 				System.out.println("A magia foi bloqueada pelo alvo principal(" + alvo.toString() + ")");
 			else {

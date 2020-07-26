@@ -71,7 +71,7 @@ public abstract class Inimigo extends GameObject {
 				existe_heroi = true;
 			}
 
-			else if (mapa.getObjetoMapa(x, y + i) instanceof Parede)
+			else if (mapa.getObjetoMapa(x, y + i) != null)
 				break;
 		}
 
@@ -83,7 +83,7 @@ public abstract class Inimigo extends GameObject {
 				existe_heroi = true;
 			}
 
-			else if (mapa.getObjetoMapa(x + i, y) instanceof Parede)
+			else if (mapa.getObjetoMapa(x + i, y) != null)
 				break;
 		}
 
@@ -95,7 +95,7 @@ public abstract class Inimigo extends GameObject {
 				existe_heroi = true;
 			}
 
-			else if (mapa.getObjetoMapa(x, y - i) instanceof Parede)
+			else if (mapa.getObjetoMapa(x, y - i) != null)
 				break;
 		}
 
@@ -105,7 +105,7 @@ public abstract class Inimigo extends GameObject {
 				herois_proximos.add((GameObject) mapa.getObjetoMapa(x - i, y));
 				posicao_heroi++;
 				existe_heroi = true;
-			} else if (mapa.getObjetoMapa(x - i, y) instanceof Parede)
+			} else if (mapa.getObjetoMapa(x - i, y) != null)
 				break;
 		}
 
