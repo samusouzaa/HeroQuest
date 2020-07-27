@@ -3,7 +3,7 @@ package excecoes;
 public class ArmaInvalidaException extends GameException {
 
 	public ArmaInvalidaException() {
-		super("Não há arma disponível, tente novamente");
+		super("Nao ha arma disponivel, tente novamente");
 	}
 
 	public ArmaInvalidaException(String message) {

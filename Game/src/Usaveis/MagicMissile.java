@@ -83,7 +83,7 @@ public class MagicMissile extends Magia {
 
 	
 	public void Usar(GameObject gameobject, Mapa mapa) throws DigitoInvalidoException {
-		System.out.println("Magic Missile ser� utilizado");
+		System.out.println("Magic Missile sera utilizado");
 		Direcao direcao = null;
 		Objeto alvo = null;
 		
@@ -94,7 +94,7 @@ public class MagicMissile extends Magia {
 			int y = gameobject.getY();
 			if (gameobject instanceof Heroi) {
 				if (((Heroi) gameobject).getPlayer()) {
-					System.out.println("Digite a direção na qual você atirará");
+					System.out.println("Digite a direcao na qual você atirara");
 					Scanner keyboard = new Scanner(System.in);
 		
 					String command = keyboard.nextLine().toLowerCase();
@@ -169,7 +169,7 @@ public class MagicMissile extends Magia {
 			}
 			
 			else
-				System.out.println("Magic Missile n�o encontrou um alvo");
+				System.out.println("Magic Missile nao encontrou um alvo");
 			
 			
 		}
