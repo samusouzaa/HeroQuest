@@ -1,3 +1,7 @@
+//Projeto final de MC322
+//Pedro Andrade Ferreira Sobrinho 242887
+//Thais Steinmuller Farias 224707
+//Samuel Souza 244192
 package sistema;
 
 import java.util.Scanner;
