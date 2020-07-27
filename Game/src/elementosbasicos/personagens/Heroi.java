@@ -19,6 +19,7 @@ import excecoes.DigitoInvalidoException;
 import excecoes.GameException;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -299,11 +300,31 @@ public abstract class Heroi extends GameObject {
 
 		else {
 			if (this.eh_player) {
-
+				
+				boolean lancar = true;
+				boolean valido = true;
 				for (Magia magia : magias)
 					System.out.println(magias.indexOf(magia) + 1 + "." + " " + magia.getChave());
-				Scanner keyboard = new Scanner(System.in);
-				int magia_escolhida = keyboard.nextInt();
+				int magia_escolhida =0;
+				
+				while (lancar) {
+					while (valido) {
+						Scanner keyboard = new Scanner(System.in);
+						try {
+							magia_escolhida = keyboard.nextInt();
+							valido = false;
+						} catch (InputMismatchException exception) {
+							System.out.println("Digite uma magia válida");
+							}
+					}
+					
+					if (magia_escolhida > magias.size()) {
+						System.out.println("Digite uma magia válida");
+						valido = true;
+					}
+					else
+						lancar = false;
+				}
 
 				lancaMagia(magia_escolhida, mapa);
 
