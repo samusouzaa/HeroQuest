@@ -282,4 +282,12 @@ public class Mapa {
 			return true;
 		return false;
 	}
+	
+	public void visualizarMapaTodo() {
+		for(int i = 0; i < ALTURA; i++)
+			for (int j = 0; j<LARGURA; j++) {
+				if(mapa[i][j] != null)
+					mapa[i][j].Visto();
+			}
+	}
 }

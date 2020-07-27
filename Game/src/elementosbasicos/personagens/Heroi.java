@@ -32,10 +32,10 @@ public abstract class Heroi extends GameObject {
 	private boolean eh_player = false;
 	private int moedas = 0;
 	
-	protected int getMoedas() {
+	public int getMoedas() {
 		return moedas;
 	}
-	public void setPlayer(boolean eh_player) {
+	protected void setPlayer(boolean eh_player) {
 		this.eh_player = eh_player;
 	}
 
@@ -62,7 +62,7 @@ public abstract class Heroi extends GameObject {
 				Mapa copia = mapa.getCopia();
 				for (int i = 0; i < passos; i++) {
 					copia.addObjeto(this);
-
+					copia.printMap();
 					System.out.println("Digite a pr�xima dire��o ou 'q' se desejar parar");
 					String command = keyboard.nextLine().toLowerCase();
 
@@ -123,9 +123,15 @@ public abstract class Heroi extends GameObject {
 			else {
 				int posicao = new Random().nextInt(lugares_andar.size());
 				for (int i = 0; i < passos; i++) {
+					System.out.println("\n\n");
 					if (mapa.verificarPosicao(this, lugares_andar.get(posicao))) {
 						this.Mover(lugares_andar.get(posicao), mapa);
 						mapa.printMap();
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					} else
 						break;
 				}
@@ -413,22 +419,31 @@ public abstract class Heroi extends GameObject {
 		boolean utilizou_punhal = false;
 		
 		if(this.temPunhal()) {
-			System.out.println("Você possui um punhal, deseja utilizá-lo? Você não poderá atacar com suas armas após essa ação");
-			System.out.println("y = sim");
-			System.out.println("n = nÃ£o");
-			Scanner in = new Scanner(System.in);
-			String s = in.nextLine().toLowerCase(); 
-			if (s.compareTo("y") == 0) {
+			if (this.eh_player) {
+				System.out.println("Você possui um punhal, deseja utilizá-lo? Você não poderá atacar com suas armas após essa ação");
+				System.out.println("y = sim");
+				System.out.println("n = nÃ£o");
+				Scanner in = new Scanner(System.in);
+				String s = in.nextLine().toLowerCase(); 
+				if (s.compareTo("y") == 0) {
+					int posicao_punhal = this.retornaPosPunhal();
+					if (posicao_punhal < 0)
+						return false;
+					arma_ataque = (Arma) this.itens.get(posicao_punhal);
+					this.excluiItem(posicao_punhal);
+					utilizou_punhal = true;
+					}
+				else
+					System.out.println("Voce poderá usá-lo no próximo turno");
+			}
+			else {
 				int posicao_punhal = this.retornaPosPunhal();
 				if (posicao_punhal < 0)
 					return false;
 				arma_ataque = (Arma) this.itens.get(posicao_punhal);
 				this.excluiItem(posicao_punhal);
 				utilizou_punhal = true;
-				}
-			else
-				System.out.println("Voce poderá usá-lo no próximo turno");
-
+			}
 		} 
 		
 		if (Armado() && !utilizou_punhal) {
@@ -478,8 +493,10 @@ public abstract class Heroi extends GameObject {
 				}
 			} while (!valido);
 			return true;
-		} else
+		} else {
+			System.out.println("Nao ha inimigos proximos");
 			return false;
+		}
 	}
 	
 	public void escolherPlayer() {

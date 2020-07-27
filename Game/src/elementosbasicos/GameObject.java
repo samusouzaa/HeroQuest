@@ -39,7 +39,10 @@ public abstract class GameObject extends Objeto implements Personagem {
 		this.itens = new ArrayList<Item>();
 		this.magias = new ArrayList<Magia>();
 	}
-
+	
+	public boolean semMagia() {
+		return magias.isEmpty();
+	}
 	
 	public int getHp() {
 		return this.hp;
