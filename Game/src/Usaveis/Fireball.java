@@ -53,13 +53,13 @@ public class Fireball extends Magia {
 
 	public void Usar(GameObject gameobject, Mapa mapa) throws DigitoInvalidoException {
 		
-		System.out.println("Fireball ser� utilizado");
+		System.out.println("Fireball sera utilizado");
 		int x = gameobject.getX();
 		int y = gameobject.getY();
 		Direcao direcao = null;
 		
 		if (((Heroi) gameobject).getPlayer()) {
-			System.out.println("Digite a direção na qual você atirará");
+			System.out.println("Digite a direção na qual voce atirara");
 			Scanner keyboard = new Scanner(System.in);
 	
 			String command = keyboard.nextLine().toLowerCase();
@@ -109,7 +109,7 @@ public class Fireball extends Magia {
 		}
 		
 		else {
-			System.out.println("Fireball n�o acertou nenhum alvo principal");
+			System.out.println("Fireball nao acertou nenhum alvo principal");
 		}
 
 		ArrayList<GameObject> inimigosProximos = getInimigos(alvo.getX(), alvo.getY(), mapa);
@@ -119,7 +119,7 @@ public class Fireball extends Magia {
 				System.out.println("A magia foi bloqueada por um dos alvos secundarios(" + alvo.toString() + ")");
 			else {	
 				inimigo.receberDano(3);
-				System.out.println("Fireball deu 3 de dano em um alvo secund�rio(" + alvo.toString() + ")");
+				System.out.println("Fireball deu 3 de dano em um alvo secundario(" + alvo.toString() + ")");
 			}
 		}
 		

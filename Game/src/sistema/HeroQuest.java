@@ -31,7 +31,7 @@ public class HeroQuest {
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
 		loadRandomMap();
-		mapa.visualizarMapaTodo();
+//		mapa.visualizarMapaTodo(); PARA TESTE E DEBUGERS
 		boolean valido = true;
 		do {
 			try {
@@ -39,7 +39,7 @@ public class HeroQuest {
 				EscolherPersonagem();
 			} catch (InputMismatchException exception) {
 				valido = false;
-				System.out.println("Entrada inválida, tente novamente!");
+				System.out.println("Entrada invalida, tente novamente!");
 			} catch (DigitoInvalidoException exception) {
 				valido = false;
 				System.out.println(exception.getMessage());
@@ -56,13 +56,14 @@ public class HeroQuest {
 		mapa.CriarMapaPadrao();
 		
 		loadMapFromFile(filename);
+		//mapa.visualizarMapaTodo(); FUNCAO PARA DEBUGUER
 		boolean valido = true;
 		do {
 			try {
 				EscolherPersonagem();
 			} catch (InputMismatchException exception) {
 				valido = false;
-				System.out.println("Entrada inválida, tente novamente!");
+				System.out.println("Entrada invalida, tente novamente!");
 			} catch (DigitoInvalidoException exception) {
 				valido = false;
 				System.out.println(exception.getMessage());
@@ -80,7 +81,16 @@ public class HeroQuest {
 	private boolean Perdeu() {
 		if(herois.isEmpty())
 			return true;
-		return false;
+		else {
+			boolean player = false;
+			for(GameObject heroi : herois) {
+				if(((Heroi) heroi).getPlayer())
+					player = true;
+			}
+			if(player)
+				return false;
+			return true;
+		}
 	}
 
 	protected void Jogar() {
@@ -167,7 +177,7 @@ public class HeroQuest {
 				}
 				
 				else {
-					System.out.println(heroi.toString() + " ir� andar");
+					System.out.println(heroi.toString() + " ira andar");
 					
 					try {
 						heroi.Andar(mapa);
@@ -187,12 +197,12 @@ public class HeroQuest {
 					
 					if (acao_controlada == 0) {
 						if (heroi.semMagia()) {
-							System.out.println(heroi.toString() + " ir� atacar");
+							System.out.println(heroi.toString() + " ira atacar");
 							((Heroi) heroi).realizaAtaque(mapa);
 						}
 						
 						else {
-							System.out.println(heroi.toString() + " ir� usar magia");
+							System.out.println(heroi.toString() + " ira usar magia");
 							heroi.escolheMagia(mapa);
 						}
 					}
@@ -203,7 +213,7 @@ public class HeroQuest {
 					}
 					
 					else {
-						System.out.println(heroi.toString() + " nao realizar� outra acao no turno");
+						System.out.println(heroi.toString() + " nao realizara outra acao no turno");
 					}
 					
 					try {
@@ -324,7 +334,7 @@ public class HeroQuest {
 			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Não foi possível encontrar mapa");
+			System.out.println("Nao foi possível encontrar mapa");
 			e.printStackTrace();
 		}
 	}
@@ -405,9 +415,14 @@ public class HeroQuest {
 		mapa.addObjeto(porta);
 		
 		Bau bau = new Bau(3, 20, armas, itens, magias);
-		Bau bau2 = new Bau(23, 7, armas, itens, magias);
 		mapa.addObjeto(bau);
-		mapa.addObjeto(bau2);
+		bau = new Bau(23, 7, armas, itens, magias);
+		mapa.addObjeto(bau);
+		bau = new Bau(18, 19, armas, itens, magias);
+		mapa.addObjeto(bau);
+		bau = new Bau(20, 23, armas, itens, magias);
+		mapa.addObjeto(bau);
+	
 
 
 		AdicionarMonstroAleatorio(3, 4);
@@ -449,7 +464,7 @@ public class HeroQuest {
 
 
 	private void EscolherPersonagem() throws DigitoInvalidoException {
-		System.out.println("Quantos jogadores jogarão? [1/4]");
+		System.out.println("Quantos jogadores jogarao? [1/4]");
 
 		Scanner keyboard = new Scanner(System.in);
 		int command = keyboard.nextInt();
@@ -549,7 +564,7 @@ public class HeroQuest {
 	
 	private void Instrucoes() {
 		System.out.println("------Instrucoes------");
-		System.out.println("No seu turno aperte w para andar, a para atacar, m para lançar magia, o para abir porta e t para abrir tesouro");
+		System.out.println("No seu turno aperte w para andar, a para atacar, m para lançar magia, o para abir porta e t para abrir tesouro e n para pular a vez");
 		System.out.println("Mate todos os inimigos espalhados pelo mapa");
 	}
 

@@ -63,7 +63,7 @@ public abstract class Heroi extends GameObject {
 				for (int i = 0; i < passos; i++) {
 					copia.addObjeto(this);
 					copia.printMap();
-					System.out.println("Digite a pr�xima dire��o ou 'q' se desejar parar");
+					System.out.println("Digite a proxima direcaoo ou 'q' se desejar parar");
 					String command = keyboard.nextLine().toLowerCase();
 
 					try {
@@ -88,7 +88,7 @@ public abstract class Heroi extends GameObject {
 
 					copia.printMap();
 				}
-				System.out.println("Esta � a posi��o desejada? [Y/N]");
+				System.out.println("Esta e a posicao desejada? [Y/N]");
 
 				String command = keyboard.nextLine().toLowerCase();
 				if (command.compareTo("y") == 0)
@@ -181,7 +181,7 @@ public abstract class Heroi extends GameObject {
 		bau = verificaTesouro(heroi, mapa);
 		
 		if (bau != null) {
-			System.out.println("Voc� encontrou um bau, deseja abri-lo?");
+			System.out.println("Voce encontrou um bau, deseja abri-lo?");
 			System.out.println("y = sim");
 			System.out.println("n = nÃ£o");
 			Scanner in = new Scanner(System.in);
@@ -190,7 +190,7 @@ public abstract class Heroi extends GameObject {
 				bau.abrirBau(heroi);
 				}
 			else
-				System.out.println("O ba� continuar� nessa posi��o");
+				System.out.println("O bau continuara nessa posicao");
 
 		}
 		
@@ -205,17 +205,17 @@ public abstract class Heroi extends GameObject {
 			}
 			else {
 				if(!this.ArmadoD()) {
-					System.out.println("A arma ser� equipada na m�o direita");
+					System.out.println("A arma sera equipada na mao direita");
 					this.equipar(false, (Arma) item);
 				}
 				
 				else if(!this.ArmadoE()) {
-					System.out.println("A arma ser� equipada na m�o esquerda");
+					System.out.println("A arma sera equipada na mao esquerda");
 					this.equipar(true, (Arma) item);
 				}
 				
 				else {
-					System.out.println("As duas maos est�o cheias, deseja trocar de arma?");
+					System.out.println("As duas maos estao cheias, deseja trocar de arma?");
 					System.out.println("y = sim");
 					System.out.println("n = nÃ£o");
 					Scanner in = new Scanner(System.in);
@@ -252,16 +252,16 @@ public abstract class Heroi extends GameObject {
 		}
 		
 		else if (item instanceof Armadura) {
-			System.out.println("Voc� tem uma " + this.armadura.getChave() + ", deseja trocar?");
+			System.out.println("Voce tem uma " + this.armadura.getChave() + ", deseja trocar?");
 			System.out.println("y = sim");
-			System.out.println("n = nÃ£o");
+			System.out.println("n = nao");
 			Scanner in = new Scanner(System.in);
 			String s = in.nextLine().toLowerCase(); 
 			if (s.compareTo("y") == 0) {
 				this.setArmadura((Armadura) item);
 				}
 			else
-				System.out.println("A armadura do ba� foi jogada fora");
+				System.out.println("A armadura do bau foi jogada fora");
 		}
 	}
 	protected int Defender() {
@@ -392,7 +392,7 @@ public abstract class Heroi extends GameObject {
 		// Se existir algum inimigo proximo, perguntamos se o ataque ocorrer
 		if (existe_inimigo == true) {
 			if (this.eh_player) {
-				System.out.println("Pressione qualquer outra tecla se n�o quiser realizar o ataque");
+				System.out.println("Pressione qualquer outra tecla se nao quiser realizar o ataque");
 
 				Scanner keyboard = new Scanner(System.in);
 				int inimigo_escolhido = keyboard.nextInt();
@@ -420,7 +420,7 @@ public abstract class Heroi extends GameObject {
 		
 		if(this.temPunhal()) {
 			if (this.eh_player) {
-				System.out.println("Você possui um punhal, deseja utilizá-lo? Você não poderá atacar com suas armas após essa ação");
+				System.out.println("Você possui um punhal, deseja utiliza-lo? Você não poderá atacar com suas armas apos essa acao");
 				System.out.println("y = sim");
 				System.out.println("n = nÃ£o");
 				Scanner in = new Scanner(System.in);
@@ -434,7 +434,7 @@ public abstract class Heroi extends GameObject {
 					utilizou_punhal = true;
 					}
 				else
-					System.out.println("Voce poderá usá-lo no próximo turno");
+					System.out.println("Voce podera usa-lo no próximo turno");
 			}
 			else {
 				int posicao_punhal = this.retornaPosPunhal();
@@ -449,9 +449,9 @@ public abstract class Heroi extends GameObject {
 		if (Armado() && !utilizou_punhal) {
 
 			if (this.eh_player) {
-				System.out.println("Usar armas ou disponÃ­veis?"); 
+				System.out.println("Usar armas ou disponiveis?"); 
 				System.out.println("y = sim");
-				System.out.println("n = nÃ£o");
+				System.out.println("n = nao");
 				Scanner in = new Scanner(System.in);
 				String s = in.nextLine().toLowerCase(); 
 				if (s.compareTo("y") == 0) {
