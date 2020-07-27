@@ -2,7 +2,7 @@ package elementosbasicos;
 
 import Externos.Coordenada;
 
-public abstract class Objeto  {
+public abstract class Objeto implements Mapeavel {
 private Coordenada coordenada;
 private boolean visivel;
 private String icon;
@@ -59,6 +59,11 @@ private String icon;
 			return icon;
 		else
 			return "  ";
+	}
+	
+	@Override 
+	public boolean Abrivel() {
+		return false;
 	}
 
 	
