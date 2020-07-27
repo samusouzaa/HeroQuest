@@ -1,22 +1,9 @@
 package elementosbasicos.personagens;
 
-import Externos.Coordenada;
-import Externos.Dados;
-import Externos.Direcao;
-import Externos.TipoDado;
-import Usaveis.Arma;
-import Usaveis.Armadura;
-import Usaveis.Item;
-import Usaveis.Magia;
-import Usaveis.Moedas;
-import Usaveis.TipoArma;
-import elementosbasicos.Bau;
-import elementosbasicos.GameObject;
-import elementosbasicos.Mapa;
-import elementosbasicos.Parede;
-import excecoes.ArmaInvalidaException;
-import excecoes.DigitoInvalidoException;
-import excecoes.GameException;
+import Externos.*;
+import Usaveis.*;
+import elementosbasicos.*;
+import excecoes.*;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -314,12 +301,12 @@ public abstract class Heroi extends GameObject {
 							magia_escolhida = keyboard.nextInt();
 							valido = false;
 						} catch (InputMismatchException exception) {
-							System.out.println("Digite uma magia válida");
+							System.out.println("Digite uma magia vï¿½lida");
 							}
 					}
 					
 					if (magia_escolhida > magias.size()) {
-						System.out.println("Digite uma magia válida");
+						System.out.println("Digite uma magia vï¿½lida");
 						valido = true;
 					}
 					else
