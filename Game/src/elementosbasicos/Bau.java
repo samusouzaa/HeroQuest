@@ -1,6 +1,7 @@
 package elementosbasicos;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -29,24 +30,46 @@ public class Bau extends Objeto {
 		for(int i = 0; i < bau.size(); i++) {
 			System.out.println("Item " + (i+1) + " : " + bau.get(i).getChave());
 		}
-		System.out.println("Quais itens voce quer pegar [Digite 0 para sair do bau]");
-	
-		Scanner keyboard = new Scanner(System.in);
-		int command = keyboard.nextInt();
+		System.out.println("Quais itens voce quer pegar [Digite qualquer outra letra para sair]");
+		boolean valido = true;
+		int command = 0;
 		
-		while(command != 0 && bau.size()>0 ) {
-			if (command <= bau.size()) {
-				heroi.adicionaItemBau(bau.get(command-1));
-				bau.remove(command-1);
-				for(int i = 0; i < bau.size(); i++) {
-					System.out.println("Item " + (i+1) + " : " + bau.get(i).getChave());
+		while (valido) {
+			Scanner keyboard = new Scanner(System.in);
+			try {
+				command = keyboard.nextInt();
+				valido = false;
+			} catch (InputMismatchException exception) {
+				System.out.println("O baú foi fechado");
+				return;
 				}
-			if (bau.size() > 0 )
-				command = keyboard.nextInt();
-			}
-			else {
-				System.out.println("Digite um item válido");
-				command = keyboard.nextInt();
+			while(command != 0 && bau.size()>0 ) {
+				
+				if (command <= bau.size()) {
+					heroi.adicionaItemBau(bau.get(command-1));
+					bau.remove(command-1);
+					for(int i = 0; i < bau.size(); i++) {
+						System.out.println("Item " + (i+1) + " : " + bau.get(i).getChave());
+					}
+				if (bau.size() > 0 )
+					try {
+						command = keyboard.nextInt();
+						valido = false;
+					} catch (InputMismatchException exception) {
+						System.out.println("O baú foi fechado");
+						return;
+						}
+				}
+				else {
+					System.out.println("Digite um item válido");
+					try {
+						command = keyboard.nextInt();
+						valido = false;
+					} catch (InputMismatchException exception) {
+						System.out.println("O baú foi fechado");
+						return;
+						}
+				}
 			}
 		}
 		

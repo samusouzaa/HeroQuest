@@ -51,9 +51,10 @@ public class HeroQuest {
 		inimigos = new ArrayList<GameObject>();
 
 		mapa = new Mapa();
-		mapa.CriarMapaPadrao();
-		
+		mapa.CriarMapaPadrao();	
 		loadMapFromFile(filename);
+		
+	
 		boolean valido = true;
 		do {
 			try {
