@@ -204,13 +204,13 @@ public class Mapa {
 		int x = object.getX();
 		int y = object.getY();
 
-		if (mapa[x + 1][y] instanceof Porta)
+		if (mapa[x + 1][y] != null && mapa[x + 1][y].Abrivel())
 			mapa[x + 1][y] = null;
-		if (mapa[x - 1][y] instanceof Porta)
+		if (mapa[x - 1][y] != null && mapa[x - 1][y].Abrivel())
 			mapa[x - 1][y] = null;
-		if (mapa[x][y + 1] instanceof Porta)
+		if (mapa[x][y + 1] != null && mapa[x][y + 1].Abrivel())
 			mapa[x][y + 1] = null;
-		if (mapa[x][y - 1] instanceof Porta)
+		if (mapa[x][y - 1] != null && mapa[x][y - 1].Abrivel())
 			mapa[x][y - 1] = null;
 	}
 
@@ -281,5 +281,13 @@ public class Mapa {
 		if (verificarPosicao(x, y))
 			return true;
 		return false;
+	}
+	
+	public void visualizarMapaTodo() {
+		for(int i = 0; i < ALTURA; i++)
+			for (int j = 0; j<LARGURA; j++) {
+				if(mapa[i][j] != null)
+					mapa[i][j].Visto();
+			}
 	}
 }

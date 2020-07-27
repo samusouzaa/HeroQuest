@@ -24,16 +24,18 @@ public class HeroQuest {
 	private ListaItens armas = utilizaveis.inicializaArmas();
 	private ListaItens itens = utilizaveis.inicializaItens();
 
-	public HeroQuest() {
+	protected HeroQuest() {
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
 		
 		mapa = new Mapa();
 		mapa.CriarMapaPadrao();
 		loadRandomMap();
+		mapa.visualizarMapaTodo();
 		boolean valido = true;
 		do {
 			try {
+				valido = true;
 				EscolherPersonagem();
 			} catch (InputMismatchException exception) {
 				valido = false;
@@ -46,7 +48,7 @@ public class HeroQuest {
 
 	}
 
-	public HeroQuest(String filename) {
+	protected HeroQuest(String filename) {
 		herois = new ArrayList<GameObject>();
 		inimigos = new ArrayList<GameObject>();
 
@@ -82,10 +84,12 @@ public class HeroQuest {
 		return false;
 	}
 
-	protected void Jogar()  {
+	protected void Jogar() {
 		Scanner keyboard = new Scanner(System.in);
 		String command;
 		boolean andar, acao;
+		
+		Instrucoes();
 
 		while (!Ganhou() && !Perdeu()) {
 
@@ -164,7 +168,7 @@ public class HeroQuest {
 				}
 				
 				else {
-					System.out.println(heroi.toString() + " irá andar");
+					System.out.println(heroi.toString() + " irï¿½ andar");
 					
 					try {
 						heroi.Andar(mapa);
@@ -184,23 +188,23 @@ public class HeroQuest {
 					
 					if (acao_controlada == 0) {
 						if (heroi.semMagia()) {
-							System.out.println(heroi.toString() + " irá atacar");
+							System.out.println(heroi.toString() + " irï¿½ atacar");
 							((Heroi) heroi).realizaAtaque(mapa);
 						}
 						
 						else {
-							System.out.println(heroi.toString() + " irá usar magia");
+							System.out.println(heroi.toString() + " irï¿½ usar magia");
 							heroi.escolheMagia(mapa);
 						}
 					}
 						
 					else if(acao_controlada == 1) {
-						System.out.println(heroi.toString() + " irá atacar");
+						System.out.println(heroi.toString() + " irï¿½ atacar");
 						((Heroi) heroi).realizaAtaque(mapa);
 					}
 					
 					else {
-						System.out.println(heroi.toString() + " nao realizará outra acao no turno");
+						System.out.println(heroi.toString() + " nao realizarï¿½ outra acao no turno");
 					}
 					
 					try {
@@ -401,7 +405,7 @@ public class HeroQuest {
 		porta = new Porta(10, 17);
 		mapa.addObjeto(porta);
 		
-		Bau bau = new Bau(2, 20, armas, itens, magias);
+		Bau bau = new Bau(3, 20, armas, itens, magias);
 		Bau bau2 = new Bau(23, 7, armas, itens, magias);
 		mapa.addObjeto(bau);
 		mapa.addObjeto(bau2);
@@ -542,6 +546,12 @@ public class HeroQuest {
 			}
 
 		}
+	}
+	
+	private void Instrucoes() {
+		System.out.println("------Instrucoes------");
+		System.out.println("No seu turno aperte w para andar, a para atacar, m para lanÃ§ar magia, o para abir porta e t para abrir tesouro");
+		System.out.println("Mate todos os inimigos espalhados pelo mapa");
 	}
 
 }
